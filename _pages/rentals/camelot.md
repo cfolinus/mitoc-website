@@ -54,4 +54,4 @@ The Camelot calendar is embedded below. Reservations are not mutually exclusive 
 
 ### Bunkhouse project
 
-As part of our long-term plan for Camelot, the cabin managers would like to erect a new structure on the property. We are currently in the earliest stages of planning and do not expect a new structure to actually be built until the early 2020s. Our general plan is to construct a new bunkhouse, intended for sleeping only. This will make Camelot more comfortable for large events and will enable us to keep using the property when the main cabin requires replacement in the next 10 to 20 years. If you would like to be involved in the planning process, please add yourself to [cabin-helpers@mit.edu](http://mailman.mit.edu/mailman/listinfo/cabin-helpers).
+MITOC is building a new bunkhouse at Camelot, with safe, modern sleeping space for 50 people. To read about the project, see how fundraising is going, or donate, visit the [Camelot bunkhouse pages](/camelot). If you'd like to help with work at Camelot, add yourself to [cabin-helpers@mit.edu](http://mailman.mit.edu/mailman/listinfo/cabin-helpers).
