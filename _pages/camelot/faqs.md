@@ -25,9 +25,9 @@ The Camelot managers and the town of Groton do not see a viable path for the exi
 
 ### How much will the new bunkhouse cost?
 
-We estimate that the new bunkhouse will cost $500,000. This figure is based on similar bunkhouses which were built by the Dartmouth Outing Club during the last decade, and includes all costs for design, permitting, construction, and construction administration for the structure. The COVID-19 pandemic and general economic conditions have added significant uncertainty to the cost of labor and materials, but we have decided to move forward with $500,000 as our fundraising target.
+We estimate that the new bunkhouse will cost $1.3 million. This figure is based on similar bunkhouses which were built by the Dartmouth Outing Club during the last decade, and includes all costs for design, permitting, construction, and construction administration for the structure. The COVID-19 pandemic and general economic conditions have added significant uncertainty to the cost of labor and materials, but we have decided to move forward with $1.3 million as our fundraising target.
 
-### What expenses are not included in the $500,000 estimated cost?
+### What expenses are not included in the $1.3 million estimated cost?
 
 The estimated bunkhouse cost does not include the following:
 * Phase 1 design work with Maclay Architects, which was funded and completed prior to the official launch of the project and fundraising campaign.
