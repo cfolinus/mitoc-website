@@ -1,0 +1,12 @@
+{
+  "name": "bunkhouse-content-doc",
+  "private": true,
+  "description": "Generates bunkhouse-content-review.docx and bunkhouse-content-map.json from the site source.",
+  "scripts": {
+    "build": "node make_content_doc.js"
+  },
+  "dependencies": {
+    "docx": "9.0.2",
+    "jszip": "3.10.1"
+  }
+}
