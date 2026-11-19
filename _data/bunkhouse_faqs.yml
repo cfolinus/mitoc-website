@@ -67,8 +67,8 @@
     - question: Can I donate to the bunkhouse project by check?
       answer: |
         Yes, it is possible to donate by check!  Please make your check payable to MIT Fund 3892696, enclose the MIT [contribution form](https://giving.mit.edu/check), and mail your check to:
-        >Massachusetts Institute of Technology
-        >P. O. Box 412926
+        >Massachusetts Institute of Technology<br>
+        >P. O. Box 412926<br>
         >Boston, MA 02241-2926
 
 - id: timeline

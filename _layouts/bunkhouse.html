@@ -24,7 +24,7 @@ layout: bunkhouse_base
     <p class="text-right">Goal: <strong>${{site.data.bunkhouse_settings.donations_goal | thousands_separated}}</strong></p>
     <a
       href="{{site.data.bunkhouse_settings.donate_link}}"
-      class="bunkouse-donate-button"
+      class="bunkhouse-donate-button"
       >Donate</a
     >
   </div>
@@ -33,7 +33,11 @@ layout: bunkhouse_base
   <div class="bunkhouse-container">
     {{content}}
     <div class="cbox small-screen-only">
-      <button class="bunkouse-donate-button">Donate</button>
+      <a
+        href="{{site.data.bunkhouse_settings.donate_link}}"
+        class="bunkhouse-donate-button"
+        >Donate</a
+      >
     </div>
   </div>
 </div>

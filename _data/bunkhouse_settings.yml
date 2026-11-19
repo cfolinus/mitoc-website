@@ -3,7 +3,7 @@ donations_amount: 468000
 donations_goal: 1300000
 number_donors: 314
 menu:
-  - title: Camelot Bunkhouse
+  - title: Overview
     href: /camelot
   # - title: History
   #   href: /camelot/history
