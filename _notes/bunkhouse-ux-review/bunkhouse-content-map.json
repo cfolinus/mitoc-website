@@ -1,6 +1,6 @@
 {
   "generated": "2026-11-20",
-  "source_commit": "6304277",
+  "source_commit": "fa94a55",
   "branch": "bunkhouse-edits",
   "note": "Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits. settings lists values in bunkhouse_settings.yml that appear in the text; edit those there, not in the page.",
   "labels": [
@@ -793,6 +793,13 @@
       "snapshot": "Frequently asked questions"
     },
     {
+      "id": "FAQ-intro",
+      "where": "FAQ page: line under the title, before the group buttons",
+      "file": "_pages/camelot/faqs.md",
+      "locator": "paragraph under the title",
+      "snapshot": "Can't find your answer? Email [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu)."
+    },
+    {
       "id": "FAQ-why",
       "where": "FAQ group heading (also the jump button). Page link: /camelot/faqs#why",
       "file": "_data/bunkhouse_faqs.yml",
@@ -1018,20 +1025,13 @@
       "where": "FAQ, Who's involved, question 1",
       "file": "_data/bunkhouse_faqs.yml",
       "locator": "group id=people, questions[0]",
-      "snapshot": "Who designed the new bunkhouse?\nMITOC hired Maclay Architects to execute the design for the new bunkhouse. Maclay Architects previously worked with the Dartmouth Outing Club on several of their bunkhouses. Maclay Architects had an extremely close collaboration with the Camelot managers and MITOC board, and we feel that the proposed design exactly represents the interests of the MITOC community."
+      "snapshot": "Who's running the project?\nThe project is led by volunteers from the MITOC community, with active participation from MIT Facilities and the MIT Division of Student Life. The design is by Maclay Architects. For names and roles, see [Who's leading the project](/camelot/about#leaders) on the About page."
     },
     {
       "id": "FAQ-people-2",
       "where": "FAQ, Who's involved, question 2",
       "file": "_data/bunkhouse_faqs.yml",
       "locator": "group id=people, questions[1]",
-      "snapshot": "Who is managing this project?\nDavid Lawrence ‘14, a former MITOC president and Camelot manager, is the volunteer director of the Camelot bunkhouse project. The fundraising committee also includes graduate student Karina Smolyar and MITOC's alumni liaison Greg Wallace. We have active participation from the MIT Department of Facilities, the MIT Division of Student Life, and many other MITOC board members."
-    },
-    {
-      "id": "FAQ-people-3",
-      "where": "FAQ, Who's involved, question 3",
-      "file": "_data/bunkhouse_faqs.yml",
-      "locator": "group id=people, questions[2]",
       "snapshot": "Who should I contact with a different question?\nPlease email mitoc-bunkhouse@mit.edu."
     },
     {
