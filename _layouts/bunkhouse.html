@@ -40,6 +40,7 @@ layout: bunkhouse_base
 </div>
 <div class="container bunkhouse-wrapper">
   <div class="bunkhouse-container">
+    {% if page.title and page.hero != 'full' %}<h1 class="bunkhouse-page-title">{{ page.title }}</h1>{% endif %}
     {{content}}
     <div class="cbox small-screen-only">
       <a

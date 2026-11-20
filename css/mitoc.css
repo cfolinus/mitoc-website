@@ -369,10 +369,17 @@ p img {
 /* Bunkhouse FAQ page (/camelot/faqs) */
 
 /* Keep anchor targets clear of the fixed 50px navbar */
+.bunkhouse-container h1[id],
 .bunkhouse-container h2[id],
 .bunkhouse-container h3[id],
 .bunkhouse-container span[id] {
   scroll-margin-top: 70px;
+}
+
+/* Page title under the compact strip: between the strip and the h2 headings */
+.bunkhouse-container .bunkhouse-page-title {
+  font-size: 32px;
+  margin: 20px 0 10px;
 }
 
 /* Jump list: pills that wrap onto new lines, so there is no sideways scrolling on phones */

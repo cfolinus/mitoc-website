@@ -276,6 +276,7 @@ children.push(H2('C. Project details page (mitoc.mit.edu/camelot/project)'));
 children.push(note('Appears below the header. Each section has a heading, then text and an architectural drawing with a caption. The alt text after each image is read aloud by screen readers.'));
 // Prose paragraphs keep the numbering PR-1, PR-2, … that earlier versions of this doc used.
 let pn = 0, im = 0, hn = 0;
+block('PR-title', 'Project page title (page heading and browser tab title)', '_pages/camelot/project.md', 'front matter title', txt('Project details'));
 blocks(body('_pages/camelot/project.md')).forEach(b => {
   if (b.type === 'h') { hn++; block(`PR-h-${hn}`, `Project page, section heading ${hn}`, '_pages/camelot/project.md', `## heading #${hn}`, [b]); }
   else if (b.type === 'img') { im++; block(`PR-img-${im}`, `Project page, image ${im}`, '_pages/camelot/project.md', `<img> #${im}`, [b]); }
@@ -286,7 +287,7 @@ blocks(body('_pages/camelot/project.md')).forEach(b => {
 // D. FAQ
 children.push(H2('D. FAQ page (mitoc.mit.edu/camelot/faqs)'));
 children.push(note('The page title is followed by a row of buttons, one per group, that jump to that group. Each group heading below is also its button label. Questions are shown in bold.'));
-block('FAQ-title', 'FAQ page title', '_pages/camelot/faqs.md', '## heading', txt('Frequently asked questions'));
+block('FAQ-title', 'FAQ page title (also the browser tab title)', '_pages/camelot/faqs.md', 'front matter title', txt('Frequently asked questions'));
 data.faqs.forEach(g => {
   block(`FAQ-${g.id}`, `FAQ group heading (also the jump button). Page link: /camelot/faqs#${g.id}`, '_data/bunkhouse_faqs.yml', `group id=${g.id} title`, txt(g.title));
   g.questions.forEach((q, i) => {

@@ -34,9 +34,7 @@ hero_tagline: Phase 1 complete · Raising funds to build in 2027
 menu:
   - title: Overview
     href: /camelot
-  # - title: History
-  #   href: /camelot/history
-  - title: Project Details
+  - title: Project details
     href: /camelot/project
   - title: FAQs
     href: /camelot/faqs

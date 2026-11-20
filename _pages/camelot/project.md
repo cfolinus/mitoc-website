@@ -1,6 +1,7 @@
 ---
 permalink: /camelot/project
 layout: bunkhouse
+title: Project details
 ---
 
 ## Location on the property

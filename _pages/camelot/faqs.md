@@ -1,6 +1,7 @@
 ---
 permalink: /camelot/faqs
 layout: bunkhouse
+title: Frequently asked questions
 ---
 {% comment %}
   Questions and answers live in _data/bunkhouse_faqs.yml.
@@ -11,8 +12,7 @@ layout: bunkhouse
 {% endcomment %}
 {% assign settings = site.data.bunkhouse_settings %}
 
-## Frequently asked questions
-{: #faq-top}
+<span id="faq-top"></span>
 
 {% for group in site.data.bunkhouse_faqs %}
 * [{{ group.title }}](#{{ group.id }})
