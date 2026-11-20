@@ -1,23 +1,49 @@
 # Camelot bunkhouse pages: staggered implementation plan
 
-*Drafted 2026-11-19 from section 6 of [bunkhouse-ux-review.md](bunkhouse-ux-review.md). R-numbers refer to that section. Status last updated 2026-11-20.*
+*Drafted 2026-11-19 from section 6 of [bunkhouse-ux-review.md](bunkhouse-ux-review.md). R-numbers refer to that section. Status last updated 2026-11-20, after batch 2b and the header/footer change.*
 
 ## Status
 
 | Batch | Status | Commit (branch `bunkhouse-edits`) |
 |---|---|---|
-| Stage 0: send questions to the committee | **Partly answered.** The content-review doc came back 2026-11-20 with Part 1 (key facts), Q2, and Q3 filled in. Q4–Q9, the nightly fee, and the gift preset are still open. | — |
+| Stage 0, round 1: questions to the committee | Partly answered. The doc came back 2026-11-20 with Part 1 (key facts), Q2, and Q3 filled in. Saved as `bunkhouse-content-review-2026-11-20-committee.docx`. | `e661459` |
+| Stage 0, round 2: remaining questions | **Ready to send, not sent.** [bunkhouse-content-review.docx](bunkhouse-content-review.docx) asks the committee to confirm Part 1 and answer the 11 questions in Part 2 (see **Next steps**). | `8a77b92` |
 | 1a: code fixes (R1, R2, typo, redirect, address) | Done | `8e67d88` |
 | 1b: banner and rentals links and copy (R12, R4) | Done, except the disputed facts left for 2a | `7f487e6` |
 | 1c: project page headings and captions (R14) | Done | `54d59f8` |
 | 1d: compact hero (R10), plus follow-up tweaks | Done | `2aba590` |
-| 2a-1: key-facts refactor (no wording change) | Done | see `git log` |
-| 2a-2: agreed facts and copy fixes (R3) | Done | see `git log` |
-| 2b: money and thermometer (R7, R9 wording) | Done, except the R9 gift preset (Q10 in the new review doc) | see `git log` |
-| 2c: ways to give, get involved (R8, R13) | **Blocked** on Q4, Q5, Q8 | — |
+| 2a-1: key-facts refactor (no wording change) | Done | `9a4e737` |
+| 2a-2: agreed facts and copy fixes (R3) | Done | `dbcaf5f` |
+| 2b: money and thermometer (R7, R9 wording), plus follow-up tweaks | Done, except the R9 gift preset (round-2 Q10) | `7eeecd4`, `7987b1c` |
+| Extra: "MITOC Bunkhouse" navbar brand, footer with link back to MITOC | Done (maintainer's request, not from the review) | `64657fd`, `1796d1e` |
+| 2c: ways to give, get involved (R8, R13) | **Blocked** on round-2 Q5, Q6, Q8 (an optional minimal version could ship now) | — |
 | Stage 3 onward | Not started | — |
 
-Stage 1 isn't pushed or merged yet. The commits are only on the local `bunkhouse-edits` branch. Before starting new work, read the **Handoff notes** at the end of this file.
+Nothing has been pushed or merged yet. Stages 1 and 2 (through 2b) are only on the local `bunkhouse-edits` branch. Before starting new work, read the **Handoff notes** at the end of this file.
+
+## Next steps
+
+1. **Send the round-2 review doc** to the committee. Each open question in its Part 2 unblocks something:
+
+   | Round-2 question | Unblocks |
+   |---|---|
+   | Q1 nightly fee | FAQ cost-3 (no number shown now) |
+   | Q2 whether Phase 0 is inside the $1.3M | FAQ cost-2 and the phases question |
+   | Q3 what happens if the goal isn't met by spring 2027 | R7 and R15: an FAQ entry and a line in the funding section |
+   | Q4 Phase 1's $300K, and thanking Phase 1 donors | Overview funding section |
+   | Q5 giving options, Q6 matching | 2c: R8 `/camelot/give` |
+   | Q7 photos and usage data | 3b posts; R16 |
+   | Q8 volunteering | 2c: R13 "Get involved" |
+   | Q9 updates owner | Stage 3 gate |
+   | Q10 gift preset | R9 `donate_link` |
+   | Q11 rentals parking (cabin managers) | Rentals parking paragraph |
+
+2. **Decisions for the maintainer** (no committee needed):
+   - **Blank gift preset:** removing `&amount=1000` from `donate_link` should work, but nobody has checked what MIT's form shows with no amount. Open `https://giving.mit.edu/form/?fundId=3892696` first. Or wait for Q10.
+   - **"given or pledged":** the thermometer label now says only "Raised by". Decide whether the overview's funding section should still say "given or pledged".
+   - **Link back to MITOC near the top of the page:** since the navbar brand change, the only link to the main site is in the footer. A "← MITOC home" menu item would put one near the top again (R2).
+   - **Pushing:** open a PR for Stages 1–2 now, or wait for 2c.
+3. **While waiting:** 2c-lite (below) is the only unblocked work left in Stage 2. Stage 3 waits on Q9.
 
 The plan follows the review's "Suggested order of work" with four adjustments:
 
@@ -52,6 +78,8 @@ Send section 8's open questions to the bunkhouse/fundraising committee now, grou
 Ask about the gift preset (R9) at the same time.
 
 **Done when:** the questions are sent and a check-in date is set.
+
+*Round 1 came back 2026-11-20 (see Stage 2). The questions still open were carried into round 2; see **Next steps**.*
 
 ---
 
@@ -183,9 +211,9 @@ First add the newly agreed facts to `facts:` (`capacity_now`, `distance_to_bunkh
 
 ### 2b. Money and thermometer (R7, R9 wording) (one PR, a few hours)
 - **Thermometer** in [bunkhouse.html](../../_layouts/bunkhouse.html):
-  - Change the label to "Raised and pledged".
+  - Change the label to "Raised and pledged". *(Built, then changed back to "Raised by" at the maintainer's request.)*
   - Add "$832,000 to go", computed as `donations_goal | minus: donations_amount`.
-  - Add `donations_as_of: November 2026` to the settings and show "as of {date}" underneath. In the compact strip, keep it small or move it into a tooltip so the strip stays one row.
+  - Add `donations_as_of: November 2026` to the settings and show "as of {date}" underneath. In the compact strip, keep it small or move it into a tooltip so the strip stays one row. *(Built as a small line; the compact strip is now a few lines taller.)*
 - **R7 section on the overview:** add one headed section after OV-4. A working title is "## What the $1.3 million pays for", since the thermometer counts the whole campaign, not just Phase 2. It covers:
   - Phase 1: done in 2025, with about $300K raised, and thanks to its donors.
   - Phase 2: about $1M for the bunkhouse.
@@ -210,16 +238,26 @@ First add the newly agreed facts to `facts:` (`capacity_now`, `distance_to_bunkh
 - I regenerated `bunkhouse-content-review.docx` and `bunkhouse-content-map.json`, so they're ready to send for the next round.
 
 ### 2c. Ways to give and getting involved (R8, R13): blocked
-Waits on Q4 (non-cash, pledges, contact, recognition), Q5 (matching details), and Q8 (volunteering). The scope is the same as before:
+Waits on round-2 Q5 (non-cash, pledges, contact, recognition), Q6 (matching details), and Q8 (volunteering). The scope is the same as before:
 - **R8:** a `/camelot/give` page covering matching, check (moved from the FAQ), stock, DAF and IRA gifts, pledges, a contact, and recognition. Keep the hero's direct form link.
-- **R13:** a "Get involved" block, and rewrite FAQ timeline-4 to point to it.
+- **R13:** a "Get involved" block, and rewrite the FAQ question "Will students be involved in construction? Alums?" (now label FAQ-timeline-5) to point to it.
 
-*Optional, only if the committee is slow:* a minimal `/camelot/give` with just what's already true. That means online giving, the check instructions moved from the FAQ, the fund number 3892696 for matching portals, and "For stock, IRA, or larger gifts, email mitoc-bunkhouse@mit.edu". Expand it once Q4 and Q5 are answered.
+*Optional, "2c-lite", only if the committee is slow:* a minimal `/camelot/give` with just what's already true. That means online giving, the check instructions moved from the FAQ, the fund number 3892696 for matching portals, and "For stock, IRA, or larger gifts, email mitoc-bunkhouse@mit.edu". Use `%fund_number%` and `{{ site.data.bunkhouse_settings.facts.fund_number }}` rather than the literal number. Expand it once Q5 and Q6 are answered.
 
 ### After each batch
 - Run `npm run build` in [tools/](tools/) (only after the committee's copy is saved; see above).
-- Regenerate the review doc. Rewrite the hard-coded Part 1 table and Part 2 questions in `make_content_doc.js`, so Part 1 shows the agreed values and Part 2 lists only the questions still open.
-- Check at 1280 px and 390 px, as for Stage 1. The thermometer's new "to go" and "as of" lines need a look in the compact strip.
+- Regenerate the review doc. Part 1 (`FACTS`) builds its values from `facts:`, so it stays current on its own. When the committee answers, remove those questions from `QUESTIONS` (Part 2). Each question names the label its comment attaches to, so check that the label still exists.
+- Regenerate **after** committing the site changes, so the doc's header names a clean commit rather than "plus uncommitted changes".
+- Check at 1280 px and 390 px, as for Stage 1.
+
+### When round-2 answers come back
+- First save the returned doc under a dated name, as in "Before starting" above.
+- Q1 → add a `nightly_fee` fact and use it in FAQ cost-3.
+- Q2 → if Phase 0 is inside the total, say so in cost-2 and the phases question; if not, add one line to cost-2 saying it was funded separately.
+- Q3 → add an FAQ entry (R15) and one sentence in the overview funding section.
+- Q4 → adjust the Phase 1 bullet in the overview funding section and the phases question.
+- Q10 → change `donate_link`.
+- Q11 → finish the rentals parking paragraph.
 
 ---
 
@@ -247,13 +285,14 @@ Waits on Q4 (non-cash, pledges, contact, recognition), Q5 (matching details), an
 
 ### 4a. Overview rewrite (R5, R11)
 - Rewrite [index.md](../../_pages/camelot/index.md) in the section order R5 proposes: What is Camelot? · Why a new bunkhouse? · Latest update · What Phase 2 will fund · Ways to give · Get involved · Who's leading the project.
+- The funding section already exists from 2b ("What the $1.3 million pays for"). Move it into place rather than rewriting it.
 - Most of these sections reuse content from 2b, 2c, and 3a, either moved or summarized with a link to the full version.
 - **R11:** Use real cabin photos from `/images/camelot/`, add location context, and link to `/rentals/camelot`. Explain "MITOCers" or drop it.
 - Remove the history paragraphs, since the backfilled posts now cover that history.
-- The final menu is: Overview · Updates · Project details · FAQs · Give/Donate · ← MITOC home.
+- The final menu is: Overview · Updates · Project details · FAQs · Give/Donate, plus the way home. The footer and the brand change already cover the way home, so a "← MITOC home" menu item depends on the maintainer's decision under **Next steps**.
 
 ### 4b. FAQ revision and impact numbers (R15, R16)
-- **R15:** Retire or update the answers that depend on dates. Add questions on matching, rising costs or a missed goal, where groups sleep now, donor recognition, and how much Camelot is used. Move "Who is managing this project?" higher in the list.
+- **R15:** Retire or update the answers that depend on dates. Add questions on matching, rising costs or a missed goal (round-2 Q3), where groups sleep now, donor recognition, and how much Camelot is used. FAQ why-2 now says the cabin sleeps about 30 and when that will end, which may be enough for "where groups sleep now". Move "Who is managing this project?" higher in the list.
 - **R16:** Add three or more usage figures to the overview's "Why a new bunkhouse?" section and to the FAQ, once the cabin managers provide them. This can ship whenever the data arrives.
 
 **Final check:** walk through each persona's top questions in section 4 again on the rendered site. The task matrix in section 5 should have no ✗ left in the cells that matter for each persona.
@@ -266,20 +305,22 @@ Waits on Q4 (non-cash, pledges, contact, recognition), Q5 (matching details), an
 |---|---|---|---|
 | 0 | Send the questions | Nothing | 30 min |
 | 1 | 1a, 1b, 1c, 1d | Nothing | 1 day total |
-| 2 | 2a-1, 2a-2, 2b, 2c | 2a and 2b are unblocked. 2c waits on Q4, Q5, Q8. | 1–2 days |
-| 3 | 3a, 3b, 3c | An owner (Q9) and photos (Q7) | Half a day of setup, then about 1 hour per post |
+| 2 | 2a-1, 2a-2, 2b ✅; 2c | 2c waits on round-2 Q5, Q6, Q8 | 2c: half a day |
+| 3 | 3a, 3b, 3c | An owner (round-2 Q9) and photos (Q7) | Half a day of setup, then about 1 hour per post |
 | 4 | 4a, 4b | Stages 2 and 3; usage data for R16 | 1–2 days |
 
 ---
 
 ## Handoff notes
 
-These were learned while building Stage 1. They're aimed at whoever (person or agent) picks this up next.
+These were learned while building Stages 1 and 2. They're aimed at whoever (person or agent) picks this up next.
 
 ### Working agreements with the site maintainer
 - **Do one batch at a time, commit it, and stop for review** before starting the next. The maintainer reviews each batch on the local server and often asks for small tweaks, which then go into that batch's commit.
 - **Don't change a fact listed in the review's section 7** until the committee has agreed on its value. If a sentence containing one has to be rewritten, drop the claim rather than picking a value.
 - Commit messages follow the pattern "… (UX review batch 1a)", with a bulleted list of what changed and the R-numbers.
+- When the maintainer asks for several batches at once, still commit each one separately. Follow-up tweaks get their own small commit with the same batch tag.
+- New site copy is the maintainer's draft unless the committee wrote it. Say which wording was chosen without committee input, so it can be checked.
 
 ### Running and checking the site
 - **Local server:** run `bundle exec jekyll serve --livereload` from the repo root, then open http://localhost:4000/camelot. The site uses Jekyll 3.8 (see the Gemfile) and is hosted on Netlify, which is why redirects live in `_redirects`.
@@ -288,19 +329,30 @@ These were learned while building Stage 1. They're aimed at whoever (person or a
   - It won't render narrower than about 500 px. A 390 px window size still lays the page out wider and crops it. Use Chrome DevTools device mode, or a real phone on the same Wi-Fi, for true phone widths.
   - The full hero has `min-height: 57vh` at 768 px and wider. A very tall desktop window stretches it, so use realistic window heights such as 1280×800.
   - Loading a URL with a `#anchor` gives blank or broken screenshots. To see content further down, use a tall window at phone width (no vh rule applies there), or a scratch copy of the page with `.bunkhouse-banner{display:none}` added.
+  - Headless Chrome writes nothing unless it's given `--user-data-dir=<scratch folder>`, and it fails silently. Serve the build with `python3 -m http.server` from the build folder, then load `/camelot.html`.
+- **Refactors:** build into two folders (`bundle exec jekyll build -d <dir>`) before and after, then run `diff -r`. 2a-1 came out byte-for-byte identical this way.
 - Running `html-proofer` (in the Gemfile) checks for broken links.
-- Run `npm run build` in [tools/](tools/) after content changes, to regenerate the committee's content-review doc.
+- Run `npm run build` in [tools/](tools/) after content changes, to regenerate the committee's content-review doc. To test without touching the tracked doc and map, set `OUT_DIR=<scratch folder>`.
 
-### Code map (after Stage 1)
-- **Hero and thermometer:** [_layouts/bunkhouse.html](../../_layouts/bunkhouse.html). It's a single template: `{% assign settings = site.data.bunkhouse_settings %}` at the top, with `bunkhouse-banner-full` or `-compact` chosen by `page.hero`. The thermometer numbers are wrapped in `.donations-stats`, and Donate is a sibling of that block.
+### Code map (after Stage 2b)
+- **Key facts:** `facts:` in [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml) holds every project fact as a string. Change a fact there, never in the page text.
+  - In pages and includes, write the full path, `{{ site.data.bunkhouse_settings.facts.key }}`. Don't shorten it with `assign`: the review-doc tool only recognizes the full path, and a shortened tag would show up in the doc as raw Liquid.
+  - In `bunkhouse_faqs.yml`, write `%key%`. Liquid doesn't run in data files.
+  - `donations_goal` and the `fundId` in `donate_link` duplicate `total_cost` and `fund_number`. Comments in the file say to keep them in step.
+- **FAQ rendering:** [faqs.md](../../_pages/camelot/faqs.md) replaces `%donate_link%` and every `%key%` in both questions and answers. A question's optional `old_ids:` list renders as empty `<span id>` elements, so old links survive a reworded question.
+- **Hero and thermometer:** [_layouts/bunkhouse.html](../../_layouts/bunkhouse.html). It's a single template: `{% assign settings = site.data.bunkhouse_settings %}` at the top, with `bunkhouse-banner-full` or `-compact` chosen by `page.hero`. Inside `.donations-stats`, in order: the amount; "RAISED BY n PEOPLE"; the bar; `.donations-to-go` (computed, hidden once the goal is met); `.donations-goal`; and `.donations-note` ("As of {donations_as_of}", plus "Gifts of every size count" in the full hero only). Donate is a sibling of `.donations-stats`.
+- **Navbar and footer:** [_includes/navbar.html](../../_includes/navbar.html) takes optional `brand_title` and `brand_href`. [bunkhouse_base.html](../../_layouts/bunkhouse_base.html) sets them to "MITOC Bunkhouse" → `/camelot` and adds `.bunkhouse-footer` ("© {build year} MITOC", linking to `/` in the text color, underlined only on hover).
 - **Hero CSS:** in [css/mitoc.css](../../css/mitoc.css), shared `.bunkhouse-banner` rules come first, then a `/* Full hero */` block and a `/* Compact strip */` block, each with its own `min-width: 768px` media query.
 - **Class names:** the class is now spelled `bunkhouse-donate-button`; the old `bunkouse` typo is gone everywhere.
-- **Heading anchors:** the existing rule `.bunkhouse-container h2[id], h3[id] { scroll-margin-top: 70px }` keeps heading anchors clear of the fixed navbar. New `##` headings on any bunkhouse page are covered automatically.
+- **Heading anchors:** the rule `.bunkhouse-container h2[id], h3[id], span[id] { scroll-margin-top: 70px }` keeps anchors, including the FAQ's `old_ids` spans, clear of the fixed navbar.
+- **Body text size:** `.bunkhouse-body p` and list items (except the FAQ jump-list pills) are `font-size: large`. Anything new inside the hero needs a more specific selector to override that.
 - **Figures:** use `<figure class="bunkhouse-figure">` with `<figcaption>` for drawings and photos. Images shrink to fit narrow screens.
 - **Homepage banner:** in [_includes/camelot_banner.html](../../_includes/camelot_banner.html), the collapsed footer is `.camelot-banner-actions` (Learn more and Donate). It's hidden when the banner is expanded. The click-to-expand script ignores clicks on `<a>` elements.
-- **FAQ answers:** they live in [_data/bunkhouse_faqs.yml](../../_data/bunkhouse_faqs.yml) and are rendered by kramdown. Use `%donate_link%` as a placeholder for the donate URL. To keep line breaks inside a blockquote, end each line with `<br>`.
+- **FAQ answers:** they live in [_data/bunkhouse_faqs.yml](../../_data/bunkhouse_faqs.yml) and are rendered by kramdown. To keep line breaks inside a blockquote, end each line with `<br>`. Changing a question's wording changes its anchor, so add the old one to `old_ids:`.
+- **Review-doc tool:** [make_content_doc.js](tools/make_content_doc.js) works out page Liquid that reads settings (`minus:` and `thousands_separated` only), and lists those settings for each label in the content map. Project-page labels are PR-n (prose), PR-h-n (headings), PR-img-n, and PR-cap-n.
 
 ### Things to know for later stages
 - **3a (Updates page):** there's no feed plugin and no existing collections in `_config.yml` (its plugins are jekyll-jolt, jekyll-sitemap, and jekyll-target-blank). An RSS feed would need a hand-written template, or adding `jekyll-feed` to the Gemfile and checking that Netlify builds it.
 - **Phone Donate button:** the full-width Donate button at the bottom of phone pages (`.small-screen-only` in the layout) still uses the base button size. The user hasn't decided whether to shrink it too.
-- **Unpushed commits:** Stage 1 isn't pushed. The maintainer hasn't yet decided whether to open a PR for Stage 1 alone or wait for more stages.
+- **Unpushed commits:** nothing from Stage 1 or 2 is pushed. The maintainer hasn't decided when to open a PR.
+- **Facts that still read as "about"** (`capacity_now`, distances, `phase1_raised`, `phase2_cost`) include the word in the value, so a sentence reads "sleeps about 30 people". Keep that pattern when adding facts.
