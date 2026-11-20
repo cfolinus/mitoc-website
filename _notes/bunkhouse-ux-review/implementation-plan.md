@@ -1,18 +1,18 @@
 # Camelot bunkhouse pages: implementation plan
 
-*Updated 2026-11-20. This plan turns [bunkhouse-ux-review.md](bunkhouse-ux-review.md) into batches. R1–R16 are from the review's Part 2, section 6; R17–R21 are from Part 1, section G. The web team's decisions (review section H) are folded in. Stages 0–2 are done; their as-built notes are in the **Appendix** at the end.*
+*Updated 2026-11-20 (Stage 3 built). This plan turns [bunkhouse-ux-review.md](bunkhouse-ux-review.md) into batches. R1–R16 are from the review's Part 2, section 6; R17–R21 are from Part 1, section G. The web team's decisions (review section H) are folded in. Stages 0–3 are done; their as-built notes are in the **Appendix** at the end.*
 
 ## Where things stand
 
-- **Done, on the local `bunkhouse-edits` branch (nothing pushed yet):** Stages 1 and 2, covering R1–R4, R7, R10, R12, R14, the facts the committee agreed in round 1, and the navbar brand and footer. See the Appendix.
+- **Done, on the local `bunkhouse-edits` branch (nothing pushed yet):** Stages 1–3, covering R1–R4, R7, R10, R12, R14, R19 (minimal), R20, R21, the facts the committee agreed in round 1, and the navbar brand and footer. See the Appendix.
 - **The web team has decided the new structure** (review section H): a short Home page, an "About" page at `/camelot/about`, a Donate page that every Donate button opens, "raised by" wording, and Updates owned by the web team.
-- **Ready to send:** the round-2 content-review doc, [bunkhouse-content-review.docx](bunkhouse-content-review.docx), with 10 open questions. It was regenerated on 2026-11-20 without the updates-owner question, which the web team answered.
-- **Next to build:** Stage 3. Nothing in Stages 3, 4, or 5a waits on the committee.
+- **Round-2 doc sent to the committee** (10 open questions). The copy as sent is saved as `bunkhouse-content-review-2026-11-20-sent.docx` and `bunkhouse-content-map-2026-11-20-sent.json`; map returned OV-n, FAQ-donating and FAQ-donating-1 labels through that saved map. The working doc has since been regenerated, so Q5 and Q6 are now attached to DON-h-3 and DON-h-1.
+- **Next to build:** Stage 4. Nothing in Stages 4 or 5a waits on the committee.
 
 | Stage | Batches | Status | Waits on |
 |---|---|---|---|
 | 0–2 | Questions round 1; quick wins; facts and money | ✅ Done | — |
-| 3 | 3a page identity (R20) · 3b share previews (R21) · 3c minimal Donate page (R19) | **Ready** | Nothing |
+| 3 | 3a page identity (R20) · 3b share previews (R21) · 3c minimal Donate page (R19) | ✅ Done (local) | — |
 | 4 | 4a About (R18) · 4b new Home (R17, R11) · 4c FAQ reshuffle | **Ready** (best after Stage 3) | Nothing |
 | 5 | 5a Updates setup · 5b posts from the last two years · 5c upkeep (R6) | 5a ready; 5b waits on photos | Phase 1 photos (Q7); the web team writes the posts |
 | 6 | 6a full Donate page · 6b Get involved · 6c missed-goal answer · 6d usage numbers · 6e small fill-ins | Waiting | The committee's round-2 answers |
@@ -55,7 +55,7 @@ Menu order: About · Updates · Project details · FAQs · Donate. Redirects: `/
    The doc's labels (OV-n and so on) point at today's pages. If answers come back after Stage 4, map OV-n labels to the new files using the committed `bunkhouse-content-map.json` from this round.
 
 2. **Ask the committee, or the cabin managers directly, for Phase 1 photos now**, separately from the doc if that's faster. They block both Home's "Where things stand" photo and the Updates posts.
-3. **Start Stage 3.**
+3. **Start Stage 4.**
 4. **Decisions for the maintainer:**
    - **Blank gift preset:** removing `&amount=1000` from `donate_link` should work, but nobody has checked what MIT's form shows with no amount. Open `https://giving.mit.edu/form/?fundId=3892696` first. Or wait for Q9.
    - **Pushing:** open a PR for Stages 1–2 now, or after Stage 3 or 4. The Stage 4 split changes what `/camelot` shows, so it's a natural point for the web team to look at a deploy preview.
@@ -77,7 +77,20 @@ Now (no input needed)          Next                        Web team, with photos
 
 ---
 
-## Stage 3: Page identity and a minimal Donate page (no committee input needed)
+## Stage 3: Page identity and a minimal Donate page (done)
+
+*As built, 2026-11-20 (commits `36e6cf4` 3a, `3ef5429` 3b, `e96cb16` 3c, each followed by a regenerated doc and map). Differences from the plan below:*
+- *Highlighting the current menu item is opt-in: `navbar.html` takes `highlight_active`, and only `bunkhouse_base.html` sets it, so main-site output is unchanged (checked: identical HTML before and after).*
+- *The "MITOC home" navbar link (R20) was dropped at the maintainer's request; the footer link stays. The `menu_right:` idea is not built.*
+- *The FAQ page's `faq-top` anchor is an empty `<span>` in faqs.md. The `h1` comes from the layout for every page with a `title:` except `hero: full`.*
+- *Share tags are in `bunkhouse_base.html`: the text is `page.description`, else `share_description` in the settings. The image is the exterior rendering, 2000×1123, via `site.url`. A real link-preview test needs a pushed deploy preview and hasn't been done.*
+- *`donate_page` is in the settings (a YAML anchor feeds the menu). The `donate_link` anchor is gone. FAQs can use `%donate_page%`.*
+- *Donate page copy is the maintainer's draft from the old FAQ answers. Flag for committee: the matching-portal sentence ("search for Massachusetts Institute of Technology as the recipient") and "a member of the committee will reply".*
+- *Review doc: Donate page is section C2 (DON-title, DON-h-n, DON-n); labels FAQ-donating-1 and -2 are gone, and SET-share and PR-title were added.*
+
+**Later suggestions (not built):** a one-sentence intro under the Project details heading (review D4); a "MITOC home" link near the top of the navbar (declined for now); test the share previews once the branch is pushed; remove the `amount=1000` preset (Q9).
+
+*The original plan for Stage 3 follows.*
 
 ### 3a. Page identity (R20) (one PR, about 2 hours)
 - **Tab titles:** in [bunkhouse_base.html](../../_layouts/bunkhouse_base.html), replace the fixed `<title>MITOC - Camelot Bunkhouse</title>` with `{% if page.title %}{{ page.title }} · {% endif %}Camelot bunkhouse · MITOC`. Add `title:` to the front matter of `project.md` ("Project details") and `faqs.md` ("Frequently asked questions"). Home has no `title:`, so it gets "Camelot bunkhouse · MITOC".
@@ -253,6 +266,8 @@ These were learned while building Stages 1 and 2. Line numbers may shift as late
 - **Navbar and footer:** [_includes/navbar.html](../../_includes/navbar.html) takes optional `brand_title` and `brand_href`. [bunkhouse_base.html](../../_layouts/bunkhouse_base.html) sets them to "MITOC Bunkhouse" → `/camelot` and adds `.bunkhouse-footer` ("© {build year} MITOC", linking to `/` in the text color, underlined only on hover).
 - **Hero CSS:** in [css/mitoc.css](../../css/mitoc.css), shared `.bunkhouse-banner` rules come first, then a `/* Full hero */` block and a `/* Compact strip */` block, each with its own `min-width: 768px` media query.
 - **Class names:** the class is now spelled `bunkhouse-donate-button`; the old `bunkouse` typo is gone everywhere.
+- **Page title and menu highlight:** pages set `title:`; the layout shows it as `h1.bunkhouse-page-title` unless `hero: full`, and the tab title is built from it. `menu-link.html` adds `class="active"` only when `highlight_active` is passed down from `navbar.html`.
+- **Donate buttons:** every Donate button uses `settings.donate_page`; the page's own hero button and Give online button use `donate_link`. Don't point inline "Donate online" links at the page.
 - **Heading anchors:** the rule `.bunkhouse-container h2[id], h3[id], span[id] { scroll-margin-top: 70px }` keeps anchors, including the FAQ's `old_ids` spans, clear of the fixed navbar.
 - **Body text size:** `.bunkhouse-body p` and list items (except the FAQ jump-list pills) are `font-size: large`. Anything new inside the hero needs a more specific selector to override that.
 - **Figures:** use `<figure class="bunkhouse-figure">` with `<figcaption>` for drawings and photos. Images shrink to fit narrow screens.
