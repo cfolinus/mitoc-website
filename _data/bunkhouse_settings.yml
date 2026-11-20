@@ -31,6 +31,9 @@ number_donors: 314
 hero_title: Camelot bunkhouse
 hero_subtitle: Coming 2027
 hero_tagline: Phase 1 complete · Raising funds to build in 2027
+# Shown in link previews (Slack, email, social posts) and often under the page
+# in search results. A page can override it with `description:` in its front matter.
+share_description: "MITOC is building a new bunkhouse at Camelot, its cabin near Rumney, NH. Phase 1 is complete; help us raise the rest to build in 2027."
 menu:
   - title: Overview
     href: /camelot

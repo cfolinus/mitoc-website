@@ -258,6 +258,7 @@ block('SET-donors', 'Thermometer: number of donors, shown as "RAISED BY ___ PEOP
 block('SET-goal', 'Thermometer: goal, shown as "Goal: ___". The "$___ to go" next to it is worked out automatically.', '_data/bunkhouse_settings.yml', 'donations_goal', txt(money(S.donations_goal)));
 block('SET-asof', 'Thermometer: date shown as "As of ___" (update whenever the amounts change)', '_data/bunkhouse_settings.yml', 'donations_as_of', txt(String(S.donations_as_of)));
 block('HERO-note', 'Header: line under the thermometer on the overview page (other pages show only the date)', '_layouts/bunkhouse.html', '.donations-note', txt(`As of ${S.donations_as_of} · Gifts of every size count`));
+block('SET-share', 'Link preview text: shown when a bunkhouse page is shared in Slack, email, or social posts, and often under the page in search results', '_data/bunkhouse_settings.yml', 'share_description', txt(S.share_description));
 block('HERO-donate', 'Header: button label (links to the MIT giving form)', '_layouts/bunkhouse.html', '.bunkhouse-donate-button text', txt('Donate'));
 const amt = (S.donate_link.match(/amount=(\d+)/) || [])[1];
 block('SET-amount', 'Amount pre-filled on the MIT giving form when someone clicks Donate', '_data/bunkhouse_settings.yml', 'donate_link amount= parameter', txt(amt ? money(amt) : '(none)'));
