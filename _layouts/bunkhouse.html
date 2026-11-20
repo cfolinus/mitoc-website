@@ -50,7 +50,8 @@ layout: bunkhouse_base
   <div class="bunkhouse-container">
     {% if page.title and page.hero != 'full' %}<h1 class="bunkhouse-page-title">{{ page.title }}</h1>{% endif %}
     {{content}}
-    {% unless on_donate_page %}
+    {% comment %} Home and the Donate page have their own Donate button at the bottom. {% endcomment %}
+    {% unless on_donate_page or page.hero == 'full' %}
     <div class="cbox small-screen-only">
       <a
         href="{{ settings.donate_page }}"

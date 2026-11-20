@@ -8,7 +8,7 @@ The full story of the bunkhouse: why it's needed, the plan, the money, and who's
 
 ## Camelot today
 
-Camelot is MITOC's cabin on 20 acres near Rumney, NH. It has been a center of the club's activities for nearly 50 years, and for many members it's where their first MITOC trip happens. Today the cabin sleeps {{ site.data.bunkhouse_settings.facts.capacity_now }} people across the loft, living room, and kitchen. The loft had to be closed because it no longer met modern safety standards, and it reopened only after a major repair by the cabin managers. To visit, see the [Camelot rental page](/rentals/camelot).
+{% include bunkhouse_summary.html part='what_is_camelot' %} It has been a center of the club's activities for nearly 50 years. Today the cabin sleeps {{ site.data.bunkhouse_settings.facts.capacity_now }} people across the loft, living room, and kitchen. The loft had to be closed because it no longer met modern safety standards, and it reopened only after a major repair by the cabin managers. To visit, see the [Camelot rental page](/rentals/camelot).
 
 <figure class="bunkhouse-figure">
   <img src="/images/camelot/pic4.jpg" alt="The existing Camelot cabin, a wooden building on posts in the woods" width="240"/>
@@ -17,11 +17,11 @@ Camelot is MITOC's cabin on 20 acres near Rumney, NH. It has been a center of th
 
 ## Why a new bunkhouse
 
-**The cabin is near the end of its life as a place to sleep.** Patches only go so far, and within a few years it will no longer be safe to sleep in. [More on why MITOC needs the bunkhouse](/camelot/faqs#why-does-mitoc-need-the-bunkhouse).
+**{% include bunkhouse_summary.html part='why' index=0 %}** Patches like the recent loft repair can only go so far. [More on why MITOC needs the bunkhouse](/camelot/faqs#why-does-mitoc-need-the-bunkhouse).
 
-**It can't be brought up to code.** Sleeping {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people would mean meeting current lodging code, with sprinklers, fire-rated sleeping rooms, and emergency exits. The Camelot managers and the town of Groton found no viable way to do that. [More on the code question](/camelot/faqs#can-the-existing-cabin-be-brought-up-to-code).
+**{% include bunkhouse_summary.html part='why' index=1 %}** Sleeping {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people would mean meeting current code, with sprinklers, fire-rated sleeping rooms, and emergency exits. The Camelot managers and the town of Groton found no viable way to do that. [More on the code question](/camelot/faqs#can-the-existing-cabin-be-brought-up-to-code).
 
-**The bunkhouse is for sleeping; the cabin stays for the rest.** The new bunkhouse will sleep {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people in {{ site.data.bunkhouse_settings.facts.room_count }} rooms of {{ site.data.bunkhouse_settings.facts.room_size }}. The existing cabin should remain a serviceable kitchen and lounge for another 10–20 years. [More on why the bunkhouse has no kitchen](/camelot/faqs#why-doesnt-the-bunkhouse-include-a-kitchen-or-lounge-area).
+**{% include bunkhouse_summary.html part='why' index=2 %}** The existing cabin should remain a serviceable kitchen and lounge for another 10–20 years. [More on why the bunkhouse has no kitchen](/camelot/faqs#why-doesnt-the-bunkhouse-include-a-kitchen-or-lounge-area).
 
 ## The plan
 

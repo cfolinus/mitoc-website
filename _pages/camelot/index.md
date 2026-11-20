@@ -4,21 +4,36 @@ layout: bunkhouse
 hero: full
 ---
 
-The MIT Outing Club’s “Camelot” cabin, set on 20 acres near Rumney, NH, has been a center of the club’s activities for nearly 50 years. Countless MITOCers are first introduced to outdoor recreation and camaraderie at events based out of Camelot. To maintain this opportunity for future generations of MIT students, we plan to build a new bunkhouse on the Camelot property, providing sleeping space for {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people. The new bunkhouse will be sited {{ site.data.bunkhouse_settings.facts.distance_to_bunkhouse }} from the existing cabin and will provide heated sleeping space in a modern, safe, tightly insulated building enclosure.
+## What is Camelot?
 
-The bunkhouse project has been in discussion since 2011, and the MITOC board approved it in 2013. Active development was kick-started in 2018 by a generous initial donation in memory of Joris Naiman. From 2019 through 2021, the Outing Club worked with Maclay Architects to create a bunkhouse design that complies with all modern building codes, is satisfactory to MIT Facilities and the local town board, and yet maintains the wilderness ethos of the Outing Club and its Camelot property. This is no small feat!
+{% include bunkhouse_summary.html part='what_is_camelot' %}
 
-With these designs in hand, the Outing Club kicked off fundraising in the fall of 2022. The project was approved by the Groton planning board in June 2023, and site prep and initial construction work started in summer of 2024. Phase 1 of the project built a new bridge, off-street parking lot, and access trail to the bunkhouse site, all completed in spring 2025, and produced the final construction drawings for the bunkhouse.
+<figure class="bunkhouse-figure">
+  <img src="/images/camelot/pic3.jpg" alt="MITOC members gathered around a campfire at Camelot" width="240"/>
+  <figcaption>Around the fire at Camelot.</figcaption>
+</figure>
 
-We are now raising funds for Phase 2, construction of the bunkhouse itself. We plan to break ground in {{ site.data.bunkhouse_settings.facts.groundbreaking }} and finish in {{ site.data.bunkhouse_settings.facts.completion }}, but construction can only start once the full {{ site.data.bunkhouse_settings.facts.total_cost }} is raised. We need your help to get there! If you are able, please consider donating to ensure MITOC can fulfill its mission for the next generation of MITOCers.
+[Visiting Camelot](/rentals/camelot)
 
-## What the {{ site.data.bunkhouse_settings.facts.total_cost }} pays for
+## Why a new bunkhouse?
 
-The bunkhouse project will cost {{ site.data.bunkhouse_settings.facts.total_cost }} in total, based on 2026 quotes from general contractors for the finished construction drawings.
+* {% include bunkhouse_summary.html part='why' index=0 %}
+* {% include bunkhouse_summary.html part='why' index=1 %}
+* {% include bunkhouse_summary.html part='why' index=2 %}
 
-* **Phase 1, complete.** Donors gave {{ site.data.bunkhouse_settings.facts.phase1_raised }} for the new parking lot, bridge, and access trail, all finished in spring 2025, and for the final construction drawings. Thank you to everyone who made it possible!
-* **Phase 2, raising now.** The bunkhouse itself will cost {{ site.data.bunkhouse_settings.facts.phase2_cost }}.
+[Read the full story](/camelot/about)
 
-As of {{ site.data.bunkhouse_settings.donations_as_of }}, ${{ site.data.bunkhouse_settings.donations_amount | thousands_separated }} has been raised by {{ site.data.bunkhouse_settings.number_donors }} people toward the full {{ site.data.bunkhouse_settings.facts.total_cost }}. That leaves **${{ site.data.bunkhouse_settings.donations_goal | minus: site.data.bunkhouse_settings.donations_amount | thousands_separated }} to go**, and we need the full amount before we can break ground in {{ site.data.bunkhouse_settings.facts.groundbreaking }}. Gifts of every size count. [Donate online]({{ site.data.bunkhouse_settings.donate_link }}), or read [more about costs and funding](/camelot/faqs#cost).
+## Where things stand
 
-On behalf of the MIT Outing Club community, we look forward to seeing you in the near future at the new MITOC Camelot bunkhouse.
+* ✓ **Phase 1 is done.** A new parking lot, bridge, and access trail were finished in spring 2025.
+* **Phase 2 is the bunkhouse itself.** **${{ site.data.bunkhouse_settings.donations_goal | minus: site.data.bunkhouse_settings.donations_amount | thousands_separated }} to go.** We can start building once the full {{ site.data.bunkhouse_settings.facts.total_cost }} is raised, planned for {{ site.data.bunkhouse_settings.facts.groundbreaking }}.
+
+[Costs and funding](/camelot/about#funding)
+
+{% include camelot_latest_update.html %}
+
+## Help build it
+
+[Donate]({{ site.data.bunkhouse_settings.donate_page }}){: .bunkhouse-give-button}
+
+Gifts of every size count, and many employers match gifts. Have a question? See the [FAQs](/camelot/faqs).

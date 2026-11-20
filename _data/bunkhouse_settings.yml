@@ -28,12 +28,23 @@ facts:
   phase1_raised: "about $300,000"
   phase2_cost: "about $1 million"
   fund_number: "3892696"
+  drive_time: "about 2.5 hours"
 number_donors: 314
+# Short text shown on Home, at the top of two About sections, and in the homepage
+# banner. Write facts as %key% (see facts: above). Insert with:
+#   {% include bunkhouse_summary.html part='what_is_camelot' %}
+#   {% include bunkhouse_summary.html part='why' index=0 %}   (0, 1, or 2)
+summary:
+  what_is_camelot: "Camelot is MITOC's cabin on 20 acres near Rumney, NH, %drive_time% from Boston. For many members it's where their first MITOC trip happens."
+  why:
+    - "The 1970s cabin is nearing the end of its life as a place to sleep, and within a few years it won't be safe to sleep in."
+    - "It can't be brought up to lodging code."
+    - "The new bunkhouse will sleep %bunkhouse_capacity% people safely, in %room_count% rooms of %room_size%, and the cabin stays as the kitchen and lounge."
 # Hero text shown at the top of every /camelot page. The tagline appears
 # only in the full hero on the overview page.
 hero_title: Camelot bunkhouse
 hero_subtitle: Coming 2027
-hero_tagline: Phase 1 complete · Raising funds to build in 2027
+hero_tagline: Phase 1 complete · Phase 2 fundraising now
 # Shown in link previews (Slack, email, social posts) and often under the page
 # in search results. A page can override it with `description:` in its front matter.
 share_description: "MITOC is building a new bunkhouse at Camelot, its cabin near Rumney, NH. Phase 1 is complete; help us raise the rest to build in 2027."

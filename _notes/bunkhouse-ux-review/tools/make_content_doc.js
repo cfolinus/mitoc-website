@@ -121,7 +121,11 @@ function blocks(md) {
   flush();
   return paras;
 }
-function body(mdFile) { return read(mdFile).replace(/^---[\s\S]*?\n---\n/, ''); }
+// {% include bunkhouse_summary.html part='why' index=1 %} prints a piece of the shared summary.
+// In the doc it shows as a pointer to that piece's label (SUM-n), where it's edited once.
+const shared = t => t.replace(/\{%-?\s*include bunkhouse_summary\.html\s+part='(\w+)'(?:\s+index=(\d))?\s*-?%\}/g,
+  (m, part, i) => `[shared text: SUM-${part === 'why' ? Number(i) + 2 : 1}]`);
+function body(mdFile) { return shared(read(mdFile).replace(/^---[\s\S]*?\n---\n/, '')); }
 
 // ---------- builders ----------
 const children = [];
@@ -169,7 +173,7 @@ const QUESTIONS = [
   ['Phase 1 donors', `The site says donors gave ${FACTS_SET.phase1_raised} for Phase 1. Was that the amount raised, or Phase 1's final cost? The overview thanks Phase 1 donors as a group. Should they be thanked by name anywhere?`, 'SET-raised'],
   ['Giving options', `Which non-cash and pledge options (stock, donor-advised funds, IRA distributions, multi-year pledges) does MIT support for fund ${FACTS_SET.fund_number}? Who is the named contact for larger gifts? Is there any donor recognition or naming policy?`, 'DON-h-3'],
   ['Matching', 'What should employer-matching donors enter in their company\'s matching portal (recipient, designation)? Can MIT provide a link for this?', 'DON-h-1'],
-  ['Photos and data', 'Are there photos of the finished Phase 1 work (bridge, parking lot, trail)? Can the cabin managers provide usage figures (visitor-nights per year, trips, capacity before and after the loft closure)?', 'OV-3'],
+  ['Photos and data', 'Are there photos of the finished Phase 1 work (bridge, parking lot, trail)? Can the cabin managers provide usage figures (visitor-nights per year, trips, capacity before and after the loft closure)?', 'HOME-7'],
   ['Volunteering', 'What in-person or skills-based help is the project actually looking for?', 'FAQ-timeline-5'],
   ['Gift amount', 'The online form opens with $1,000 already filled in. Keep that, lower it, or leave the amount blank?', 'SET-amount'],
   ['Rentals parking (for the cabin managers)', 'The rentals page now describes the new gravel lot. Are the rest of its parking instructions ("entirely off the pavement", "park as close as possible to other cars") still right?', 'RENT-parking'],
@@ -191,8 +195,8 @@ const steps = [
   'Start with Part 1, Key facts. These are the values you agreed in the last review, as the website now states them. If any is wrong, write the correction in the right-hand column.',
   'Answer the open questions in Part 2. Each one also appears as a comment next to the text it affects in Part 3.',
   'Edit the website text in Part 3 freely. You can rewrite, delete, reorder, or add new paragraphs and FAQ questions.',
-  'Leave the small grey labels like [OV-1] in place. They tell the maintainer where each piece of text lives on the website. To remove a block, delete its text and keep the label, or add a comment saying "delete".',
-  'For new text, add a line like "NEW: after OV-3" or "NEW FAQ in Cost and funding", then the text.',
+  'Leave the small grey labels like [HOME-1] in place. They tell the maintainer where each piece of text lives on the website. To remove a block, delete its text and keep the label, or add a comment saying "delete".',
+  'For new text, add a line like "NEW: after HOME-3" or "NEW FAQ in Cost and funding", then the text.',
   'Use comments for questions, disagreements, and ideas about layout or images. Layout can\'t be edited in this document, but comments about it are welcome.',
   'Bold text and links carry over to the website. Other formatting (fonts, colors, sizes, highlighting) is ignored.',
   'When the review is finished, download the file as Word (in Google Docs: File → Download → Microsoft Word) and send it to the website maintainer.',
@@ -266,11 +270,24 @@ children.push(label('NAV', 'Menu items at the top of every bunkhouse page, in or
   S.menu.map(m => m.title).join(' | ')));
 S.menu.forEach(m => children.push(new Paragraph({numbering: {reference: 'bullets', level: 0}, children: [new TextRun(m.title)]})));
 
-// B. Overview
-children.push(H2('B. Overview page (mitoc.mit.edu/camelot)'));
-children.push(note('Appears below the header. Unheaded paragraphs first, then a headed section on funding, then a closing line.'));
-blocks(body('_pages/camelot/index.md')).forEach((b, i) =>
-  block(`OV-${i + 1}`, `Overview page, paragraph ${i + 1}`, '_pages/camelot/index.md', `paragraph ${i + 1}`, [b]));
+// A2. Shared summary
+children.push(H2('A2. Shared summary text (Home, About, and the banner)'));
+children.push(note('Edit this text here once. It appears on the Home page, at the top of two sections on the About page, and in the first paragraph of the fundraising banner. Where those pages show "[shared text: SUM-n]", this is the text.'));
+block('SUM-1', 'Shared summary: what Camelot is (Home, About "Camelot today", banner)', '_data/bunkhouse_settings.yml', 'summary.what_is_camelot', txt(S.summary.what_is_camelot));
+S.summary.why.forEach((w, i) =>
+  block(`SUM-${i + 2}`, `Shared summary: reason ${i + 1} for a new bunkhouse (Home bullet, About "Why a new bunkhouse")`, '_data/bunkhouse_settings.yml', `summary.why[${i}]`, txt(w)));
+
+// B. Home
+children.push(H2('B. Home page (mitoc.mit.edu/camelot)'));
+children.push(note('Appears below the header. A short pitch, with a link to the About page for the full story. Once the Updates page has posts, a "Latest update" section appears between "Where things stand" and "Help build it".'));
+let hp = 0, hh = 0, hi = 0;
+blocks(body('_pages/camelot/index.md')).forEach(b => {
+  const kind = b.type === 'li' ? 'list item' : 'paragraph';
+  if (b.type === 'h') { hh++; block(`HOME-h-${hh}`, `Home page, section heading ${hh}`, '_pages/camelot/index.md', `## heading #${hh}`, [b]); }
+  else if (b.type === 'img') { hi++; block(`HOME-img-${hi}`, `Home page, image ${hi}`, '_pages/camelot/index.md', `<img> #${hi}`, [b]); }
+  else if (b.type === 'caption') block(`HOME-cap-${hi}`, `Home page, caption for image ${hi}`, '_pages/camelot/index.md', `<figcaption> #${hi}`, [b]);
+  else { hp++; block(`HOME-${hp}`, `Home page, ${kind} ${hp}`, '_pages/camelot/index.md', `${kind} ${hp}`, [b]); }
+});
 
 // B2. About page
 children.push(H2('B2. About page (mitoc.mit.edu/camelot/about)'));
@@ -328,7 +345,7 @@ data.faqs.forEach(g => {
 // E. Homepage banner
 children.push(H2('E. Fundraising banner on every main-site page'));
 children.push(note('A blue box at the top of every page on the main MITOC site. It starts collapsed: visitors see the title, the first two lines of text (fading out), and a Donate button, and click to expand it. Image alt text: "Drawing of the future cabin".'));
-const B = read('_includes/camelot_banner.html');
+const B = shared(read('_includes/camelot_banner.html'));
 const clean = s => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 block('BAN-title', 'Banner: title', '_includes/camelot_banner.html', '<h3>', txt(clean(B.match(/<h3>([\s\S]*?)<\/h3>/)[1])));
 [...B.matchAll(/<p>([\s\S]*?)<\/p>/g)].forEach((m, i) =>

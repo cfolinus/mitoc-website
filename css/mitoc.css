@@ -163,6 +163,8 @@ p img {
 }
 
 .bunkhouse-banner-full .donations-block {
+  /* More opaque than the compact strip so the small "As of" line stays readable */
+  background: rgba(255, 255, 255, 0.85);
   padding: 12px 20px;
   min-width: min(300px, 90%);
 }

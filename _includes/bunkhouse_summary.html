@@ -1,0 +1,17 @@
+{%- comment -%}
+  Prints one piece of the shared summary from bunkhouse_settings.yml, with %key%
+  placeholders replaced by the matching facts.
+    part='what_is_camelot'        the two-sentence description
+    part='why' index=0            one of the three "why" bullets (0, 1, or 2)
+{%- endcomment -%}
+{%- assign settings = site.data.bunkhouse_settings -%}
+{%- if include.part == 'why' -%}
+  {%- assign text = settings.summary.why[include.index] -%}
+{%- else -%}
+  {%- assign text = settings.summary[include.part] -%}
+{%- endif -%}
+{%- for fact in settings.facts -%}
+  {%- assign token = "%" | append: fact[0] | append: "%" -%}
+  {%- assign text = text | replace: token, fact[1] -%}
+{%- endfor -%}
+{{- text -}}
