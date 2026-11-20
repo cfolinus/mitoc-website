@@ -30,16 +30,13 @@ facts:
   fund_number: "3892696"
   drive_time: "about 2.5 hours"
 number_donors: 314
-# Short text shown on Home, at the top of two About sections, and in the homepage
-# banner. Write facts as %key% (see facts: above). Insert with:
+# Wording taken from the committee's own text. Shown on Home, About and (what_is_camelot)
+# the homepage banner. Write facts as %key% (see facts: above). Insert with:
 #   {% include bunkhouse_summary.html part='what_is_camelot' %}
-#   {% include bunkhouse_summary.html part='why' index=0 %}   (0, 1, or 2)
+#   {% include bunkhouse_summary.html part='why' %}
 summary:
-  what_is_camelot: "Camelot is MITOC's cabin on 20 acres near Rumney, NH, %drive_time% from Boston. For many members it's where their first MITOC trip happens."
-  why:
-    - "The 1970s cabin is nearing the end of its life as a place to sleep, and within a few years it won't be safe to sleep in."
-    - "It can't be brought up to lodging code."
-    - "The new bunkhouse will sleep %bunkhouse_capacity% people safely, in %room_count% rooms of %room_size%, and the cabin stays as the kitchen and lounge."
+  what_is_camelot: "The MIT Outing Club's Camelot cabin, set on 20 acres near Rumney, NH, has been a center of the club's activities for nearly 50 years. Countless MITOC members are first introduced to outdoor recreation and camaraderie at events based out of Camelot."
+  why: "The existing cabin is nearing the end of its usable life as a place to sleep. Its loft had to be closed because it did not meet modern safety standards, and it reopened only after a major repair effort by the cabin managers, but patches like this can only go so far. Within a few years the cabin will no longer be safe to sleep in, and it can't be brought up to the code required for lodging. The new bunkhouse will give MITOC safe, comfortable sleeping space for %bunkhouse_capacity% people."
 # Hero text shown at the top of every /camelot page. The tagline appears
 # only in the full hero on the overview page.
 hero_title: Camelot bunkhouse

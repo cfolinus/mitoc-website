@@ -121,10 +121,10 @@ function blocks(md) {
   flush();
   return paras;
 }
-// {% include bunkhouse_summary.html part='why' index=1 %} prints a piece of the shared summary.
+// {% include bunkhouse_summary.html part='why' %} prints a piece of the shared summary.
 // In the doc it shows as a pointer to that piece's label (SUM-n), where it's edited once.
-const shared = t => t.replace(/\{%-?\s*include bunkhouse_summary\.html\s+part='(\w+)'(?:\s+index=(\d))?\s*-?%\}/g,
-  (m, part, i) => `[shared text: SUM-${part === 'why' ? Number(i) + 2 : 1}]`);
+const shared = t => t.replace(/\{%-?\s*include bunkhouse_summary\.html\s+part='(\w+)'\s*-?%\}/g,
+  (m, part) => `[shared text: SUM-${part === 'why' ? 2 : 1}]`);
 function body(mdFile) { return shared(read(mdFile).replace(/^---[\s\S]*?\n---\n/, '')); }
 
 // ---------- builders ----------
@@ -173,7 +173,7 @@ const QUESTIONS = [
   ['Phase 1 donors', `The site says donors gave ${FACTS_SET.phase1_raised} for Phase 1. Was that the amount raised, or Phase 1's final cost? The overview thanks Phase 1 donors as a group. Should they be thanked by name anywhere?`, 'SET-raised'],
   ['Giving options', `Which non-cash and pledge options (stock, donor-advised funds, IRA distributions, multi-year pledges) does MIT support for fund ${FACTS_SET.fund_number}? Who is the named contact for larger gifts? Is there any donor recognition or naming policy?`, 'DON-h-3'],
   ['Matching', 'What should employer-matching donors enter in their company\'s matching portal (recipient, designation)? Can MIT provide a link for this?', 'DON-h-1'],
-  ['Photos and data', 'Are there photos of the finished Phase 1 work (bridge, parking lot, trail)? Can the cabin managers provide usage figures (visitor-nights per year, trips, capacity before and after the loft closure)?', 'HOME-7'],
+  ['Photos and data', 'Are there photos of the finished Phase 1 work (bridge, parking lot, trail)? Can the cabin managers provide usage figures (visitor-nights per year, trips, capacity before and after the loft closure)?', 'HOME-3'],
   ['Volunteering', 'What in-person or skills-based help is the project actually looking for?', 'FAQ-timeline-5'],
   ['Gift amount', 'The online form opens with $1,000 already filled in. Keep that, lower it, or leave the amount blank?', 'SET-amount'],
   ['Rentals parking (for the cabin managers)', 'The rentals page now describes the new gravel lot. Are the rest of its parking instructions ("entirely off the pavement", "park as close as possible to other cars") still right?', 'RENT-parking'],
@@ -272,10 +272,9 @@ S.menu.forEach(m => children.push(new Paragraph({numbering: {reference: 'bullets
 
 // A2. Shared summary
 children.push(H2('A2. Shared summary text (Home, About, and the banner)'));
-children.push(note('Edit this text here once. It appears on the Home page, at the top of two sections on the About page, and in the first paragraph of the fundraising banner. Where those pages show "[shared text: SUM-n]", this is the text.'));
+children.push(note('Edit this text here once. It appears on the Home page, in two sections of the About page, and (the first passage) at the start of the fundraising banner. Where those pages show "[shared text: SUM-n]", this is the text.'));
 block('SUM-1', 'Shared summary: what Camelot is (Home, About "Camelot today", banner)', '_data/bunkhouse_settings.yml', 'summary.what_is_camelot', txt(S.summary.what_is_camelot));
-S.summary.why.forEach((w, i) =>
-  block(`SUM-${i + 2}`, `Shared summary: reason ${i + 1} for a new bunkhouse (Home bullet, About "Why a new bunkhouse")`, '_data/bunkhouse_settings.yml', `summary.why[${i}]`, txt(w)));
+block('SUM-2', 'Shared summary: why a new bunkhouse is needed (Home, About "Why a new bunkhouse")', '_data/bunkhouse_settings.yml', 'summary.why', txt(S.summary.why));
 
 // B. Home
 children.push(H2('B. Home page (mitoc.mit.edu/camelot)'));

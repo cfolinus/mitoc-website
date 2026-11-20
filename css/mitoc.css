@@ -85,6 +85,14 @@ p img {
 
 .bunkhouse-container {
   max-width: 950px;
+  width: 100%;
+}
+
+/* Keep running text to a comfortable line length (about 75 characters) */
+.bunkhouse-container > p,
+.bunkhouse-container > ul:not(.faq-jump-list),
+.bunkhouse-container > blockquote {
+  max-width: 44em;
 }
 
 .bunkhouse-banner {
