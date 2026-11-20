@@ -5,7 +5,7 @@ layout: bunkhouse
 
 ## Location on the property
 
-The new bunkhouse will be located behind the existing cabin, about 100 meters up the hill. This is close enough that underground electrical wiring will be cost-effective, but far enough that sound from the cabin and campfire won’t carry. The bunkhouse will be farther from the property line than the existing cabin.
+The new bunkhouse will be located behind the existing cabin, {{ site.data.bunkhouse_settings.facts.distance_to_bunkhouse }} up the hill. This is close enough that underground electrical wiring will be cost-effective, but far enough that sound from the cabin and campfire won’t carry. The bunkhouse will be farther from the property line than the existing cabin.
 
 <figure class="bunkhouse-figure">
   <img src="/images/bunkhouse/bunkhouse-site-plan.png" alt="Bunkhouse site plan" width="400"/>
@@ -14,11 +14,11 @@ The new bunkhouse will be located behind the existing cabin, about 100 meters up
 
 ## Layout
 
-The bunkhouse will have five sleeping rooms which accommodate 10 people each. A large central hallway contains ample space for gear storage for {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people. The floor plan also includes a covered deck area.
+The bunkhouse will have {{ site.data.bunkhouse_settings.facts.room_count }} sleeping rooms which accommodate {{ site.data.bunkhouse_settings.facts.room_size }} people each, so each room can hold a standard Winter School trip. A large central hallway contains ample space for gear storage for {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people. The floor plan also includes a covered deck area.
 
 <figure class="bunkhouse-figure">
   <img src="/images/bunkhouse/bunkhouse-floor-plan.png" alt="Bunkhouse floor plan" width="400"/>
-  <figcaption>Floor plan: five sleeping rooms of 10 bunks each, a central hallway with gear storage and benches, three toilets, and the covered deck.</figcaption>
+  <figcaption>Floor plan: {{ site.data.bunkhouse_settings.facts.room_count }} sleeping rooms of {{ site.data.bunkhouse_settings.facts.room_size }} bunks each, a central hallway with gear storage and benches, three toilets, and the covered deck.</figcaption>
 </figure>
 
 ## Toilets and water

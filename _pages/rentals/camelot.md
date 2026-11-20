@@ -8,7 +8,7 @@
       - /images/camelot/pic4.jpg
 ---
 
-Camelot is a rustic cabin located near Rumney, NH. The cabin is situated on 20 acres of forest and can accomodate groups of 40 or more people. Camelot is a 2.5 hour drive from Boston and is within 15 minutes of Rattlesnake Mountain and the world-famous sport climbing at Rumney. The cabin is set back about 1000 feet from the road and is only accessible by a rough foot trail.
+Camelot is a rustic cabin located near Rumney, NH. The cabin is situated on 20 acres of forest and can sleep groups of {{ site.data.bunkhouse_settings.facts.capacity_now }} people. Camelot is a 2.5 hour drive from Boston and is within 15 minutes of Rattlesnake Mountain and the world-famous sport climbing at Rumney. The cabin is set back {{ site.data.bunkhouse_settings.facts.walk_from_parking }} from the road and is only accessible by a rough foot trail.
 
 **Prior permission from the Camelot managers is required for ALL USES of the cabin or grounds. Contact [camelot-mgr@mit.edu](mailto:camelot-mgr@mit.edu) to request permission. Use of the cabin or grounds without permission is trespassing and we will call the police.** All MITOC members may request permission to camp on the grounds, but only trained keyholders may reserve the cabin itself. Check the [cabins](/rentals/cabins) page for more information.
 
@@ -26,7 +26,7 @@ There are lots of options for sleeping outside. A sturdy lean-to with space for 
 
 ### General guidelines
 
-The parking lot is a dirt pull-off at the side of the road. Vehicles must be entirely off the pavement. Park as close as possible to any other cars which are already in the parking lot. This maximimizes capacity for busy weekends and also helps with plowing in case it snows during your visit.
+The parking lot is a gravel off-street lot with room for about {{ site.data.bunkhouse_settings.facts.parking_spaces }} cars. Vehicles must be entirely off the pavement. Park as close as possible to any other cars which are already in the parking lot. This maximizes capacity for busy weekends and also helps with plowing in case it snows during your visit.
 
 Campfires are only allowed in the fire ring in front of the cabin. Burn only dead wood from around the grounds or split logs from under the cabin. **Wood in the wood shed is for heating only and may not be used for campfires.** Do not cut down or otherwise damage standing trees. Do not use any accelerants. Keep campfires small and ensure that they are attended at all times.
 

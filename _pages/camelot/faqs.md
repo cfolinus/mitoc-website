@@ -31,6 +31,7 @@ layout: bunkhouse
   {%- assign question = question | replace: token, fact[1] -%}
   {%- assign answer = answer | replace: token, fact[1] -%}
 {%- endfor %}
+{% for old_id in q.old_ids %}<span id="{{ old_id }}"></span>{% endfor %}
 ### {{ question }}
 {: .faq-question}
 

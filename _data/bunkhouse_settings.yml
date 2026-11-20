@@ -7,16 +7,27 @@ donations_goal: 1300000
 #   pages and includes:  {{ site.data.bunkhouse_settings.facts.total_cost }}
 #   bunkhouse_faqs.yml:  %total_cost%  (Liquid doesn't run inside data files)
 # Values are strings so they print exactly as written.
+# Agreed with the bunkhouse committee, November 2026.
 facts:
   total_cost: "$1.3 million"
   bunkhouse_capacity: "50"
+  room_count: "five"
+  room_size: "10"
+  capacity_now: "about 30"
+  distance_to_bunkhouse: "about 200 meters"
+  walk_from_parking: "about 200 meters"
+  parking_spaces: "20"
+  groundbreaking: "late spring 2027"
+  completion: "fall 2027"
+  phase1_raised: "about $300,000"
+  phase2_cost: "about $1 million"
   fund_number: "3892696"
 number_donors: 314
 # Hero text shown at the top of every /camelot page. The tagline appears
 # only in the full hero on the overview page.
 hero_title: Camelot bunkhouse
 hero_subtitle: Coming 2027
-hero_tagline: Site construction has started!
+hero_tagline: Phase 1 complete · Raising funds to build in 2027
 menu:
   - title: Overview
     href: /camelot

@@ -333,7 +333,8 @@ p img {
 
 /* Keep anchor targets clear of the fixed 50px navbar */
 .bunkhouse-container h2[id],
-.bunkhouse-container h3[id] {
+.bunkhouse-container h3[id],
+.bunkhouse-container span[id] {
   scroll-margin-top: 70px;
 }
 

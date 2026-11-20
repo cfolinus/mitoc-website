@@ -12,7 +12,7 @@
 | 1c: project page headings and captions (R14) | Done | `54d59f8` |
 | 1d: compact hero (R10), plus follow-up tweaks | Done | `2aba590` |
 | 2a-1: key-facts refactor (no wording change) | Done | see `git log` |
-| 2a-2: agreed facts and copy fixes (R3) | Ready to start | — |
+| 2a-2: agreed facts and copy fixes (R3) | Done | see `git log` |
 | 2b: money and thermometer (R7, R9 wording) | Ready, except the R9 gift preset | — |
 | 2c: ways to give, get involved (R8, R13) | **Blocked** on Q4, Q5, Q8 | — |
 | Stage 3 onward | Not started | — |
@@ -172,6 +172,13 @@ First add the newly agreed facts to `facts:` (`capacity_now`, `distance_to_bunkh
   - RENT-parking: say it's a gravel lot with room for about 20 cars. Have the cabin managers check the rest of the paragraph.
   - Leave the $10 rental fee alone; that one is correct.
 - **Grep check:** search for "yards", "100 m", "1000 feet", "40 or more", "decade", "2013", "winter", "Dartmouth", "$20", and "design now complete". Each hit should be either gone or intentional.
+
+*As built (2a-2):*
+- `facts:` now also holds `room_count`, `room_size`, `capacity_now`, `distance_to_bunkhouse`, `walk_from_parking`, `parking_spaces`, `groundbreaking`, `completion`, `phase1_raised`, and `phase2_cost`.
+- I kept the existing question wording wherever I could, because FAQ anchors come from the question text. The one question I reworded (cost-2) has a new `old_ids:` field in `bunkhouse_faqs.yml`. `faqs.md` renders each old ID as an empty `<span id>`, so links to `#what-expenses-are-not-included-in-the-13-million-estimated-cost` still land on that question.
+- The new "What are the phases of the project?" question is first in the Timeline group. That shifts that group's labels in the next review doc (FAQ-timeline-1 is now the phases question).
+- I wrote "Winter School" with capitals in the project page's room sentence, for MITOC's program. The committee wrote it lowercase.
+- On the rentals page, I only changed the first sentence of the parking paragraph. The rest is unchanged, pending a check by the cabin managers.
 
 ### 2b. Money and thermometer (R7, R9 wording) (one PR, a few hours)
 - **Thermometer** in [bunkhouse.html](../../_layouts/bunkhouse.html):
