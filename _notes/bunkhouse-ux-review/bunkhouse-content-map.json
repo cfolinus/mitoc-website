@@ -1,6 +1,6 @@
 {
   "generated": "2026-11-20",
-  "source_commit": "bce5eba",
+  "source_commit": "36e6cf4",
   "branch": "bunkhouse-edits",
   "note": "Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits. settings lists values in bunkhouse_settings.yml that appear in the text; edit those there, not in the page.",
   "labels": [
@@ -79,7 +79,7 @@
       "where": "Menu items at the top of every bunkhouse page, in order",
       "file": "_data/bunkhouse_settings.yml",
       "locator": "menu[].title",
-      "snapshot": "Overview | Project Details | FAQs | Donate"
+      "snapshot": "Overview | Project details | FAQs | Donate"
     },
     {
       "id": "OV-1",
@@ -163,11 +163,11 @@
       "where": "Overview page, paragraph 9",
       "file": "_pages/camelot/index.md",
       "locator": "paragraph 9",
-      "snapshot": "As of November 2026, 314 people have given or pledged $468,000 toward the full $1.3 million. That leaves **$832,000 to go**, and we need the full amount before we can break ground in late spring 2027. Gifts of every size count. [Donate online](https://giving.mit.edu/form/?fundId=3892696&amount=1000), or read [more about costs and funding](/camelot/faqs#cost).",
+      "snapshot": "As of November 2026, $468,000 has been raised by 314 people toward the full $1.3 million. That leaves **$832,000 to go**, and we need the full amount before we can break ground in late spring 2027. Gifts of every size count. [Donate online](https://giving.mit.edu/form/?fundId=3892696&amount=1000), or read [more about costs and funding](/camelot/faqs#cost).",
       "settings": [
         "bunkhouse_settings.yml donations_as_of",
-        "bunkhouse_settings.yml number_donors",
         "bunkhouse_settings.yml donations_amount",
+        "bunkhouse_settings.yml number_donors",
         "bunkhouse_settings.yml facts.total_cost",
         "bunkhouse_settings.yml donations_goal",
         "bunkhouse_settings.yml facts.groundbreaking",
@@ -180,6 +180,13 @@
       "file": "_pages/camelot/index.md",
       "locator": "paragraph 10",
       "snapshot": "On behalf of the MIT Outing Club community, we look forward to seeing you in the near future at the new MITOC Camelot bunkhouse."
+    },
+    {
+      "id": "PR-title",
+      "where": "Project page title (page heading and browser tab title)",
+      "file": "_pages/camelot/project.md",
+      "locator": "front matter title",
+      "snapshot": "Project details"
     },
     {
       "id": "PR-h-1",
@@ -345,9 +352,9 @@
     },
     {
       "id": "FAQ-title",
-      "where": "FAQ page title",
+      "where": "FAQ page title (also the browser tab title)",
       "file": "_pages/camelot/faqs.md",
-      "locator": "## heading",
+      "locator": "front matter title",
       "snapshot": "Frequently asked questions"
     },
     {
