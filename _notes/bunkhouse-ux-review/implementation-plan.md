@@ -1,6 +1,19 @@
 # Camelot bunkhouse pages: staggered implementation plan
 
-*Drafted 2026-11-19 from section 6 of [bunkhouse-ux-review.md](bunkhouse-ux-review.md). R-numbers refer to that section.*
+*Drafted 2026-11-19 from section 6 of [bunkhouse-ux-review.md](bunkhouse-ux-review.md). R-numbers refer to that section. Status last updated 2026-11-20.*
+
+## Status
+
+| Batch | Status | Commit (branch `bunkhouse-edits`) |
+|---|---|---|
+| Stage 0: send questions to the committee | **Not started** | — |
+| 1a: code fixes (R1, R2, typo, redirect, address) | Done | `8e67d88` |
+| 1b: banner and rentals links and copy (R12, R4) | Done, except the disputed facts left for 2a | `7f487e6` |
+| 1c: project page headings and captions (R14) | Done | `54d59f8` |
+| 1d: compact hero (R10), plus follow-up tweaks | Done | `2aba590` |
+| Stage 2 onward | Not started. Waits on committee answers, except the 2a refactor (step 1), which can start now. | — |
+
+Stage 1 isn't pushed or merged yet. The commits are only on the local `bunkhouse-edits` branch. Before starting new work, read the **Handoff notes** at the end of this file.
 
 The plan follows the review's "Suggested order of work" with four adjustments:
 
@@ -44,12 +57,15 @@ Ask about the gift preset (R9) at the same time.
 - **R1:** In [_layouts/bunkhouse.html:35-37](../../_layouts/bunkhouse.html#L35-L37), replace the dead `<button>` with an `<a href="{{site.data.bunkhouse_settings.donate_link}}">`.
 - **Typo:** Rename the class `bunkouse-donate-button` to `bunkhouse-donate-button` everywhere it appears: [bunkhouse.html](../../_layouts/bunkhouse.html), [camelot_banner.html](../../_includes/camelot_banner.html), and [css/mitoc.css](../../css/mitoc.css).
 - **R2:** Add a "← MITOC home" item to the menu in [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml), or drop `hide_root=true`. Rename the "Camelot Bunkhouse" menu item to "Overview". Leave the commented-out History entry for now; Stage 3 removes it.
+  - *As built:* I dropped `hide_root=true`. The "MIT Outing Club" brand link now shows at every width, including phones with the menu closed.
 - **R4 (redirect only):** Add `/bunkhouse /camelot 301` and `/bunkhouse/* /camelot 301` to [_redirects](../../_redirects).
 - **Display bug:** Keep the line breaks in the check-mailing address in [bunkhouse_faqs.yml:70-72](../../_data/bunkhouse_faqs.yml#L70-L72) by ending each line with two spaces or `<br>`.
 
 ### 1b. Links and newcomer copy (one PR, about 1 hour)
 - **R4 (rentals):** Replace the stale "Bunkhouse project" section in [rentals/camelot.md:55-57](../../_pages/rentals/camelot.md#L55-L57) with two sentences that don't depend on any fact still being decided, plus a link to `/camelot`. Leave "40 or more" (line 11) alone until 2a.
 - **R12 (structure):** Show "Learn more" next to Donate in the collapsed banner footer. Rewrite the banner's opening to say what Camelot is, and remove "As you may know." Leave the disputed claims (the distance, "Since 2013", "end of its useful life", "design now complete") for 2a.
+  - *As built:* I renamed the link inside the expanded banner from "Read more" to "Learn more" to match. I removed "Since 2013" and "end of its useful life" from the first paragraph rather than replacing them.
+  - *Still waiting for 2a:* in [camelot_banner.html](../../_includes/camelot_banner.html), "approximately 100m" (line 23), "$1.3 million" (line 26), "With the design now complete" (line 30), and "complete the new bunkhouse in 2027" (line 33). In [rentals/camelot.md:11](../../_pages/rentals/camelot.md#L11), "40 or more" (also misspelled "accomodate").
 
 ### 1c. Project page headings (one PR, about 1 hour)
 - **R14:** In [project.md](../../_pages/camelot/project.md), add `##` headings and a caption for each drawing, and end with links to the FAQs and Donate.
@@ -57,6 +73,13 @@ Ask about the gift preset (R9) at the same time.
 ### 1d. Compact hero (one PR, a few hours)
 - **R10:** Show the full hero only on the overview, using a front-matter flag such as `hero: full`. Use a one-row title, thermometer, and Donate bar on the subpages. Cap the hero's height on phones. Give the `h3` a light backing so it has enough contrast.
 - R3 changes the hero text later, so build the layout so the copy can change without touching the CSS.
+- *As built:*
+  - The overview has `hero: full` in its front matter, and every other page gets the compact strip by default.
+  - The three headline lines are `hero_title`, `hero_subtitle`, and `hero_tagline` in `bunkhouse_settings.yml`. The tagline appears only in the full hero.
+  - Follow-up changes the user asked for:
+    - "Coming 2027" is left-aligned under the title in both versions of the hero.
+    - The Donate button in the overview's hero is smaller and sized to its text. The full-width Donate button at the bottom of phone pages is unchanged.
+    - I removed the 22 px font-size rule on `.bunkhouse-navbar`, so the bunkhouse navbar now matches the main site's.
 
 **Check each PR** with `jekyll serve` at 1280 px and 390 px wide. Tap both Donate buttons on a phone-sized screen, open the phone menu, and confirm that `/bunkhouse` redirects. Running `html-proofer` (already in the Gemfile) catches broken links.
 
@@ -66,7 +89,7 @@ Ask about the gift preset (R9) at the same time.
 
 ### 2a. Keep key facts in one place, then fix them (R3)
 1. **Refactor first, without changing any wording:** move the facts that drift into [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml), for example `total_cost`, `current_phase`, `groundbreaking`, `completion_target`, `nightly_fee`, `distance_to_cabin`, and `capacity_now`. Then insert them with Liquid in the overview, the FAQ, the banner, and the rentals page. This removes the cause of the contradictions in section 7.
-2. **Then settle the values:** update each row of section 7 to the agreed value. Pick one definition of "Phase 1". Update the hero ("Coming 2027" and the h3 subtitle) and the FAQ answers written in the past tense (trail work, "When will construction start?"). Finish the banner and rentals edits that 1b left for later.
+2. **Then settle the values:** update each row of section 7 to the agreed value. Pick one definition of "Phase 1". Update the hero, which now means editing `hero_subtitle` and `hero_tagline` in `bunkhouse_settings.yml`, and the FAQ answers written in the past tense (trail work, "When will construction start?"). Finish the banner and rentals edits that 1b left for later (listed under 1b).
 
 ### 2b. Money (R7, R9)
 - **R7:** Add a "What Phase 2 will fund" section to the overview: Phase 1's cost and thanks to its donors, what the Phase 2 total covers and when it was last estimated, the amount raised, the remaining gap, and the funding level that lets construction start. Rewrite the FAQ cost answer, which still has its 2022 wording. Point the thermometer at whatever the committee chose, and add a "$X to go" figure computed in Liquid.
@@ -127,3 +150,38 @@ Ask about the gift preset (R9) at the same time.
 | 2 | 2a, 2b, 2c | Committee answers (Q1–6, 8) | 1–2 days |
 | 3 | 3a, 3b, 3c | An owner (Q9) and photos (Q7) | Half a day of setup, then about 1 hour per post |
 | 4 | 4a, 4b | Stages 2 and 3; usage data for R16 | 1–2 days |
+
+---
+
+## Handoff notes
+
+These were learned while building Stage 1. They're aimed at whoever (person or agent) picks this up next.
+
+### Working agreements with the site maintainer
+- **Do one batch at a time, commit it, and stop for review** before starting the next. The maintainer reviews each batch on the local server and often asks for small tweaks, which then go into that batch's commit.
+- **Don't change a fact listed in the review's section 7** until the committee has agreed on its value. If a sentence containing one has to be rewritten, drop the claim rather than picking a value.
+- Commit messages follow the pattern "… (UX review batch 1a)", with a bulleted list of what changed and the R-numbers.
+
+### Running and checking the site
+- **Local server:** run `bundle exec jekyll serve --livereload` from the repo root, then open http://localhost:4000/camelot. The site uses Jekyll 3.8 (see the Gemfile) and is hosted on Netlify, which is why redirects live in `_redirects`.
+- **Built file names:** pages build to `_site/camelot.html` and `_site/camelot/faqs.html`, not `…/index.html`. That matters if you serve a build folder with a plain static server.
+- **Screenshot quirks with headless Chrome:**
+  - It won't render narrower than about 500 px. A 390 px window size still lays the page out wider and crops it. Use Chrome DevTools device mode, or a real phone on the same Wi-Fi, for true phone widths.
+  - The full hero has `min-height: 57vh` at 768 px and wider. A very tall desktop window stretches it, so use realistic window heights such as 1280×800.
+  - Loading a URL with a `#anchor` gives blank or broken screenshots. To see content further down, use a tall window at phone width (no vh rule applies there), or a scratch copy of the page with `.bunkhouse-banner{display:none}` added.
+- Running `html-proofer` (in the Gemfile) checks for broken links.
+- Run `npm run build` in [tools/](tools/) after content changes, to regenerate the committee's content-review doc.
+
+### Code map (after Stage 1)
+- **Hero and thermometer:** [_layouts/bunkhouse.html](../../_layouts/bunkhouse.html). It's a single template: `{% assign settings = site.data.bunkhouse_settings %}` at the top, with `bunkhouse-banner-full` or `-compact` chosen by `page.hero`. The thermometer numbers are wrapped in `.donations-stats`, and Donate is a sibling of that block.
+- **Hero CSS:** in [css/mitoc.css](../../css/mitoc.css), shared `.bunkhouse-banner` rules come first, then a `/* Full hero */` block and a `/* Compact strip */` block, each with its own `min-width: 768px` media query.
+- **Class names:** the class is now spelled `bunkhouse-donate-button`; the old `bunkouse` typo is gone everywhere.
+- **Heading anchors:** the existing rule `.bunkhouse-container h2[id], h3[id] { scroll-margin-top: 70px }` keeps heading anchors clear of the fixed navbar. New `##` headings on any bunkhouse page are covered automatically.
+- **Figures:** use `<figure class="bunkhouse-figure">` with `<figcaption>` for drawings and photos. Images shrink to fit narrow screens.
+- **Homepage banner:** in [_includes/camelot_banner.html](../../_includes/camelot_banner.html), the collapsed footer is `.camelot-banner-actions` (Learn more and Donate). It's hidden when the banner is expanded. The click-to-expand script ignores clicks on `<a>` elements.
+- **FAQ answers:** they live in [_data/bunkhouse_faqs.yml](../../_data/bunkhouse_faqs.yml) and are rendered by kramdown. Use `%donate_link%` as a placeholder for the donate URL. To keep line breaks inside a blockquote, end each line with `<br>`.
+
+### Things to know for later stages
+- **3a (Updates page):** there's no feed plugin and no existing collections in `_config.yml` (its plugins are jekyll-jolt, jekyll-sitemap, and jekyll-target-blank). An RSS feed would need a hand-written template, or adding `jekyll-feed` to the Gemfile and checking that Netlify builds it.
+- **Phone Donate button:** the full-width Donate button at the bottom of phone pages (`.small-screen-only` in the layout) still uses the base button size. The user hasn't decided whether to shrink it too.
+- **Unpushed commits:** Stage 1 isn't pushed. The maintainer hasn't yet decided whether to open a PR for Stage 1 alone or wait for more stages.

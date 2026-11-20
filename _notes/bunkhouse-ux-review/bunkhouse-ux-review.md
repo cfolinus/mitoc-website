@@ -4,6 +4,12 @@
 
 This folder starts with an underscore, so Jekyll does not publish it. Screenshots are in [screenshots/](screenshots/).
 
+> **Implementation status (updated 2026-11-20).** Work is tracked in [implementation-plan.md](implementation-plan.md), which has the status table, the order of work, and handoff notes.
+> - **Done** (Stage 1, commits `8e67d88`…`2aba590` on `bunkhouse-edits`, not pushed yet): R1, R2, R4, R10, R14, and R12 except its disputed facts. Section 6 marks each one.
+> - **Not started:** everything else, mostly waiting on the committee's answers to section 8.
+> - **Line numbers in this review are from commit `cd2bad8`.** Many have shifted in `_layouts/bunkhouse.html`, `_layouts/bunkhouse_base.html`, `_includes/camelot_banner.html`, `_pages/camelot/project.md`, and `css/mitoc.css`. Search for the quoted text instead of trusting the line numbers.
+> - **The findings and screenshots below describe the site before Stage 1.** For example, the dead phone Donate button, the missing home link, and the full-screen phone hero are now fixed.
+
 **Content review document:** [bunkhouse-content-review.docx](bunkhouse-content-review.docx) contains all the bunkhouse wording, the key facts table, and the open questions, for committee members to edit in Google Docs or Word. [bunkhouse-content-map.json](bunkhouse-content-map.json) maps each `[label]` in the document to its source file, so edits can be applied back to the site. To regenerate both after the site changes, run `npm install` (first time only) and then `npm run build` in [tools/](tools/). This needs Node and Ruby.
 
 > **Comparing against `main`?** This review covers `bunkhouse-edits`, which has two commits that aren't on `main` yet (`8d992b5`, `cd2bad8`). Those commits already fixed several problems, so they don't appear below:
@@ -341,18 +347,23 @@ Each item is written so it can be handed to Claude Code as a task. **Decision** 
 
 **R1. Fix the dead Donate button on phones.** *Effort S. Personas P2, P5.*
 In [_layouts/bunkhouse.html:35-37](../../_layouts/bunkhouse.html#L35-L37), replace the `<button>` with an `<a href="{{site.data.bunkhouse_settings.donate_link}}" class="bunkouse-donate-button">`, matching the hero button. While there, consider fixing the class-name typo `bunkouse` → `bunkhouse` everywhere it appears (layout, banner include, and `css/mitoc.css`).
+✅ *Done in `8e67d88`, including the typo fix.*
 
 **R2. Add a way back to the main site from bunkhouse pages.** *Effort S. Persona P6.*
 Either drop `hide_root=true` in [bunkhouse_base.html:18](../../_layouts/bunkhouse_base.html#L18) so the "MIT Outing Club" brand link appears, or add a "← MITOC home" item to the menu in [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml). While editing the menu, rename "Camelot Bunkhouse" to "Overview".
+✅ *Done in `8e67d88`. I dropped `hide_root=true` and renamed the menu item. In `2aba590`, the navbar font sizes were also changed to match the main site.*
 
 **R4. Connect `/rentals/camelot` to the bunkhouse pages, and add a `/bunkhouse` redirect.** *Effort S. Personas P3, P5, P6.*
 Replace the stale "Bunkhouse project" section in [_pages/rentals/camelot.md:55-57](../../_pages/rentals/camelot.md#L55-L57) with two current sentences and a link to `/camelot`. Add `/bunkhouse  /camelot  301` (and `/bunkhouse/*`) to [_redirects](../../_redirects).
+✅ *Done: the redirect in `8e67d88`, the rentals section in `7f487e6`. The "40 or more" capacity claim on the rentals page still waits for R3.*
 
 **R12. Make the homepage banner work for newcomers.** *Effort S. Persona P6, and everyone else.*
 In [_includes/camelot_banner.html](../../_includes/camelot_banner.html), show a "Learn more" link next to the small Donate button in the collapsed footer (lines 51-55), so it's visible without expanding. Rewrite the opening (lines 13-19) to say what Camelot is before what it needs, for example: *"Camelot is MITOC's cabin in the White Mountains foothills, where many members take their first trip. We're building it a new bunkhouse."* Remove "As you may know." Make the copy match the overview's facts (see R3).
+🟡 *Partly done in `7f487e6`. The "Learn more" link is added and the opening is rewritten. The second and third paragraphs still contain disputed facts ("100m", "$1.3 million", "design now complete", "complete … in 2027"), which wait for R3.*
 
 **R14. Add headings and captions to the project page.** *Effort S. Personas P3, P4.*
 In [_pages/camelot/project.md](../../_pages/camelot/project.md), add `##` headings (Location on the property · Layout · Toilets and water · Heating and insulation · Structure · Fire safety), give each drawing a short caption, and end with a link to the FAQs and a Donate link.
+✅ *Done in `54d59f8`.*
 
 ### Content fixes (need a few facts from the committee)
 
@@ -442,6 +453,7 @@ Add FAQ entries for matching and non-cash gifts.
 
 **R10. Use a compact hero on subpages and phones, and improve text contrast.** *Effort M. Personas P2, P5.*
 Show the full hero only on the overview. Give the project and FAQ pages a short title bar with the thermometer and Donate in one row (in the layout, `{% if page.url == "/camelot/" %}` or a front-matter flag). On phones, cap the hero height so the first content appears in the first screen. Improve the contrast of "Site construction has started!" (the `h3` sits directly on the busy drawing; see [screenshot](screenshots/overview-mobile-fold.jpg)) by giving it the same light backing as the `h1` and `h2`.
+✅ *Done in `2aba590`, moved up to Stage 1 because it needs no decisions. Pages set `hero: full` in their front matter to get the full hero. The hero text now lives in `bunkhouse_settings.yml` (`hero_title`, `hero_subtitle`, `hero_tagline`), so R3 can edit it there.*
 
 **R11. Add a "What is Camelot?" introduction for newcomers.** *Effort S–M. Persona P6.*
 Use the existing photos in `/images/camelot/` (already used on `/rentals/camelot`). Add one sentence of location context ("about 2.5 hours from Boston, near Rumney climbing"), link to the rentals page, and say it's open to all members. Explain or drop "MITOCers".
@@ -464,7 +476,9 @@ For example: visitor-nights per year, number of MITOC trips and events based at 
 
 ### Suggested order of work
 
-1. **This week (no decisions):** R1, R2, R4, R12, R14.
+*This order has been superseded by the more detailed [implementation-plan.md](implementation-plan.md).*
+
+1. **This week (no decisions):** R1, R2, R4, R12, R14. ✅ *Done, plus R10.*
 2. **After a short committee check-in to settle facts and policies:** R3, R7, R9, then R8 and R13. At the same check-in, name an owner for updates (open question 9).
 3. **Updates page:** R6, once there's an owner. The past-milestone posts can be written as soon as Phase 1 photos are collected, without waiting for the restructure.
 4. **Larger restructure:** R5 with R10, R11, R15, R16. Do this once the content from steps 2 and 3 exists, since the new overview mainly reorganizes that content and shows the latest update.
@@ -494,7 +508,7 @@ These need one agreed value. Check with the committee before changing them.
 - The homepage banner says "With the design now complete, we are actively seeking donations" ([camelot_banner.html:31](../../_includes/camelot_banner.html#L31)), which reads like 2022.
 - The entire "Bunkhouse project" section on `/rentals/camelot` ([rentals/camelot.md:55-57](../../_pages/rentals/camelot.md#L55-L57)).
 
-**Display bug**
+**Display bug** (✅ fixed in `8e67d88` with `<br>`)
 - The check-mailing address in the FAQ ([bunkhouse_faqs.yml:70-72](../../_data/bunkhouse_faqs.yml#L70-L72)) appears on the website as one run-on line ("Massachusetts Institute of Technology P. O. Box 412926 Boston, MA…"). Kramdown merges the three `>` lines into a single paragraph. Ending each line with two spaces, or with `<br>`, keeps the line breaks.
 
 **Upkeep risks**
