@@ -1,6 +1,6 @@
 {
   "generated": "2026-11-20",
-  "source_commit": "36e6cf4",
+  "source_commit": "3ef5429",
   "branch": "bunkhouse-edits",
   "note": "Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits. settings lists values in bunkhouse_settings.yml that appear in the text; edit those there, not in the page.",
   "labels": [
@@ -59,6 +59,13 @@
       "file": "_layouts/bunkhouse.html",
       "locator": ".donations-note",
       "snapshot": "As of November 2026 · Gifts of every size count"
+    },
+    {
+      "id": "SET-share",
+      "where": "Link preview text: shown when a bunkhouse page is shared in Slack, email, or social posts, and often under the page in search results",
+      "file": "_data/bunkhouse_settings.yml",
+      "locator": "share_description",
+      "snapshot": "MITOC is building a new bunkhouse at Camelot, its cabin near Rumney, NH. Phase 1 is complete; help us raise the rest to build in 2027."
     },
     {
       "id": "HERO-donate",
