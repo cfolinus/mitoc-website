@@ -6,12 +6,16 @@
 
 | Batch | Status | Commit (branch `bunkhouse-edits`) |
 |---|---|---|
-| Stage 0: send questions to the committee | **Not started** | — |
+| Stage 0: send questions to the committee | **Partly answered.** The content-review doc came back 2026-11-20 with Part 1 (key facts), Q2, and Q3 filled in. Q4–Q9, the nightly fee, and the gift preset are still open. | — |
 | 1a: code fixes (R1, R2, typo, redirect, address) | Done | `8e67d88` |
 | 1b: banner and rentals links and copy (R12, R4) | Done, except the disputed facts left for 2a | `7f487e6` |
 | 1c: project page headings and captions (R14) | Done | `54d59f8` |
 | 1d: compact hero (R10), plus follow-up tweaks | Done | `2aba590` |
-| Stage 2 onward | Not started. Waits on committee answers, except the 2a refactor (step 1), which can start now. | — |
+| 2a-1: key-facts refactor (no wording change) | Ready to start | — |
+| 2a-2: agreed facts and copy fixes (R3) | Ready to start | — |
+| 2b: money and thermometer (R7, R9 wording) | Ready, except the R9 gift preset | — |
+| 2c: ways to give, get involved (R8, R13) | **Blocked** on Q4, Q5, Q8 | — |
+| Stage 3 onward | Not started | — |
 
 Stage 1 isn't pushed or merged yet. The commits are only on the local `bunkhouse-edits` branch. Before starting new work, read the **Handoff notes** at the end of this file.
 
@@ -87,20 +91,103 @@ Ask about the gift preset (R9) at the same time.
 
 ## Stage 2: Content fixes (after the committee check-in)
 
-### 2a. Keep key facts in one place, then fix them (R3)
-1. **Refactor first, without changing any wording:** move the facts that drift into [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml), for example `total_cost`, `current_phase`, `groundbreaking`, `completion_target`, `nightly_fee`, `distance_to_cabin`, and `capacity_now`. Then insert them with Liquid in the overview, the FAQ, the banner, and the rentals page. This removes the cause of the contradictions in section 7.
-2. **Then settle the values:** update each row of section 7 to the agreed value. Pick one definition of "Phase 1". Update the hero, which now means editing `hero_subtitle` and `hero_tagline` in `bunkhouse_settings.yml`, and the FAQ answers written in the past tense (trail work, "When will construction start?"). Finish the banner and rentals edits that 1b left for later (listed under 1b).
+*Re-planned 2026-11-20 from the committee's answers in the returned [bunkhouse-content-review.docx](bunkhouse-content-review.docx). The committee filled in Part 1 and answered Q2 and Q3. They didn't edit any Part 3 wording, so the new copy below is drafted by the maintainer and reviewed batch by batch as usual.*
 
-### 2b. Money (R7, R9)
-- **R7:** Add a "What Phase 2 will fund" section to the overview: Phase 1's cost and thanks to its donors, what the Phase 2 total covers and when it was last estimated, the amount raised, the remaining gap, and the funding level that lets construction start. Rewrite the FAQ cost answer, which still has its 2022 wording. Point the thermometer at whatever the committee chose, and add a "$X to go" figure computed in Liquid.
-- **R9:** Remove or lower `&amount=1000` in `donate_link`. Add the line "314 people have given. Gifts of every size count." near the thermometer, with the donor count filled in from `number_donors`.
-- **Add an `updated:` date** to `bunkhouse_settings.yml` and show "as of {date}" under the thermometer. Stage 3 can later switch this to the latest post's date.
+### Before starting: save the committee's copy
+`npm run build` in [tools/](tools/) **overwrites** `bunkhouse-content-review.docx`, and the returned file (uncommitted) is the only record of the committee's answers. Rename it to `bunkhouse-content-review-2026-11-20-committee.docx` and commit it before regenerating anything.
 
-### 2c. Ways to give and getting involved (R8, R13)
-- **R8:** Create a new `/camelot/give` page and add it to the menu. Cover employer matching (the fund name and number, plus whatever details MIT gives for matching portals), checks (move this from the FAQ), stock, DAF, and IRA gifts (link to MIT's instructions), pledges, a named contact, and recognition, if the committee decides on any. Point the menu's "Donate" item to `/camelot/give` or keep it pointing to the form; recommend keeping the direct form link in the hero.
-- **R13:** Add a "Get involved" block on the overview for now, with a volunteer signup form and a "Get updates by email" list. Rewrite the FAQ answer to "Will students be involved? Alums?" to point to it.
+### What the committee settled
 
-**After each content PR:** run `npm run build` in [tools/](tools/) to regenerate the content-review doc, so the committee reviews the current wording.
+| Fact | Agreed value | Notes for the copy |
+|---|---|---|
+| Phases | **Phase 0:** initial design with Maclay Architects (2019–21). **Phase 1:** parking lot, bridge, and access trail, plus the final construction drawings (fundraising 2022–24, about $300K; built 2024–25). **Phase 2:** construction of the bunkhouse (fundraising 2026–27, about $1M). | Replaces both old meanings of "Phase 1". |
+| Total cost and goal | $1.3 million, covering parking lot, trail and bridge, site prep, the bunkhouse itself, and design and project support (architects, structural and geotechnical engineers, MIT Facilities) | Reverses the FAQ's "not included" list. |
+| Basis of the estimate | 2026 estimate from general contractors' initial quotes on the finished construction drawings | Replaces the 2022 Dartmouth/COVID wording. |
+| Thermometer | Whole campaign, including pledges. $468,000 from 314 people, as of November 2026. | Gap = $832,000 (computed). |
+| Funding needed to start | The full $1.3 million | |
+| Schedule | Groundbreaking late spring 2027, construction complete fall 2027, in one season (about May–November) | "Coming 2027" is correct. Drop the "paused for winter" line. |
+| Current cabin capacity | About 30 people, across the loft, living room, and kitchen | The loft is **open again** after a major repair. The FAQ's "loft is closed" is now wrong. |
+| Bunkhouse capacity | 50 people in five rooms of 10, each the size of a standard winter school trip | |
+| Cabin to bunkhouse | About 200 meters | Was "100 m" on the project page and banner. |
+| Parking to cabin | About 200 meters | Was "1000 feet" on the rentals page. |
+| Parking | New gravel off-street lot with room for 20 cars | |
+| History | 2011 discussions begin · 2013 MITOC board approves · 2014–18 focus groups · 2018 founding gift (Joris Naiman) · 2019 Maclay hired · 2021 design complete · 2022–24 Phase 1 fundraising · 2024–25 Phase 1 built · 2026–27 Phase 2 fundraising | Settles "almost a decade" and "Since 2013". |
+| Cabin condition | The committee wrote three paragraphs (Part 1, "Condition of the existing cabin"): near the end of its usable life *as sleeping space*; loft repaired but patches only go so far; can't be brought to lodging code; within a few years it won't be safe to sleep in; usable as kitchen and lounge for another 10–20 years. | Use it nearly verbatim in the FAQ. Both the banner's "end of its useful life" and the FAQ's "10–20 years" are true once each is qualified. |
+| Contact | mitoc-bunkhouse@mit.edu (no named person) | |
+
+**Still open.** Follow up with the committee, but don't let these block 2a or 2b:
+- **Nightly fee** (Q6, second half): left blank. Remove the "$20" from the FAQ and don't state a number.
+- **Phase 0 in the $1.3M?** The committee's list includes "design … work from architects", but the current FAQ says the initial Maclay design was paid for separately, and $300K + $1M = $1.3M suggests Phase 0 is outside the total. Until this is confirmed, describe the $1.3M as "Phases 1 and 2" and leave Phase 0's funding out.
+- **What if the $1.3M isn't reached by spring 2027?** There's $832K to go and about six months left. Does groundbreaking slip to 2028? The answer belongs in R7 and R15. Until then, say only that full funding is needed before groundbreaking.
+- **Phase 1's $300K:** was it raised, or was it the cost? Can Phase 1 donors be thanked by name or as a group?
+- **Rentals parking instructions** belong to the cabin managers. Check the new wording with camelot-mgr@mit.edu.
+- Q4 (non-cash gifts, contact, recognition), Q5 (matching), Q7 (photos, usage data), Q8 (volunteering), Q9 (updates owner), and the R9 gift preset.
+
+### 2a-1. Key-facts refactor, no wording change (one PR, about 2 hours)
+1. Add a `facts:` map to [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml), with string values. Only include facts that are **already worded the same everywhere they appear**, so this batch changes no rendered text. Candidates: `total_cost: "$1.3 million"`, `capacity_new: "50"`, `rooms: "five"`, `room_size: "10"`. Add a comment noting that `donations_goal` (numeric, for the thermometer) must match `total_cost`.
+2. **FAQ YAML:** in [faqs.md](../../_pages/camelot/faqs.md), extend the existing `%donate_link%` replacement into a loop that replaces each `%key%` with `settings.facts[key]`. A Liquid `for` loop over a hash yields `[key, value]` pairs. Swap the literal values in [bunkhouse_faqs.yml](../../_data/bunkhouse_faqs.yml) for `%total_cost%` and similar placeholders, and update the file's header comment.
+3. **Pages and includes:** use `{{ site.data.bunkhouse_settings.facts.total_cost }}` in [index.md](../../_pages/camelot/index.md), [project.md](../../_pages/camelot/project.md), [camelot_banner.html](../../_includes/camelot_banner.html), and [rentals/camelot.md](../../_pages/rentals/camelot.md).
+4. **Content-review tool:** update [make_content_doc.js](tools/make_content_doc.js) to substitute the `%key%` placeholders (and `{{ …facts.x }}`) with their values in the doc, and record in the content map which fact key each one came from. Without this, committee members would see raw placeholders.
+5. **Verify it's a no-op:** build `_site` before and after, then run `diff -r`. The only differences allowed are whitespace.
+
+### 2a-2. Agreed facts and copy fixes (R3) (one PR, about half a day)
+First add the newly agreed facts to `facts:` (`capacity_now`, `distance_to_bunkhouse`, `walk_from_parking`, `groundbreaking`, `completion`, `phase2_cost`, `parking_lot`), then edit the copy below. Labels match the content-review doc. Make one wording pass, keeping the current structure; the R5 restructure is Stage 4.
+
+- **Hero:** set `hero_tagline` to something like "Phase 1 complete · Raising funds to build in 2027". Keep `hero_subtitle: Coming 2027`.
+- **Overview** (no new headings yet):
+  - OV-1: replace "a few hundred yards" with the distance fact.
+  - OV-2: replace "in discussion for almost a decade" with "in discussion since 2011 and approved by the MITOC board in 2013".
+  - OV-3: say Phase 1 also produced the final construction drawings.
+  - OV-4: say "breaking ground in late spring 2027 and finishing that fall". Replace "$1.3 million total costs" with the whole-campaign framing, and say the full amount is needed before groundbreaking.
+- **FAQ "Why a bunkhouse?":**
+  - why-2: drop "the loft area … is closed". Use the committee's condition text: the loft was repaired, the cabin sleeps about 30 now, and within a few years it won't be safe to sleep in.
+  - why-5: replace with the committee's lodging-code paragraph (sprinklers, fire-rated rooms, exits; the cabin managers and the Town of Groton found no viable way to bring the cabin up to code).
+  - why-4: keep "10–20 years", worded as kitchen and lounge only.
+- **FAQ "Cost and funding":**
+  - cost-1: $1.3M, estimated in 2026 from contractors' quotes on the finished construction drawings. Remove the Dartmouth and COVID wording.
+  - cost-2: change the question to **"What does the $1.3 million cover?"** and list the committee's items. Add a line about Phase 0 only after the open question is settled.
+  - cost-3: "modest user fees, in line with MITOC's other cabins". No dollar figure.
+- **FAQ "Timeline":**
+  - timeline-1: break ground in late spring 2027 once the full $1.3M is raised.
+  - timeline-2: one building season, about May to November, finishing fall 2027. Remove the winter pause.
+  - Add a new question, **"What are the phases of the project?"**, with Phase 0, 1, and 2, each with dates. This is the single place where "Phase" is defined.
+- **FAQ "Building and site":** in building-3 (parking), say the new gravel lot has room for 20 cars and was built in Phase 1 (2024–25), at the town's request.
+- **Project page:** in PR-1, change "about 100 meters up the hill" to the distance fact. In PR-2, add "each the size of a standard winter school trip".
+- **Banner:**
+  - BAN-2: change "100m" to the distance fact.
+  - BAN-3: replace "With the design now complete …" with Phase 1 being done (2025) and raising the rest to build in 2027.
+  - BAN-1 can say "nearing the end of its life as sleeping space" again, now that it's agreed.
+- **Rentals:**
+  - RENT-about: "40 or more" → `capacity_now` (about 30). Fix "accomodate". "1000 feet" → `walk_from_parking`.
+  - RENT-parking: say it's a gravel lot with room for about 20 cars. Have the cabin managers check the rest of the paragraph.
+  - Leave the $10 rental fee alone; that one is correct.
+- **Grep check:** search for "yards", "100 m", "1000 feet", "40 or more", "decade", "2013", "winter", "Dartmouth", "$20", and "design now complete". Each hit should be either gone or intentional.
+
+### 2b. Money and thermometer (R7, R9 wording) (one PR, a few hours)
+- **Thermometer** in [bunkhouse.html](../../_layouts/bunkhouse.html):
+  - Change the label to "Raised and pledged".
+  - Add "$832,000 to go", computed as `donations_goal | minus: donations_amount`.
+  - Add `donations_as_of: November 2026` to the settings and show "as of {date}" underneath. In the compact strip, keep it small or move it into a tooltip so the strip stays one row.
+- **R7 section on the overview:** add one headed section after OV-4. A working title is "## What the $1.3 million pays for", since the thermometer counts the whole campaign, not just Phase 2. It covers:
+  - Phase 1: done in 2025, with about $300K raised, and thanks to its donors.
+  - Phase 2: about $1M for the bunkhouse.
+  - The estimate comes from 2026 contractor quotes.
+  - $468K raised or pledged, $832K to go, and the full amount needed before the late-spring 2027 groundbreaking.
+  - A link to the FAQ cost section.
+  - All the numbers come from `facts:` or the thermometer values, not literals.
+- **R9 wording:** add "{{number_donors}} people have given so far. Gifts of every size count." near the thermometer on the overview. **Don't change `&amount=1000` until the preset is decided.** The maintainer can make that call directly, or add it to the follow-up questions.
+
+### 2c. Ways to give and getting involved (R8, R13): blocked
+Waits on Q4 (non-cash, pledges, contact, recognition), Q5 (matching details), and Q8 (volunteering). The scope is the same as before:
+- **R8:** a `/camelot/give` page covering matching, check (moved from the FAQ), stock, DAF and IRA gifts, pledges, a contact, and recognition. Keep the hero's direct form link.
+- **R13:** a "Get involved" block, and rewrite FAQ timeline-4 to point to it.
+
+*Optional, only if the committee is slow:* a minimal `/camelot/give` with just what's already true. That means online giving, the check instructions moved from the FAQ, the fund number 3892696 for matching portals, and "For stock, IRA, or larger gifts, email mitoc-bunkhouse@mit.edu". Expand it once Q4 and Q5 are answered.
+
+### After each batch
+- Run `npm run build` in [tools/](tools/) (only after the committee's copy is saved; see above).
+- Regenerate the review doc. Rewrite the hard-coded Part 1 table and Part 2 questions in `make_content_doc.js`, so Part 1 shows the agreed values and Part 2 lists only the questions still open.
+- Check at 1280 px and 390 px, as for Stage 1. The thermometer's new "to go" and "as of" lines need a look in the compact strip.
 
 ---
 
@@ -147,7 +234,7 @@ Ask about the gift preset (R9) at the same time.
 |---|---|---|---|
 | 0 | Send the questions | Nothing | 30 min |
 | 1 | 1a, 1b, 1c, 1d | Nothing | 1 day total |
-| 2 | 2a, 2b, 2c | Committee answers (Q1–6, 8) | 1–2 days |
+| 2 | 2a-1, 2a-2, 2b, 2c | 2a and 2b are unblocked. 2c waits on Q4, Q5, Q8. | 1–2 days |
 | 3 | 3a, 3b, 3c | An owner (Q9) and photos (Q7) | Half a day of setup, then about 1 hour per post |
 | 4 | 4a, 4b | Stages 2 and 3; usage data for R16 | 1–2 days |
 
