@@ -892,14 +892,27 @@ These need one agreed value. Check with the committee before changing them.
 
 ## 8. Open questions for MITOC
 
-*Round 1 answered Q2, Q3, and most of Q1 and Q6 (2026-11-20). The questions still open, plus new ones raised by the answers, are in Part 2 of the regenerated [bunkhouse-content-review.docx](bunkhouse-content-review.docx), numbered differently. See the "Next steps" table in [implementation-plan.md](implementation-plan.md).*
+*Updated 2026-11-20. The committee's round-1 answers (saved as `bunkhouse-content-review-2026-11-20-committee.docx`) and the web team's decisions (Part 1, section H) settled most of these. What's still open is in the round-2 [bunkhouse-content-review.docx](bunkhouse-content-review.docx), whose questions are numbered differently; the "Round 2" column gives that number. [implementation-plan.md](implementation-plan.md) says which batch each answer unblocks.*
 
-1. **Money:** does the $468K raised include funds spent on Phase 1? What's the current Phase 2 budget, and has the $1.3M estimate been updated since 2022?
-2. **Schedule:** what funding level, and by what date, lets construction start? Is "Coming 2027" the completion target or the start?
-3. **Thermometer:** should it show Phase 2 only, or the whole campaign?
-4. **Giving options:** which non-cash and pledge options does MIT support for fund 3892696? Who's the named contact for larger gifts? Is there any donor recognition or naming policy?
-5. **Matching:** what should employer-matching donors enter (recipient, designation)? Can MIT provide a link for this?
-6. **Current capacity and fee:** how many can sleep at Camelot now, and is the planned bunkhouse fee $10 or $20 per night?
-7. **Photos and data:** are there photos of the finished Phase 1 work, and usage figures from the cabin managers?
-8. **Volunteering:** what in-person or skills-based help is the project actually looking for?
-9. **Ownership:** who will write posts for the Updates page and keep the thermometer current? What's the minimum schedule (for example, quarterly plus each milestone)? Who sends the matching email announcement?
+✅ answered · 🟡 partly answered · ❓ open
+
+| # | Question | Status | Answer, or what's still open | Round 2 |
+|---|---|---|---|---|
+| 1 | **Money:** does the $468K raised include funds spent on Phase 1? What's the current Phase 2 budget, and has the $1.3M estimate been updated since 2022? | 🟡 | **Answered (committee):** $468K counts the whole campaign, Phases 1 and 2, including pledges. The $1.3M total was re-estimated in 2026 from general contractors' quotes on the finished construction drawings: about $300K for Phase 1 and about $1M for Phase 2. **Still open:** whether Phase 0 (the 2019–21 design work) is inside the $1.3M, and whether Phase 1's $300K was the amount raised or its final cost. | Q2, Q4 |
+| 2 | **Schedule:** what funding level, and by what date, lets construction start? Is "Coming 2027" the completion target or the start? | 🟡 | **Answered (committee):** construction starts only once the full $1.3M is raised. Groundbreaking is planned for late spring 2027 and completion for fall 2027, in one building season, so "Coming 2027" is the completion date. **Still open:** what happens if the full amount isn't raised by spring 2027 (does construction move to 2028?), or if bids come in above the estimate. | Q3 |
+| 3 | **Thermometer:** should it show Phase 2 only, or the whole campaign? | ✅ | **Committee:** the whole campaign, including pledges. **Web team:** label it "raised by" everywhere. | — |
+| 4 | **Giving options:** which non-cash and pledge options does MIT support for fund 3892696? Who's the named contact for larger gifts? Is there any donor recognition or naming policy? | 🟡 | **Answered (committee):** the contact is mitoc-bunkhouse@mit.edu, with no named person. **Still open:** stock, donor-advised funds, IRA distributions, multi-year pledges, a named contact for larger gifts, and recognition or naming. | Q5 |
+| 5 | **Matching:** what should employer-matching donors enter (recipient, designation)? Can MIT provide a link for this? | ❓ | Not answered yet. | Q6 |
+| 6 | **Current capacity and fee:** how many can sleep at Camelot now, and is the planned bunkhouse fee $10 or $20 per night? | 🟡 | **Answered (committee):** the cabin sleeps about 30 now, across the loft, living room, and kitchen. The loft is open again after a major repair. **Still open:** the bunkhouse's nightly fee. The FAQ says "modest user fees" with no number until then. | Q1 |
+| 7 | **Photos and data:** are there photos of the finished Phase 1 work, and usage figures from the cabin managers? | ❓ | Not answered yet. **Now the most urgent question:** Phase 1 photos are needed for both the Updates posts and the Home page. | Q7 |
+| 8 | **Volunteering:** what in-person or skills-based help is the project actually looking for? | ❓ | Not answered yet. | Q8 |
+| 9 | **Ownership:** who will write posts for the Updates page and keep the thermometer current? What's the minimum schedule? Who sends the matching email announcement? | 🟡 | **Answered (web team):** the web team owns Updates, posts a few times a year, and will backfill posts from about the last two years. The plan makes updating the thermometer part of writing each post. **Not yet settled:** who sends an email announcement for each post, and whether there will be an updates mailing list (that depends on Q8 and R13). | Removed (answered) |
+
+**Added in round 2** (not in the original list):
+
+| Question | Status | Round 2 |
+|---|---|---|
+| **Gift amount:** the online form opens with $1,000 filled in. Keep it, lower it, or leave it blank? (R9) | ❓ Open. The maintainer could also decide this. | Q9 |
+| **Rentals parking** (for the cabin managers): are the rest of the parking instructions on `/rentals/camelot` still right with the new gravel lot? | ❓ Open | Q10 |
+
+**Settled in round 1 but not asked here:** every row of section 7 (distances, history, cabin condition, what $1.3M covers, capacity, parking), and the definition of the project's phases. See "What the committee settled" in the implementation plan's appendix.
