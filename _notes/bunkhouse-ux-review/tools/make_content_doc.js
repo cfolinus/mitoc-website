@@ -171,7 +171,6 @@ const QUESTIONS = [
   ['Matching', 'What should employer-matching donors enter in their company\'s matching portal (recipient, designation)? Can MIT provide a link for this?', 'FAQ-donating-1'],
   ['Photos and data', 'Are there photos of the finished Phase 1 work (bridge, parking lot, trail)? Can the cabin managers provide usage figures (visitor-nights per year, trips, capacity before and after the loft closure)?', 'OV-3'],
   ['Volunteering', 'What in-person or skills-based help is the project actually looking for?', 'FAQ-timeline-5'],
-  ['Ownership', 'Who will write posts for a new bunkhouse Updates page and keep the thermometer current? What\'s the minimum schedule (for example, quarterly plus each milestone)? Who sends the matching email announcement?', 'SET-asof'],
   ['Gift amount', 'The online form opens with $1,000 already filled in. Keep that, lower it, or leave the amount blank?', 'SET-amount'],
   ['Rentals parking (for the cabin managers)', 'The rentals page now describes the new gravel lot. Are the rest of its parking instructions ("entirely off the pavement", "park as close as possible to other cars") still right?', 'RENT-parking'],
 ];
