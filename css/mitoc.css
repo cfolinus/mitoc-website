@@ -71,21 +71,13 @@ p img {
   max-width: 950px;
 }
 
-.bunkhouse-navbar,
-.bunkhouse-navbar .navbar-brand {
-  font-size: 22px;
-}
-
 .bunkhouse-banner {
   background-size: cover;
   background-repeat: no-repeat;
   background-image: url(/images/bunkhouse/bunkhouse-exterior-rendering.jpg);
   background-position-y: 34%;
   background-position-x: 50%;
-  min-height: 57vh;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
   margin-bottom: 1rem;
@@ -93,18 +85,196 @@ p img {
 
 .bunkhouse-banner h1,
 .bunkhouse-banner h2,
+.bunkhouse-banner h3,
 .donations-block {
   background: rgba(255, 255, 255, 0.45);
+}
+
+/* The tagline is thinner text, so it needs a lighter backing to stay readable */
+.bunkhouse-banner h3 {
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.bunkhouse-banner h1,
+.bunkhouse-banner h2,
+.bunkhouse-banner h3 {
+  color: #151515;
+  padding: 2px 10px;
+  text-align: center;
 }
 
 .bunkhouse-banner h1,
 .bunkhouse-banner h2 {
   font-weight: bolder;
   text-transform: uppercase;
-  color: #151515;
-  padding: 2px 10px;
-  text-align: center;
+}
+
+.bunkhouse-banner-titles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Subtitle sits under the title, lined up with its left edge */
+.bunkhouse-banner-titles h2 {
+  align-self: flex-start;
+}
+
+.donations-amount {
+  display: block;
+}
+
+/* Full hero: overview page only (front matter `hero: full`) */
+.bunkhouse-banner-full {
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px 15px;
+}
+
+.bunkhouse-banner-full h1 {
+  font-size: 3.2rem;
+  margin: 0 0 10px;
+}
+
+.bunkhouse-banner-full h2 {
+  font-size: 2.4rem;
+  margin: 0 0 10px;
+}
+
+.bunkhouse-banner-full h3 {
+  font-size: 1.8rem;
+  margin: 0 0 12px;
+}
+
+.bunkhouse-banner-full .donations-block {
+  padding: 12px 20px;
+  min-width: min(300px, 90%);
+}
+
+.bunkhouse-banner-full .donations-amount {
+  font-size: 2.6rem;
+}
+
+.bunkhouse-banner-full .bunkhouse-donate-button {
+  display: block;
+  width: fit-content;
+  margin: 4px auto 0;
+  padding: 6px 36px;
+  font-size: 1.8rem;
+}
+
+@media (min-width: 768px) {
+  .bunkhouse-banner-full {
+    min-height: 57vh;
+    padding: 30px 15px;
+  }
+  .bunkhouse-banner-full h1 {
+    font-size: 6rem;
+    margin-bottom: 15px;
+  }
+  .bunkhouse-banner-full h2 {
+    font-size: 4rem;
+    margin-bottom: 15px;
+  }
+  .bunkhouse-banner-full h3 {
+    font-size: 2.4rem;
+    margin-bottom: 15px;
+  }
+  .bunkhouse-banner-full .donations-block {
+    padding: 20px;
+  }
+  .bunkhouse-banner-full .donations-amount {
+    font-size: 3rem;
+  }
+  .bunkhouse-banner-full .bunkhouse-donate-button {
+    font-size: 2.2rem;
+    padding: 6px 48px;
+  }
+}
+
+/* Compact strip: every other bunkhouse page */
+.bunkhouse-banner-compact {
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 15px;
+  background-position-y: 45%;
+}
+
+.bunkhouse-banner-compact .bunkhouse-banner-titles {
+  gap: 4px;
+}
+
+.bunkhouse-banner-compact h1 {
+  font-size: 2.4rem;
+  margin: 0;
+}
+
+.bunkhouse-banner-compact h2 {
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.bunkhouse-banner-compact .donations-block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 8px 14px;
+  width: 100%;
+  max-width: 520px;
+  min-width: 0;
+}
+
+.bunkhouse-banner-compact .donations-stats {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 8px;
+}
+
+.bunkhouse-banner-compact .donations-amount {
   font-size: 2rem;
+}
+
+.bunkhouse-banner-compact .donations-stats p {
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.bunkhouse-banner-compact .donations-stats > .thermometer,
+.bunkhouse-banner-compact .donations-stats > .text-right {
+  flex-basis: 100%;
+}
+
+.bunkhouse-banner-compact .donations-stats > .thermometer {
+  margin: 4px 0 2px;
+}
+
+.bunkhouse-banner-compact .bunkhouse-donate-button {
+  flex: none;
+  width: auto;
+  font-size: 1.8rem;
+  padding: 6px 24px;
+  margin-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  .bunkhouse-banner-compact {
+    flex-direction: row;
+    gap: 40px;
+    padding: 16px 15px;
+  }
+  .bunkhouse-banner-compact h1 {
+    font-size: 3.6rem;
+  }
+  .bunkhouse-banner-compact h2 {
+    font-size: 2rem;
+  }
+  .bunkhouse-banner-compact .bunkhouse-donate-button {
+    font-size: 2.2rem;
+  }
 }
 
 .thermometer {
@@ -115,13 +285,6 @@ p img {
 
 .donation-progress {
   background: #d22630;
-}
-
-.bunkhouse-banner h1 {
-  font-size: 4rem;
-}
-.bunkhouse-banner h2 {
-  font-size: 3rem;
 }
 
 .bunkhouse-donate-button {
@@ -138,13 +301,6 @@ p img {
 }
 
 @media (min-width: 768px) {
-  .bunkhouse-banner h1 {
-    font-size: 6rem;
-  }
-  .bunkhouse-banner h2 {
-    font-size: 4rem;
-  }
-
   .bunkhouse-donate-button {
     font-size: 3rem;
     width: 250px;

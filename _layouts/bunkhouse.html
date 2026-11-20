@@ -2,31 +2,35 @@
 layout: bunkhouse_base
 ---
 
-<div class="bunkhouse-banner">
-  <h1>Camelot bunkhouse</h1>
-  <h2>Coming 2027</h2>
-  <h3>Site construction has started!</h3>
+{% assign settings = site.data.bunkhouse_settings %}
+{% comment %}
+  Pages with `hero: full` in their front matter (the overview) get the large
+  hero. Every other page gets a compact strip with the same facts in one row.
+{% endcomment %}
+<div class="bunkhouse-banner {% if page.hero == 'full' %}bunkhouse-banner-full{% else %}bunkhouse-banner-compact{% endif %}">
+  <div class="bunkhouse-banner-titles">
+    <h1>{{ settings.hero_title }}</h1>
+    <h2>{{ settings.hero_subtitle }}</h2>
+    {% if page.hero == 'full' %}<h3>{{ settings.hero_tagline }}</h3>{% endif %}
+  </div>
   <div class="donations-block">
-    <strong class="donations-amount"
-      >${{site.data.bunkhouse_settings.donations_amount | thousands_separated
-      }}</strong
-    ><br />
-    <p>RAISED BY <strong>{{site.data.bunkhouse_settings.number_donors}}</strong> PEOPLE</p>
-    <div class="thermometer">
-      {% assign goal_float = site.data.bunkhouse_settings.donations_goal | times: 1.0 %}
-      {% assign total_donations_float = site.data.bunkhouse_settings.donations_amount | times: 1.0 %}
-      {% assign progress_total = total_donations_float | divided_by: goal_float | times: 100 %}
-      <div
-        class="thermometer donation-progress"
-        style="width: {{progress_total | round: 2}}%"
-      ></div>
+    <div class="donations-stats">
+      <strong class="donations-amount"
+        >${{ settings.donations_amount | thousands_separated }}</strong
+      >
+      <p>RAISED BY <strong>{{ settings.number_donors }}</strong> PEOPLE</p>
+      <div class="thermometer">
+        {% assign goal_float = settings.donations_goal | times: 1.0 %}
+        {% assign total_donations_float = settings.donations_amount | times: 1.0 %}
+        {% assign progress_total = total_donations_float | divided_by: goal_float | times: 100 %}
+        <div
+          class="thermometer donation-progress"
+          style="width: {{progress_total | round: 2}}%"
+        ></div>
+      </div>
+      <p class="text-right">Goal: <strong>${{ settings.donations_goal | thousands_separated }}</strong></p>
     </div>
-    <p class="text-right">Goal: <strong>${{site.data.bunkhouse_settings.donations_goal | thousands_separated}}</strong></p>
-    <a
-      href="{{site.data.bunkhouse_settings.donate_link}}"
-      class="bunkhouse-donate-button"
-      >Donate</a
-    >
+    <a href="{{ settings.donate_link }}" class="bunkhouse-donate-button">Donate</a>
   </div>
 </div>
 <div class="container bunkhouse-wrapper">

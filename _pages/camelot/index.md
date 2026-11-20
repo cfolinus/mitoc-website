@@ -1,6 +1,7 @@
 ---
 permalink: /camelot
 layout: bunkhouse
+hero: full
 ---
 
 The MIT Outing Club’s “Camelot” cabin, set on 20 acres near Rumney, NH, has been a center of the club’s activities for nearly 50 years. Countless MITOCers are first introduced to outdoor recreation and camaraderie at events based out of Camelot. To maintain this opportunity for future generations of MIT students, we plan to build a new bunkhouse on the Camelot property, providing sleeping space for 50 people. The new bunkhouse will be sited a few hundred yards away from the existing cabin and will provide heated sleeping space in a modern, safe, tightly insulated building enclosure.
