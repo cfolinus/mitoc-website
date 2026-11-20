@@ -1,6 +1,6 @@
 {
   "generated": "2026-11-20",
-  "source_commit": "dbcaf5f+uncommitted",
+  "source_commit": "7eeecd4",
   "branch": "bunkhouse-edits",
   "note": "Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits. settings lists values in bunkhouse_settings.yml that appear in the text; edit those there, not in the page.",
   "labels": [
