@@ -1,19 +1,20 @@
 # Camelot bunkhouse pages: implementation plan
 
-*Updated 2026-11-20 (Stage 3 built). This plan turns [bunkhouse-ux-review.md](bunkhouse-ux-review.md) into batches. R1–R16 are from the review's Part 2, section 6; R17–R21 are from Part 1, section G. The web team's decisions (review section H) are folded in. Stages 0–3 are done; their as-built notes are in the **Appendix** at the end.*
+*Updated 2026-11-20 (Stage 4 built). This plan turns [bunkhouse-ux-review.md](bunkhouse-ux-review.md) into batches. R1–R16 are from the review's Part 2, section 6; R17–R21 are from Part 1, section G. The web team's decisions (review section H) are folded in. Stages 0–4 are done; their as-built notes are in the **Appendix** at the end.*
 
 ## Where things stand
 
-- **Done, on the local `bunkhouse-edits` branch (nothing pushed yet):** Stages 1–3, covering R1–R4, R7, R10, R12, R14, R19 (minimal), R20, R21, the facts the committee agreed in round 1, and the navbar brand and footer. See the Appendix.
+- **Done, on the local `bunkhouse-edits` branch (nothing pushed yet):** Stages 1–4, covering R1–R4, R7, R10–R12, R14, R17, R18, R19 (minimal), R20, R21, the facts the committee agreed in round 1, and the navbar brand and footer. See the Appendix.
 - **The web team has decided the new structure** (review section H): a short Home page, an "About" page at `/camelot/about`, a Donate page that every Donate button opens, "raised by" wording, and Updates owned by the web team.
 - **Round-2 doc sent to the committee** (10 open questions). The copy as sent is saved as `bunkhouse-content-review-2026-11-20-sent.docx` and `bunkhouse-content-map-2026-11-20-sent.json`; map returned OV-n, FAQ-donating and FAQ-donating-1 labels through that saved map. The working doc has since been regenerated, so Q5 and Q6 are now attached to DON-h-3 and DON-h-1.
-- **Next to build:** Stage 4. Nothing in Stages 4 or 5a waits on the committee.
+- **Stage 4 is built locally.** Round-2 labels the committee uses map as: OV-1 to OV-4 → HOME-n and AB-n (the old overview text is now About; see `bunkhouse-content-map-2026-11-20-sent.json` for each label's source paragraph); Q7 (photos) is attached to HOME-7.
+- **Next to build:** Stage 5a (Updates setup). It doesn't wait on the committee; 5b waits on Phase 1 photos.
 
 | Stage | Batches | Status | Waits on |
 |---|---|---|---|
 | 0–2 | Questions round 1; quick wins; facts and money | ✅ Done | — |
 | 3 | 3a page identity (R20) · 3b share previews (R21) · 3c minimal Donate page (R19) | ✅ Done (local) | — |
-| 4 | 4a About (R18) · 4b new Home (R17, R11) · 4c FAQ reshuffle | **Ready** (best after Stage 3) | Nothing |
+| 4 | 4a About (R18) · 4b new Home (R17, R11) · 4c FAQ reshuffle | ✅ Done (local) | — |
 | 5 | 5a Updates setup · 5b posts from the last two years · 5c upkeep (R6) | 5a ready; 5b waits on photos | Phase 1 photos (Q7); the web team writes the posts |
 | 6 | 6a full Donate page · 6b Get involved · 6c missed-goal answer · 6d usage numbers · 6e small fill-ins | Waiting | The committee's round-2 answers |
 
@@ -55,7 +56,7 @@ Menu order: About · Updates · Project details · FAQs · Donate. Redirects: `/
    The doc's labels (OV-n and so on) point at today's pages. If answers come back after Stage 4, map OV-n labels to the new files using the committed `bunkhouse-content-map.json` from this round.
 
 2. **Ask the committee, or the cabin managers directly, for Phase 1 photos now**, separately from the doc if that's faster. They block both Home's "Where things stand" photo and the Updates posts.
-3. **Start Stage 4.**
+3. **Start Stage 5a.** Nothing from Stages 1–4 is pushed; Stage 4 changes what `/camelot` shows, so this is a natural point to push for a deploy preview.
 4. **Decisions for the maintainer:**
    - **Blank gift preset:** removing `&amount=1000` from `donate_link` should work, but nobody has checked what MIT's form shows with no amount. Open `https://giving.mit.edu/form/?fundId=3892696` first. Or wait for Q9.
    - **Pushing:** open a PR for Stages 1–2 now, or after Stage 3 or 4. The Stage 4 split changes what `/camelot` shows, so it's a natural point for the web team to look at a deploy preview.
@@ -125,7 +126,19 @@ Now (no input needed)          Next                        Web team, with photos
 
 ---
 
-## Stage 4: Split `/camelot` into Home and About
+## Stage 4: Split `/camelot` into Home and About (done)
+
+*As built, 2026-11-20 (commits `deb763c` 4a, `6304277` 4b, and the 4c commit, each followed by a regenerated doc and map). Differences from the plan below:*
+- *Photos: all four files in `images/camelot/` are only 160×120 px, so they're shown small (240 px wide). About uses `pic4` (captioned "The existing Camelot cabin") and Home uses `pic3` (a campfire, "Around the fire at Camelot"). Please check the captions are accurate, and replace both with larger photos when available.*
+- *The timeline adds "June 2023: Groton planning board approves", from the old page text; not committee-confirmed.*
+- *Shared summary: `summary:` in the settings, printed by `_includes/bunkhouse_summary.html` (`part='what_is_camelot'` or `part='why' index=0..2`). On About, each "why" bullet is the bold lead of its paragraph, and the first sentence pair opens "Camelot today". In the banner it replaces only the first sentence, so "nearing the end of its life as a place to sleep" stays.*
+- *New fact `drive_time: "about 2.5 hours"` (confirmed by the maintainer).*
+- *Home is about 170 words below the hero. "Where things stand" is text only; Phase 1 photos are held for the Updates posts. The Latest update slot is `_includes/camelot_latest_update.html`, guarded because Jekyll can't sort a missing collection (it errors); tested with a throwaway collection.*
+- *Full hero: the thermometer box is more opaque (85%), and the tagline is "Phase 1 complete · Phase 2 fundraising now". The phone footer Donate button is hidden on Home too.*
+- *FAQ: "Who's running the project?" replaces the two people questions (old anchors kept); the Maclay sentence is in About's "The plan" and the FAQ answer. "Can't find your answer?" sits under the FAQ title.*
+- *Review doc: Home is section B (HOME-n, HOME-h-n, HOME-img-n, HOME-cap-n), shared text is A2 (SUM-1 to SUM-4), About is B2 (AB-n), Donate is C2. OV-n labels no longer exist. New copy to flag for the committee: the summary, Home text, "Many employers match gifts", and the About section intros.*
+
+*The original plan for Stage 4 follows.*
 
 Do these three batches in order, one commit each, stopping for review between them. Nothing is pushed until all three are reviewed, so the temporary duplication after 4a never goes live.
 
@@ -289,6 +302,7 @@ These were learned while building Stages 1 and 2. Line numbers may shift as late
 - **Shared navbar include (3a):** `navbar.html` and `menu-link.html` are used by the main site too. Any change there (active state, a right-hand menu) shows up site-wide; check main-site pages and keep new parameters optional.
 - **Anchors that move in Stage 4:** the current overview's `#what-the-13-million-pays-for` heading moves to `/camelot/about#funding`. It has never been pushed, so nothing outside links to it. FAQ anchors that move (the donate questions in 3c, the people questions in 4c) keep working through `old_ids:`.
 - **Review-doc labels change in Stages 3–4:** OV-n is replaced by HOME-n and AB-n, and DON-n and SUM-n are added. Round-2 answers labelled OV-n need mapping through the round-2 `bunkhouse-content-map.json` (it records the source file and paragraph for each label). Commit the content map with each regenerated doc so old labels stay traceable.
+- **Shared summary:** edit `summary:` in the settings (or the SUM-n labels in the doc). Use `{% include bunkhouse_summary.html … %}` wherever it should appear; don't copy the text.
 - **Phone Donate button:** the full-width Donate button at the bottom of phone pages (`.small-screen-only` in the layout) still uses the base button size. The user hasn't decided whether to shrink it too. On the Donate page it duplicates the page's own big button; consider hiding it there with a front-matter flag.
 - **Unpushed commits:** nothing from Stage 1 or 2 is pushed. The maintainer hasn't decided when to open a PR.
 - **Facts that still read as "about"** (`capacity_now`, distances, `phase1_raised`, `phase2_cost`) include the word in the value, so a sentence reads "sleeps about 30 people". Keep that pattern when adding facts.
@@ -388,7 +402,7 @@ Ask about the gift preset (R9) at the same time.
 | Cabin to bunkhouse | About 200 meters | Was "100 m" on the project page and banner. |
 | Parking to cabin | About 200 meters | Was "1000 feet" on the rentals page. |
 | Parking | New gravel off-street lot with room for 20 cars | |
-| History | 2011 discussions begin · 2013 MITOC board approves · 2014–18 focus groups · 2018 founding gift (Joris Naiman) · 2019 Maclay hired · 2021 design complete · 2022–24 Phase 1 fundraising · 2024–25 Phase 1 built · 2026–27 Phase 2 fundraising | Settles "almost a decade" and "Since 2013". |
+| History | 2011 discussions begin · 2013 MITOC board approves · 2014–18 focus groups · 2018 founding gift (Joris Naiman) · 2019 Maclay hired · 2021 design complete · 2022–24 Phase 1 fundraising · June 2023 Groton planning board approves *(added by the maintainer in Stage 4, from the old page text)* · 2024–25 Phase 1 built · 2026–27 Phase 2 fundraising | Settles "almost a decade" and "Since 2013". |
 | Cabin condition | The committee wrote three paragraphs (Part 1, "Condition of the existing cabin"): near the end of its usable life *as sleeping space*; loft repaired but patches only go so far; can't be brought to lodging code; within a few years it won't be safe to sleep in; usable as kitchen and lounge for another 10–20 years. | Use it nearly verbatim in the FAQ. Both the banner's "end of its useful life" and the FAQ's "10–20 years" are true once each is qualified. |
 | Contact | mitoc-bunkhouse@mit.edu (no named person) | |
 
