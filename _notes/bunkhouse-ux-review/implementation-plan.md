@@ -7,7 +7,7 @@
 - **Done, on the local `bunkhouse-edits` branch (nothing pushed yet):** Stages 1–4, covering R1–R4, R7, R10–R12, R14, R17, R18, R19 (minimal), R20, R21, the facts the committee agreed in round 1, and the navbar brand and footer. See the Appendix.
 - **The web team has decided the new structure** (review section H): a short Home page, an "About" page at `/camelot/about`, a Donate page that every Donate button opens, "raised by" wording, and Updates owned by the web team.
 - **Round-2 doc sent to the committee** (10 open questions). The copy as sent is saved as `bunkhouse-content-review-2026-11-20-sent.docx` and `bunkhouse-content-map-2026-11-20-sent.json`; map returned OV-n, FAQ-donating and FAQ-donating-1 labels through that saved map. The working doc has since been regenerated, so Q5 and Q6 are now attached to DON-h-3 and DON-h-1.
-- **Stage 4 is built locally.** Round-2 labels the committee uses map as: OV-1 to OV-4 → HOME-n and AB-n (the old overview text is now About; see `bunkhouse-content-map-2026-11-20-sent.json` for each label's source paragraph); Q7 (photos) is attached to HOME-7.
+- **Stage 4 is built locally.** Round-2 labels the committee uses map as: OV-1 to OV-4 → HOME-n and AB-n (the old overview text is now About; see `bunkhouse-content-map-2026-11-20-sent.json` for each label's source paragraph); Q7 (photos) is attached to HOME-3.
 - **Next to build:** Stage 5a (Updates setup). It doesn't wait on the committee; 5b waits on Phase 1 photos.
 
 | Stage | Batches | Status | Waits on |
@@ -129,14 +129,14 @@ Now (no input needed)          Next                        Web team, with photos
 ## Stage 4: Split `/camelot` into Home and About (done)
 
 *As built, 2026-11-20 (commits `deb763c` 4a, `6304277` 4b, and the 4c commit, each followed by a regenerated doc and map). Differences from the plan below:*
-- *Photos: all four files in `images/camelot/` are only 160×120 px, so they're shown small (240 px wide). About uses `pic4` (captioned "The existing Camelot cabin") and Home uses `pic3` (a campfire, "Around the fire at Camelot"). Please check the captions are accurate, and replace both with larger photos when available.*
+- *Wording and look (revised after the maintainer said the first version read as generic):* Home and About reuse the committee's original paragraphs and the FAQ's wording about the cabin's condition. There are no photos yet (the four files in `images/camelot/` are only 160×120 px), no check marks or bold lead-ins, and no question-style headings. Running text is capped at 44em.
 - *The timeline adds "June 2023: Groton planning board approves", from the old page text; not committee-confirmed.*
-- *Shared summary: `summary:` in the settings, printed by `_includes/bunkhouse_summary.html` (`part='what_is_camelot'` or `part='why' index=0..2`). On About, each "why" bullet is the bold lead of its paragraph, and the first sentence pair opens "Camelot today". In the banner it replaces only the first sentence, so "nearing the end of its life as a place to sleep" stays.*
-- *New fact `drive_time: "about 2.5 hours"` (confirmed by the maintainer).*
-- *Home is about 170 words below the hero. "Where things stand" is text only; Phase 1 photos are held for the Updates posts. The Latest update slot is `_includes/camelot_latest_update.html`, guarded because Jekyll can't sort a missing collection (it errors); tested with a throwaway collection.*
+- *Shared summary: `summary:` in the settings has two committee-worded passages, `what_is_camelot` and `why`, printed by `_includes/bunkhouse_summary.html` (`part='what_is_camelot'` or `part='why'`). They appear on Home, in two About sections, and (the first) at the start of the banner, which keeps its second sentence about the 1970s cabin.*
+- *New fact `drive_time: "about 2.5 hours"` (confirmed by the maintainer); used in About's "Camelot today".*
+- *Home is short (about 170 words below the hero). "Where things stand" is text only; Phase 1 photos are held for the Updates posts. The Latest update slot is `_includes/camelot_latest_update.html`, guarded because Jekyll can't sort a missing collection (it errors); tested with a throwaway collection.*
 - *Full hero: the thermometer box is more opaque (85%), and the tagline is "Phase 1 complete · Phase 2 fundraising now". The phone footer Donate button is hidden on Home too.*
 - *FAQ: "Who's running the project?" replaces the two people questions (old anchors kept); the Maclay sentence is in About's "The plan" and the FAQ answer. "Can't find your answer?" sits under the FAQ title.*
-- *Review doc: Home is section B (HOME-n, HOME-h-n, HOME-img-n, HOME-cap-n), shared text is A2 (SUM-1 to SUM-4), About is B2 (AB-n), Donate is C2. OV-n labels no longer exist. New copy to flag for the committee: the summary, Home text, "Many employers match gifts", and the About section intros.*
+- *Review doc: Home is section B (HOME-n, HOME-h-n), shared text is A2 (SUM-1 and SUM-2), About is B2 (AB-n), Donate is C2. OV-n labels no longer exist. New copy to flag for the committee: the lightly edited summary ("MITOC members" instead of "MITOCers"), About's "Why" second paragraph and the FAQ links, and the timeline's June 2023 entry.*
 
 *The original plan for Stage 4 follows.*
 
@@ -302,7 +302,7 @@ These were learned while building Stages 1 and 2. Line numbers may shift as late
 - **Shared navbar include (3a):** `navbar.html` and `menu-link.html` are used by the main site too. Any change there (active state, a right-hand menu) shows up site-wide; check main-site pages and keep new parameters optional.
 - **Anchors that move in Stage 4:** the current overview's `#what-the-13-million-pays-for` heading moves to `/camelot/about#funding`. It has never been pushed, so nothing outside links to it. FAQ anchors that move (the donate questions in 3c, the people questions in 4c) keep working through `old_ids:`.
 - **Review-doc labels change in Stages 3–4:** OV-n is replaced by HOME-n and AB-n, and DON-n and SUM-n are added. Round-2 answers labelled OV-n need mapping through the round-2 `bunkhouse-content-map.json` (it records the source file and paragraph for each label). Commit the content map with each regenerated doc so old labels stay traceable.
-- **Shared summary:** edit `summary:` in the settings (or the SUM-n labels in the doc). Use `{% include bunkhouse_summary.html … %}` wherever it should appear; don't copy the text.
+- **Shared summary:** edit `summary:` in the settings (or SUM-1 and SUM-2 in the doc). Use `{% include bunkhouse_summary.html … %}` wherever it should appear; don't copy the text.
 - **Phone Donate button:** the full-width Donate button at the bottom of phone pages (`.small-screen-only` in the layout) still uses the base button size. The user hasn't decided whether to shrink it too. On the Donate page it duplicates the page's own big button; consider hiding it there with a front-matter flag.
 - **Unpushed commits:** nothing from Stage 1 or 2 is pushed. The maintainer hasn't decided when to open a PR.
 - **Facts that still read as "about"** (`capacity_now`, distances, `phase1_raised`, `phase2_cost`) include the word in the value, so a sentence reads "sleeps about 30 people". Keep that pattern when adding facts.
