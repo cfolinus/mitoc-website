@@ -328,6 +328,7 @@ blocks(body('_pages/camelot/donate.md')).forEach(b => {
 children.push(H2('D. FAQ page (mitoc.mit.edu/camelot/faqs)'));
 children.push(note('The page title is followed by a row of buttons, one per group, that jump to that group. Each group heading below is also its button label. Questions are shown in bold.'));
 block('FAQ-title', 'FAQ page title (also the browser tab title)', '_pages/camelot/faqs.md', 'front matter title', txt('Frequently asked questions'));
+block('FAQ-intro', 'FAQ page: line under the title, before the group buttons', '_pages/camelot/faqs.md', 'paragraph under the title', txt("Can't find your answer? Email [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu)."));
 data.faqs.forEach(g => {
   block(`FAQ-${g.id}`, `FAQ group heading (also the jump button). Page link: /camelot/faqs#${g.id}`, '_data/bunkhouse_faqs.yml', `group id=${g.id} title`, txt(g.title));
   g.questions.forEach((q, i) => {

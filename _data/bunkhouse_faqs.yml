@@ -122,13 +122,10 @@
 - id: people
   title: Who's involved
   questions:
-    - question: Who designed the new bunkhouse?
+    - question: Who's running the project?
+      old_ids: [who-designed-the-new-bunkhouse, who-is-managing-this-project]
       answer: |
-        MITOC hired Maclay Architects to execute the design for the new bunkhouse. Maclay Architects previously worked with the Dartmouth Outing Club on several of their bunkhouses. Maclay Architects had an extremely close collaboration with the Camelot managers and MITOC board, and we feel that the proposed design exactly represents the interests of the MITOC community.
-
-    - question: Who is managing this project?
-      answer: |
-        David Lawrence ‘14, a former MITOC president and Camelot manager, is the volunteer director of the Camelot bunkhouse project. The fundraising committee also includes graduate student Karina Smolyar and MITOC's alumni liaison Greg Wallace. We have active participation from the MIT Department of Facilities, the MIT Division of Student Life, and many other MITOC board members.
+        The project is led by volunteers from the MITOC community, with active participation from MIT Facilities and the MIT Division of Student Life. The design is by Maclay Architects. For names and roles, see [Who's leading the project](/camelot/about#leaders) on the About page.
 
     - question: Who should I contact with a different question?
       answer: |

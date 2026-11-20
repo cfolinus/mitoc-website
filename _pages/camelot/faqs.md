@@ -14,6 +14,8 @@ title: Frequently asked questions
 
 <span id="faq-top"></span>
 
+Can't find your answer? Email [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu).
+
 {% for group in site.data.bunkhouse_faqs %}
 * [{{ group.title }}](#{{ group.id }})
 {%- endfor %}
