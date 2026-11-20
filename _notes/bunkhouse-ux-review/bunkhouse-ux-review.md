@@ -1,18 +1,370 @@
 # Camelot bunkhouse pages: UX review by audience
 
-*Reviewed 2026-11-19 on branch `bunkhouse-edits` (commit `cd2bad8`). Pages were rendered locally with `jekyll serve` and checked in Chrome at desktop (1280 px) and phone (390 px, iPhone-sized) widths.*
+*First review 2026-11-19 on branch `bunkhouse-edits` (commit `cd2bad8`). **Second review 2026-11-20** (commit `bce5eba`), after Stages 1–2b and the web team's request to restructure the section into six pages. Both times, pages were rendered locally with `jekyll serve` and checked in Chrome at desktop (1280 px) and phone widths.*
 
-This folder starts with an underscore, so Jekyll does not publish it. Screenshots are in [screenshots/](screenshots/).
+This folder starts with an underscore, so Jekyll does not publish it. Screenshots are in [screenshots/](screenshots/). Files starting with `r2-` are from the second review.
+
+**How this document is organized**
+- **Part 1 (sections A–H): second review.** It covers the new page structure the web team asked for, and what's still open on the current pages. Start here.
+- **Part 2 (sections 1–8): first review.** The original findings by persona, kept as the record. [implementation-plan.md](implementation-plan.md) refers to its section and R-numbers, so they're unchanged. Where Part 1 replaces a recommendation, Part 2 says so.
 
 > **Implementation status (updated 2026-11-20).** Work is tracked in [implementation-plan.md](implementation-plan.md), which has the status table, next steps, and handoff notes.
-> - **Done** (Stages 1 and 2 through batch 2b, on `bunkhouse-edits`, not pushed yet): R1, R2, R3, R4, R10, R12, R14, and R7. Section 6 marks each one.
+> - **Done** (Stages 1 and 2 through batch 2b, on `bunkhouse-edits`, not pushed yet): R1, R2, R3, R4, R10, R12, R14, and R7.
 > - **Partly done:** R9 (small-gift wording added; the $1,000 preset still waits for a decision), R6 (only the "as of" date on the thermometer), and R15 (the time-sensitive answers are updated; the new questions aren't added yet).
-> - **Not started:** R5, R6's Updates page, R8, R11, R13, and R16.
-> - **Committee:** the first round of questions came back on 2026-11-20 (saved as `bunkhouse-content-review-2026-11-20-committee.docx`) and settled every row of section 7 except the nightly fee. The questions still open are in the regenerated [bunkhouse-content-review.docx](bunkhouse-content-review.docx), which is ready to send.
-> - **Line numbers in this review are from commit `cd2bad8`.** Many have shifted in `_layouts/bunkhouse.html`, `_layouts/bunkhouse_base.html`, `_includes/camelot_banner.html`, `_pages/camelot/project.md`, and `css/mitoc.css`. Search for the quoted text instead of trusting the line numbers.
-> - **The findings and screenshots below describe the site before Stage 1.** For example, the dead phone Donate button, the missing home link, the full-screen phone hero, and the contradictory facts are now fixed.
+> - **Not started:** R8, R11, R13, R16, and the new R17–R21 in section G. R5 is replaced by R17 and R18.
+> - **Committee:** round 1 came back on 2026-11-20 (`bunkhouse-content-review-2026-11-20-committee.docx`). The round-2 questions are in [bunkhouse-content-review.docx](bunkhouse-content-review.docx), ready to send. Section H records the web team's four decisions (2026-11-20). The updates-owner question is answered and was removed from the doc, which now has 10 questions.
+> - **The implementation plan was re-planned on 2026-11-20 for the restructure.** Stage 3 is page identity and a minimal Donate page, Stage 4 the Home/About split, Stage 5 Updates, and Stage 6 the fill-ins from round-2 answers.
+> - **Line numbers in Part 2 are from commit `cd2bad8`.** Many have shifted. Search for the quoted text instead.
 
-**Content review document:** [bunkhouse-content-review.docx](bunkhouse-content-review.docx) contains all the bunkhouse wording, the key facts table, and the open questions, for committee members to edit in Google Docs or Word. [bunkhouse-content-map.json](bunkhouse-content-map.json) maps each `[label]` in the document to its source file, so edits can be applied back to the site. To regenerate both after the site changes, run `npm install` (first time only) and then `npm run build` in [tools/](tools/). This needs Node and Ruby.
+**Content review document:** [bunkhouse-content-review.docx](bunkhouse-content-review.docx) contains all the bunkhouse wording, the key facts table, and the open questions, for committee members to edit in Google Docs or Word. [bunkhouse-content-map.json](bunkhouse-content-map.json) maps each `[label]` in the document to its source file, so edits can be applied back to the site. To regenerate both after the site changes, run `npm install` (first time only) and then `npm run build` in [tools/](tools/). This needs Node and Ruby. Moving the overview text to a new file (R17) changes the source paths the tool reads; see section G.
+
+---
+
+# Part 1: Second review (2026-11-20)
+
+## A. Summary
+
+**The pages are in much better shape than a day ago.** The phone Donate bug, the contradictory facts, the unclear money picture, the full-screen phone hero, and the stale rentals and banner copy are all fixed. A reader can now find out what the project costs, what's raised, what's left, and when it's meant to be built.
+
+**What's still weak is the shape of the section, not the facts.** The `/camelot` page still opens with four unheaded paragraphs in date order. The strongest reason to give, that the cabin will soon not be safe to sleep in, is still only in the FAQ. There are no photos of the real cabin or of the finished Phase 1 work, no way to see progress over time, and nothing on employer matching or other ways to give.
+
+**The six-page structure the web team proposed fixes most of that**, as long as each page has one clear job. The one real risk is that **Home and the full-story page (now "About") both end up as summaries of the same story**, so readers can't tell which to read and editors keep two copies in step. Section C gives each page a distinct job. The web team has since settled the open choices (section H): the overview page is called "About", every Donate button opens a Donate page, and the web team owns Updates.
+
+**The five most valuable changes now**
+
+| # | Change | Why it matters | Effort |
+|---|---|---|---|
+| 1 | **Build the Home page as a one-screen pitch** (R17): what Camelot is, why the bunkhouse is needed now, where things stand, and how to give, with a real photo. Everything else is a link. | `/camelot` is where every email, the homepage banner, and the rentals page send people. Today they land on history paragraphs. | M |
+| 2 | **Give About (`/camelot/about`) a distinct job as the full story** (R18), restructured under headings. | Stops Home and About from duplicating each other, and gives detail-minded donors one place to read the whole case. | M |
+| 3 | **Launch the Updates page with posts covering the last two years, with photos** (R6, updated), and show the latest post on Home. | Repeat donors still can't see their last gift at work. The web team will own the page and post a few times a year. | M, plus photos |
+| 4 | **Make Donate a real page** (R19) that every Donate button opens, with "Give online" at the top, then matching, check, stock/DAF/IRA, pledges, and a contact. | Matching and larger gifts are still unaddressed. A minimal version can ship now with facts already known. | S for the minimal version |
+| 5 | **Give every page its own identity** (R20): a visible page title, a distinct browser-tab title, a highlighted current menu item, and a share preview for Home. | With six pages instead of three, readers need to know where they are. Every page currently has the same tab title, "MITOC - Camelot Bunkhouse". | S |
+
+---
+
+## B. What's changed since the first review
+
+**Fixed** (see Part 2, section 6, for commits):
+- The phone Donate button at the bottom of each page works (R1).
+- The navbar brand, "MITOC Bunkhouse", links to `/camelot`, and the footer links back to the main MITOC site (R2).
+- Every fact in Part 2's section 7 now has one agreed value, stored once in `bunkhouse_settings.yml` (R3). "Phase" is defined once, in a new FAQ.
+- The overview has a "What the $1.3 million pays for" section, and the thermometer shows the amount to go and an "as of" date (R7).
+- The hero is compact on subpages and fits a phone screen, with content starting about halfway down the first screen ([phone](screenshots/r2-overview-phone-full.jpg), [compact strip](screenshots/r2-faqs-desktop-fold.jpg)) (R10).
+- The homepage banner says what Camelot is first and shows "Learn more" when collapsed (R12). The rentals page links to the bunkhouse pages and has the correct capacity (R4).
+- The project page has headings and captions (R14) ([screenshot](screenshots/r2-project-desktop-fold.jpg)).
+
+**Still open on the current pages**
+
+| Severity | Problem | Where | Fixed by |
+|---|---|---|---|
+| Major | The "why now" case (the cabin is near the end of its life as sleeping space, and within a few years won't be safe to sleep in) is only in the FAQ. The overview says only "to maintain this opportunity for future generations". | `index.md` paragraph 1; FAQ "Why does MITOC need the bunkhouse?" | R17, R18 |
+| Major | The overview's first four paragraphs are unheaded and in date order. The ask comes in paragraph 4. | `index.md` | R17, R18 |
+| Major | No photos of the real cabin or of Phase 1 (bridge, lot, trail). Every image in the section is an architect's drawing. Four cabin photos already exist in `/images/camelot/`. | Whole section | R17, R6 |
+| Major | No progress over time: no dated updates, so a returning visitor sees nothing new except possibly the thermometer. | Whole section | R6 |
+| Major | No employer matching, stock/DAF/IRA, pledge, or larger-gift information. The fund name ("MIT Outing Club Camelot Cabin Fund") and number are only in the FAQ. | FAQ "How to donate" | R19 |
+| Major | Schedule credibility: the hero says "Coming 2027", and full funding is needed before a late-spring 2027 groundbreaking, with $832,000 to go and about six months left. The site doesn't say what happens if the goal is missed. A project-minded reader (P4) will notice. | Hero; overview; FAQ timeline | Round-2 Q3 |
+| Minor | Every page has the same browser-tab title, and the nav doesn't highlight the current page. The project page has no page heading, so on the compact hero it isn't obvious what page you're on. | `bunkhouse_base.html:8`; `menu-link.html`; `project.md` | R20 |
+| Minor | The overview states the groundbreaking condition twice (paragraph 4 and the funding section), and the hero says 2027 twice ("Coming 2027" and "Raising funds to build in 2027"). | `index.md`; `hero_tagline` | R17, R18 |
+| Minor | The small "As of November 2026 · Gifts of every size count" line sits on a translucent box over the drawing and is hard to read on the full hero. | [screenshot](screenshots/r2-overview-desktop-fold.jpg) | R17 |
+| Minor | The only link to the main MITOC site is in the footer, at the bottom of long pages. | `bunkhouse_base.html` | R20 |
+| Minor | "Is Phase 0 inside the $1.3M?" is still ambiguous: the FAQ's cost list includes architects' design work, but the phases list gives Phase 0 no cost. | FAQ cost-2 and phases | Round-2 Q2 |
+| Minor | "Will students be involved in construction? Alums?" is still a vague "where possible", with no signup. | FAQ | R13 |
+| Minor | "Raised by 314 people" in the hero, but "given or pledged" in the overview. Both are accurate, but they read as different numbers. | Hero; overview funding section | Section H: use "raised by" |
+
+---
+
+## C. The new page structure
+
+### C1. Site map
+
+The web team asked for these pages, and settled the page name, URLs, and Donate behavior on 2026-11-20 (section H).
+
+```
+Main site (every page)
+ └─ Collapsible banner ── Learn more ──► /camelot (Home)
+                       └─ Donate ─────► /camelot/donate
+/rentals/camelot ───────── link ──────► /camelot (Home)
+/bunkhouse, /bunkhouse/* ── 301 ───────► /camelot (Home)
+
+Bunkhouse navbar:  [MITOC Bunkhouse]  About · Updates · Project details · FAQs · [Donate]
+                         │                  │               │            │            │       │
+                         ▼                  ▼               ▼            ▼            ▼       ▼
+                   /camelot (Home)   /camelot/about  /camelot/   /camelot/    /camelot/  /camelot/
+                   not in menu;                         updates     project      faqs       donate
+                   reached by brand
+                   link and all
+                   inbound links
+
+Every Donate button (hero, compact strip, phone footer, banner, menu) ──► /camelot/donate
+/camelot/donate ── Give online ──► MIT giving form
+Footer on every page: © MITOC ──► main site
+```
+
+**What works about this structure**
+- **All existing inbound links land on the right page without changes.** Emails, the homepage banner, the rentals page, and the `/bunkhouse` redirect all point at `/camelot`, which becomes the short pitch. That's the right page for someone arriving from outside.
+- **Home isn't in the menu, and that's fine.** The brand link "MITOC Bunkhouse" already goes to `/camelot`, which is the convention people expect. Readers inside the section use the menu to go deeper, not back to the pitch.
+- **Each remaining page answers one kind of question**: the story, the progress, the design, the reference answers, and how to give.
+
+### C2. Each page's job
+
+The test for each page: a reader should be able to say in one sentence why they'd go there, and no two pages should give the same answer.
+
+| Page | Job (one sentence) | Main readers | Hero | Length target |
+|---|---|---|---|---|
+| **Home** `/camelot` | "Tell me what this is and why I should care, in a minute, and let me give." | Everyone arriving from outside; P2, P5, P6 most | Full | About 250 words below the hero; on a phone, under three screens |
+| **About** `/camelot/about` | "Give me the whole case: the cabin, the need, the plan, the money, and who's running it." | P1, P3, P4 | Compact | Headed sections, each short, linking out for detail |
+| **Updates** `/camelot/updates` | "What's happened since I last looked?" | P1, P5, returning donors; email links | Compact | Newest first; each post short |
+| **Project details** `/camelot/project` | "What exactly will be built?" | P3, P4 | Compact | As now |
+| **FAQs** `/camelot/faqs` | "I have a specific question." | Everyone, via search or links | Compact | As now, minus the donate and people groups |
+| **Donate** `/camelot/donate` | "How do I give in the way that suits me?" | P1, P2, P4 | Compact | One screen per giving method at most |
+
+### C3. The Home/Overview overlap, and the menu name
+
+The brief describes Home as "a condensed version of what Camelot is, why the bunkhouse matters" and Overview as the current `/camelot` content. In practice both would start with "what Camelot is" and "why a bunkhouse", which leads to two problems:
+- **Readers can't tell them apart.** "Overview" usually means the short version, but here Home is the short one. Someone who has read Home and sees "Overview" in the menu will expect the same thing again and skip it, missing the detail they wanted.
+- **Editors will let them drift.** Two summaries of the same facts is how the first review's contradictions happened.
+
+**Recommendations**
+1. **Name it so readers expect more than Home.** ✅ *Decided: "About", at `/camelot/about`.* "About" is a familiar label for the longer story behind a page, and doesn't promise a summary the way "Overview" does. The page's opening line should still make the depth clear, for example "The full story of the bunkhouse: why it's needed, the plan, the money, and who's running it."
+2. **Home summarizes; it never explains.** Every Home section is one to three sentences plus a link to the page that has the full version. If a Home sentence needs a second paragraph, that paragraph belongs on About.
+3. **Write the shared short text once.** The two-sentence "What is Camelot?" and the three "why" bullets will appear on Home, at the top of About, and in the homepage banner. Keep them in one place, for example a `summary:` block in `bunkhouse_settings.yml` or an include, the same way `facts:` already works.
+
+### C4. Navigation details
+
+- **Menu order: About · Updates · Project details · FAQs · Donate.** Updates comes second because returning donors, the campaign's most valuable readers right now, come back for news. Donate goes last, styled as a button so it stands apart from the content pages.
+- **Highlight the current page** in the menu (R20). With five items this is how readers know where they are, especially on the compact hero, which looks the same on every page.
+- **Give each page a visible heading** under the compact hero (for example "Project details"), and its own `<title>` ("Updates · Camelot bunkhouse · MITOC"). Browser tabs, bookmarks, search results, and shared links currently all say "MITOC - Camelot Bunkhouse".
+- **Link back to the main site near the top.** The footer works but is far down a long page. A small "MITOC home" link at the right end of the navbar, or in the menu, puts it where newcomers (P6) look first.
+- **Update the menu data**: remove the commented-out History entry, since Updates replaces it.
+
+---
+
+## D. Page-by-page recommendations
+
+### D1. Home (`/camelot`)
+
+The page most people will see first, and for many the only one. Its job is to make the case fast and offer the next step.
+
+```
+[Full hero: Camelot bunkhouse · Coming 2027 · thermometer with "as of" · Donate]
+
+## What is Camelot?            2 sentences + one real cabin photo (/images/camelot/)
+                               "Camelot is MITOC's cabin on 20 acres near Rumney, NH, 2.5 hours from
+                                Boston. For many members it's where their first MITOC trip happens."
+                               → Visiting Camelot (/rentals/camelot)
+
+## Why a new bunkhouse?        3 bullets, from the FAQ:
+                               · The 1970s cabin is near the end of its life as sleeping space;
+                                 within a few years it won't be safe to sleep in.
+                               · It can't be brought up to lodging code.
+                               · The bunkhouse will sleep 50 safely, in 5 rooms of 10, and the
+                                 cabin stays as kitchen and lounge.
+                               → The full story (About)
+
+## Where things stand          ✓ Phase 1 done (2025): parking lot, bridge, trail. Photo.
+                               ◯ Phase 2: the bunkhouse. $832,000 to go; construction starts once
+                                 the full $1.3M is raised, planned for late spring 2027.
+                               → Costs and funding (About#funding)
+
+## Latest update               date · title · one line · "All updates →"   (hidden until posts exist)
+
+## Help build it               Donate [button → Donate page] · "Gifts of every size count. Many
+                               employers match gifts."
+                               → Questions? FAQs
+```
+
+Notes:
+- **Lead with a real photo.** The hero drawing shows the future; one photo of the cabin and one of the finished bridge show that this is a real place and real progress. They do more for P6 and P1 than any wording change.
+- **"Where things stand" replaces the history.** Two status lines say more to a donor than four paragraphs of dates. The dates move to About and the backfilled Updates posts.
+- **Drop the duplicate 2027.** With "Coming 2027" in the hero, the tagline can carry the status instead, for example "Phase 1 complete · Phase 2 fundraising now".
+- **Fix the small "As of" line's contrast** while designing the full hero: give it the same solid backing as the amount, or move it below the box.
+- **Add a meta description and share image** (`og:title`, `og:description`, `og:image` using the exterior rendering or a cabin photo). Fundraising emails, Slack, and social posts will show this preview, and today they'd show only "MITOC - Camelot Bunkhouse".
+
+### D2. About (`/camelot/about`)
+
+The current `/camelot` text moves here and gets headings. This replaces Part 2's R5. Order by what a detail-minded reader asks, not by date:
+
+```
+[Compact hero]
+# About
+
+## Camelot today               the shared 2-sentence intro, then: how members use it, capacity now (about 30),
+                               the loft repair. Photos. Link to /rentals/camelot. Explain or drop "MITOCers".
+## Why a new bunkhouse         the 3 shared bullets, expanded to a short paragraph each, with links to the
+                               FAQ's code and "why not buy a house" answers
+## The plan                    one-paragraph description of the building → Project details
+## Timeline                    the phases as a dated list (2011 discussions … 2025 Phase 1 done …
+                               late spring 2027 groundbreaking … fall 2027 complete). Mark done items ✓.
+## What the $1.3 million pays for   the existing section, moved as is (give it a stable id, e.g. #funding)
+## Who's leading the project   moved from the end of the FAQ: names, roles, MIT Facilities, DSL, contact
+## Get involved                volunteer signup, updates list (R13), once they exist
+```
+
+Notes:
+- **Remove the duplicate groundbreaking sentence** (current paragraph 4 repeats the funding section).
+- **The timeline list replaces paragraphs 2–3** and stays correct without anyone updating it, which matters if Updates posts lapse.
+- **Keep the closing line short or cut it.** "We look forward to seeing you…" is warm but adds nothing to a page whose last section should be an action.
+
+### D3. Updates (`/camelot/updates`)
+
+✅ *Decided: the web team owns the page, posts a few times a year, and will backfill the last two years.* Part 2's R6 still covers *how*, and its warning still applies: **a page whose newest post is a year old tells donors the project has stalled.** "A few times a year" works if no gap runs much past four months. Add milestone posts on top (full funding reached, groundbreaking, completion), and a short post when fundraising is the only news.
+
+Changes to R6 for the new structure:
+- **Don't launch it empty.** Launch with the backfilled posts from the last two years, at least one with Phase 1 photos. Suggested set:
+  - summer 2024: site work begins
+  - spring 2025: Phase 1 complete: parking lot, bridge, and trail (photos), with thanks to Phase 1 donors
+  - 2025–26: final construction drawings and contractor quotes; the $1.3M estimate confirmed
+  - fall 2026: Phase 2 fundraising kickoff, and where the total stands
+
+  Earlier history (2011–2023) goes in About's Timeline list rather than in posts. That replaces R6's longer backfill list going back to 2018.
+- **Show the latest post on Home**, not on About. Home is where returning visitors arrive from emails.
+- **Each post gets its own URL** (a Jekyll collection), so each fundraising email can link to the specific post.
+- **Put the date and amount raised at the top of every post**, so a reader can tell at a glance how current it is.
+- **Put a reminder on someone's calendar** every few months, and update the thermometer (`donations_amount`, `number_donors`, `donations_as_of`) as part of writing each post.
+
+### D4. Project details (`/camelot/project`)
+
+In good shape since the headings and captions (R14).
+- **Add a page heading and a one-sentence intro**: "The bunkhouse was designed with Maclay Architects in 2019–21. The final construction drawings were completed in 2025." This tells readers the design is settled.
+- **Optional:** a short facts list at the top (sleeps 50 · 5 rooms of 10 · no running water · 3 composting toilets · sprinklered) for readers who won't read the prose.
+- Keep the closing links to FAQs and Donate; point Donate at the Donate page.
+
+### D5. FAQs (`/camelot/faqs`)
+
+- **Move "How to donate" to the Donate page.** Keep a one-line group, "How to donate", that links there, so the `#donating` anchor still works. Add matching and non-cash questions on the Donate page rather than here.
+- **Move "Who's involved" to About**, keeping "Who should I contact?" in the FAQ.
+- **Add the R15 questions** as the committee answers them: what happens if the goal isn't met by spring 2027 (round-2 Q3), how donors are recognized, how much Camelot is used.
+- **Add a page-top line**: "Can't find your answer? Email mitoc-bunkhouse@mit.edu."
+
+### D6. Donate (`/camelot/donate`)
+
+This is Part 2's R8, now with a fixed home. See R19.
+
+```
+[Compact hero]
+# Ways to give
+
+[Give online] big button → MIT form              "Gifts of every size count."   (above the fold on phones)
+
+## Double your gift with employer matching   fund name and number, MIT as recipient, what portals ask for
+## By check                                  moved from the FAQ, address with line breaks
+## Stock, donor-advised funds, and IRA gifts  1–2 sentences each, linking to MIT's own instructions
+## Pledges and larger gifts                  "Email mitoc-bunkhouse@mit.edu and a member of the committee will reply."
+## Is my gift tax deductible?                moved from the FAQ
+```
+
+- ✅ *Decided: every Donate button, and the menu item, opens this page.* That adds one click for people who've already decided, so the page has to make that click cost nothing:
+  - **"Give online" first,** visible without scrolling on a phone, before any explanation. The compact hero is short enough for this, but check it at phone width.
+  - **On this page, the hero's Donate button goes straight to MIT's form** (or reads "Give online"), since a button that reloads the same page looks broken. Hide the full-width phone Donate button at the bottom here too, or point it at the form.
+  - **The homepage banner's Donate button also opens this page.** For main-site visitors who don't yet know the project, that's an improvement.
+  - Inline text links that say "Donate online" (in the funding section, for example) can stay pointed at the form, since their label promises the form.
+- **Ship a minimal version now** with only what's already true (the plan's "2c-lite"), and fill in matching details and recognition when round-2 Q5 and Q6 come back. Add `/camelot/give` as a redirect to it.
+
+### D7. Shared elements
+
+- **Hero:** full on Home only; compact on every other page, including About.
+- **Homepage banner:** "Learn more" goes to Home, which is now the right page. Its Donate button changes to the Donate page. Its text should use the shared summary from C3.
+- **Rentals page:** no change needed; its link goes to Home.
+
+---
+
+## E. Personas against the new structure
+
+**Verdict now, and what the new structure adds** (personas are described in Part 2, section 4)
+
+| Persona | First review | Now (`bce5eba`) | Where the new structure helps most |
+|---|---|---|---|
+| P1: Phase 1 major donor | Poor | **Fair.** The money is clear and Phase 1 donors are thanked. No progress photos, no larger-gift path. | Updates (photos of what they built), Donate (pledges, IRA, a contact), About (who's accountable) |
+| P2: Engineer with matching | Fair | **Fair.** The button works and small gifts are welcomed, but there's no matching info and the "why" is slow to find. | Home (the case in a minute), Donate (matching) |
+| P3: Former Camelot manager | Fair to poor | **Fair.** The contradictions are gone. No usage data, no way to volunteer. | About (Get involved, timeline), FAQ (usage, R16) |
+| P4: Former trip leader, project leader | Fair | **Fair.** The schedule is consistent and phases are defined, but what happens if funding misses spring 2027 is unanswered. | About (timeline, who's leading); depends on round-2 Q3 |
+| P5: Current member, small donor | Fair | **Fair.** There's an "as of" date and small-gift wording. Still nothing new to see between visits. | Updates, Home's latest-update teaser |
+| P6: New member | Poor | **Fair to poor.** The banner explains Camelot and the footer links home, but there's no real photo or visiting link on the bunkhouse pages. | Home ("What is Camelot?" with photo and visiting link) |
+
+**Which page answers each task, once built**
+
+| Task | Answered now? | Page in the new structure |
+|---|---|---|
+| Understand what Camelot is | Partly (one sentence, no photo) | Home; About |
+| Understand why a bunkhouse is needed now | Only in the FAQ | Home (bullets); About (full) |
+| See progress so far | No | Updates; Home teaser; About timeline |
+| Know how much is still needed | **Yes** | Hero (every page); About funding section |
+| Trust the schedule and budget | Partly (missed-goal answer missing) | About timeline and funding; FAQ |
+| Give online | **Yes** | Every Donate button |
+| Get a gift matched | No | Donate |
+| Give stock, IRA, a pledge, or a large gift | No | Donate |
+| Volunteer or contribute expertise | No | About (Get involved) |
+| Visit Camelot, or get back to the main site | Footer only | Home (visiting link); navbar link (R20) |
+
+---
+
+## F. Upkeep risks in the new structure
+
+- **Six pages means more places to go stale.** Keep every number in `facts:` and every repeated summary in one shared place (C3). The Home page in particular should contain almost no text that isn't shared or linked.
+- **Updates is the page most likely to go stale.** Tie updating the thermometer (`donations_amount`, `donations_as_of`) to writing each post, so both stay current together.
+- **The hero's "Coming 2027"** becomes wrong the moment the schedule slips. If round-2 Q3 says groundbreaking could move to 2028, change `hero_subtitle` the same day, and say so in an Updates post.
+
+---
+
+## G. Recommendations from the second review
+
+R1–R16 are in Part 2, section 6. The new structure changes these:
+- **R5 (restructure the overview)** is replaced by R17 (Home) and R18 (About).
+- **R6 (Updates page)** stands, with the changes in D3. The web team owns it.
+- **R8 (Ways to give)** becomes R19: its own Donate page.
+- **R11 ("What is Camelot?")** goes on Home (R17), with the longer version on About (R18).
+- **R13 (Get involved)** goes on About.
+- **R15 (FAQ revision)** now also moves two groups out of the FAQ (D5).
+
+**R17. Split `/camelot` into Home and About.** *Effort M. All personas.*
+- Move the current [_pages/camelot/index.md](../../_pages/camelot/index.md) content to a new `_pages/camelot/about.md` (`permalink: /camelot/about`, `title: About`, no `hero: full`), then build the new Home in `index.md` (`hero: full`) following D1. Add `/camelot/overview /camelot/about 301` to `_redirects`, since "overview" was the name in the web team's brief and may already be in drafts or emails.
+- Add a shared `summary:` block (what Camelot is; the three "why" bullets) to `bunkhouse_settings.yml`, and use it on Home, About, and the homepage banner.
+- Use one real cabin photo now; add a Phase 1 photo when one arrives (round-2 Q7).
+- Add the Latest update slot as a loop over the Updates collection that shows nothing when it's empty, so Home can ship before Updates does.
+- Change `hero_tagline` so the hero doesn't say 2027 twice, and fix the contrast of the "As of" line.
+- **Content-review tool:** [make_content_doc.js](tools/make_content_doc.js) reads `index.md` for the OV labels. Point it at `about.md` and add Home labels (for example HOME-n), then regenerate the doc.
+
+**R18. Restructure About.** *Effort M. Personas P1, P3, P4.* Follow D2. Give the funding section a stable id (`#funding`) for Home and emails to link to. Move "Who is managing this project?" here from the FAQ, keeping its old anchor working with an `old_ids`-style span on the FAQ page, or a short FAQ answer that links here.
+
+**R19. Add a Donate page.** *Effort S for the minimal version; M once round-2 Q5 and Q6 are answered. Personas P1, P2, P4.* Follow D6. Add `donate_page: /camelot/donate` to `bunkhouse_settings.yml` and point the `Donate` menu entry, every Donate button in the layout, and the homepage banner's Donate button at it. Keep `donate_link` (MIT's form) for the page's "Give online" button, the hero button on the Donate page itself, and inline "Donate online" links. Move the check and tax-deductibility answers from the FAQ, and leave the `#donating` group as a one-line pointer. Add `/camelot/give /camelot/donate 301` to `_redirects`.
+
+**R20. Give each page its own identity.** *Effort S. All personas.*
+- In [bunkhouse_base.html](../../_layouts/bunkhouse_base.html), build the `<title>` from the page: `{% if page.title %}{{ page.title }} · {% endif %}Camelot bunkhouse · MITOC`. Add `title:` to each page's front matter.
+- Show `page.title` as a visible `h1` at the top of the content on every page except Home.
+- Highlight the current menu item: in [menu-link.html](../../_includes/menu-link.html), add `class="active"` to the `<li>` when `include.item.href == page.url` (Bootstrap's navbar already styles `.active`). The main site uses the same include, so check it there too.
+- Add a "MITOC home" link near the top of the bunkhouse navbar, right-aligned.
+
+**R21. Add share previews.** *Effort S. All personas, through emails and posts.* In `bunkhouse_base.html`, add `<meta name="description">` and Open Graph tags (`og:title`, `og:description`, `og:image`, `og:url`), from `page.description` with a site-wide default for the section. Home matters most.
+
+### Suggested order of work
+
+1. **Now:** R20, R21, the minimal R19 Donate page, and the one-line "raised by" wording fix. Small, independent, and each one helps on its own.
+2. **Next:** R17 and R18 together, since they move the same text. Home ships with the Latest update slot empty.
+3. **Then Updates (R6):** the web team writes the backfill posts once Phase 1 photos are collected. Home's teaser starts showing posts automatically.
+4. **As the committee answers round 2:** fill in the Donate page (Q5, Q6), the missed-goal FAQ and funding line (Q3), Get involved (Q8), and usage numbers (R16).
+
+[implementation-plan.md](implementation-plan.md) turns this order into batches: Stage 3 (items 1), Stage 4 (item 2), Stage 5 (item 3), and Stage 6 (item 4).
+
+---
+
+## H. Decisions from the web team
+
+*Decided 2026-11-20. Each row says what changes in this review and in [implementation-plan.md](implementation-plan.md).*
+
+| # | Question | Decision | What it changes |
+|---|---|---|---|
+| 1 | Menu name for the full-story page | **"About", at `/camelot/about`** | R17, R18, C3, D2. The file is `_pages/camelot/about.md`. Add a redirect from `/camelot/overview`, the name used in the brief. |
+| 2 | Where Donate goes | **Every Donate button, and the menu item, opens a `/camelot/donate` page** with more information about giving | R19, D6, C1. This differs from the review's original suggestion (buttons straight to MIT's form). It works as long as "Give online" is the first thing on the Donate page, visible on a phone without scrolling, and the Donate page's own hero button goes to the form (D6). |
+| 3 | "Raised by" or "given or pledged" | **"Raised by"** | Change the funding section on the overview/About from "314 people have given or pledged $468,000" to wording like "$468,000 has been raised by 314 people". The thermometer already says "Raised by". |
+| 4 | Who owns Updates | **The web team, posting a few times a year, with backfilled posts from about the last two years** | R6, D3. Stage 5 is unblocked apart from Phase 1 photos. The round-2 updates-owner question is answered and has been removed from the content-review doc. Earlier history goes in About's Timeline list, not in posts. |
+
+**What still waits on the committee:** round-2 Q1–Q10 in [bunkhouse-content-review.docx](bunkhouse-content-review.docx) (renumbered after the updates-owner question was removed, so the gift preset is now Q9 and rentals parking Q10). Photos of the Phase 1 work (Q7) now block both the Updates backfill and Home's "Where things stand" photo, so they're the most useful thing to chase first.
+
+---
+
+# Part 2: First review (2026-11-19)
+
+*Kept as the record of the original findings. Sections 3 (structure) and R5 describe the site before the restructure; see Part 1 for the current recommendations.*
 
 > **Comparing against `main`?** This review covers `bunkhouse-edits`, which has two commits that aren't on `main` yet (`8d992b5`, `cd2bad8`). Those commits already fixed several problems, so they don't appear below:
 > - **Cost:** $500,000 is updated to $1.3M on the overview, FAQ, and homepage banner. The thermometer now shows $468K raised toward $1.3M from 314 donors.
@@ -85,6 +437,8 @@ The bunkhouse pages look good at first glance. The hero image is attractive, the
 ---
 
 ## 3. How the section is structured today
+
+*This is the structure on 2026-11-19. Part 1, section C1, has the new six-page structure.*
 
 ```
 Main site (every page)
@@ -385,11 +739,13 @@ Then make the thermometer match. If it should show Phase 2 only, adjust `donatio
 
 **R9. Change the online gift's default amount and add small-gift wording.** *Effort S. Decision: preset or not. Personas P2, P5.*
 Remove `&amount=1000` from `donate_link` in [bunkhouse_settings.yml:1](../../_data/bunkhouse_settings.yml#L1), or set it to a lower value. Add a line near the thermometer such as *"314 people have given. Gifts of every size count."*
-🟡 *The wording is done in `7eeecd4`: "Gifts of every size count" under the overview's thermometer, and in the funding section. The $1,000 preset is unchanged until the maintainer or committee decides (round-2 Q10).*
+🟡 *The wording is done in `7eeecd4`: "Gifts of every size count" under the overview's thermometer, and in the funding section. The $1,000 preset is unchanged until the maintainer or committee decides (round-2 Q9).*
 
 ### Structural changes
 
 **R5. Restructure the overview page around readers' questions.** *Effort M. Decision: which audience the page leads with. Recommended: donors with some MITOC background, with a short intro for newcomers. All personas.*
+🔁 *Replaced by R17 (Home) and R18 (About the project) in Part 1, section G, after the web team asked for separate Home and Overview pages. The section list below is split between them; see section D.*
+
 Proposed section order for [_pages/camelot/index.md](../../_pages/camelot/index.md). Each section has a heading, two to four sentences, and a link to more detail.
 
 ```
@@ -409,6 +765,8 @@ The bunkhouse menu becomes: Overview · Updates · Project details · FAQs · Do
 Move the current history paragraphs off the overview. They become the first posts on the Updates page (R6).
 
 **R6. Add an Updates page.** *Effort M to set up, then about an hour per post. Decision: who writes posts, and how often (open question 9). Needs Phase 1 photos. Personas P1, P3, P4, P5.*
+
+🔁 *The web team has asked for this page (`/camelot/updates`). Part 1, section D3, updates this recommendation: the latest-post teaser goes on Home, not the overview. The owner and schedule are still needed first.*
 
 A new `/camelot/updates` page with dated posts, newest first, like Kickstarter project updates. It gives repeat donors evidence of progress and gives fundraising emails something to link to. The email is what most alumni will actually read; the page is the permanent record behind it.
 
@@ -436,7 +794,7 @@ The first new post is then the Phase 2 kickoff. These posts replace the history 
 - a "Latest update" teaser on the overview (date, title, one line, link)
 - an "as of {date}" line under the thermometer, using the latest post's date or an `updated:` field in [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml)
 
-🟡 *Only the "as of" line is done (`7eeecd4`), from `donations_as_of` in the settings. The Updates page waits for an owner (round-2 Q9).*
+🟡 *Only the "as of" line is done (`7eeecd4`), from `donations_as_of` in the settings. The web team now owns the Updates page (Part 1, section H).*
 
 *Implementation:*
 - Use a Jekyll collection, for example `_camelot_updates/` with `output: true` in `_config.yml`, so each post gets its own URL that emails can link to.
@@ -447,6 +805,7 @@ The first new post is then the Phase 2 kickoff. These posts replace the history 
 - Pair it with the "Get updates by email" mailing list in R13, and announce each new post on that list.
 
 **R8. Add "Ways to give".** *Effort M. Decision: which options MIT supports for this fund, recognition policy, and a contact for larger gifts. Personas P1, P2, P4.*
+🔁 *Becomes R19 in Part 1: its own page at `/camelot/donate`, opened from the menu, while Donate buttons keep going straight to the form.*
 This can be a section on the overview or its own `/camelot/give` page, linked from the nav. Cover:
 - online giving
 - **employer matching:** what the matching portal needs, the fund name and number (3892696), and MIT's details
@@ -463,9 +822,11 @@ Show the full hero only on the overview. Give the project and FAQ pages a short 
 ✅ *Done in `2aba590`, moved up to Stage 1 because it needs no decisions. Pages set `hero: full` in their front matter to get the full hero. The hero text now lives in `bunkhouse_settings.yml` (`hero_title`, `hero_subtitle`, `hero_tagline`), so R3 can edit it there.*
 
 **R11. Add a "What is Camelot?" introduction for newcomers.** *Effort S–M. Persona P6.*
+🔁 *Goes on the new Home page (R17), with a longer version on About the project (R18).*
 Use the existing photos in `/images/camelot/` (already used on `/rentals/camelot`). Add one sentence of location context ("about 2.5 hours from Boston, near Rumney climbing"), link to the rentals page, and say it's open to all members. Explain or drop "MITOCers".
 
 **R13. Add a "Get involved" path.** *Effort S. Decision: what opportunities exist. Personas P3, P5.*
+🔁 *Goes on About the project (R18, section D2).*
 Add a short section with a signup link for work-day or volunteer interest, and a "Get updates by email" link to a mailing list that announces each new post on the Updates page (R6). A Google Form or mailing list is enough. Rewrite the "Will students be involved? Alums?" FAQ answer to point to it.
 
 **R15. Revise the FAQ list.** *Effort M. All personas.*
@@ -484,7 +845,7 @@ For example: visitor-nights per year, number of MITOC trips and events based at 
 
 ### Suggested order of work
 
-*This order has been superseded by the more detailed [implementation-plan.md](implementation-plan.md).*
+*This order has been superseded by the more detailed [implementation-plan.md](implementation-plan.md), and for the restructure by Part 1, section G.*
 
 1. **This week (no decisions):** R1, R2, R4, R12, R14. ✅ *Done, plus R10.*
 2. **After a short committee check-in to settle facts and policies:** R3, R7, R9, then R8 and R13. At the same check-in, name an owner for updates (open question 9). ✅ *R3 and R7 done; R9 partly. R8 and R13 wait for round-2 answers.*
