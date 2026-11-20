@@ -272,6 +272,18 @@ children.push(note('Appears below the header. Unheaded paragraphs first, then a 
 blocks(body('_pages/camelot/index.md')).forEach((b, i) =>
   block(`OV-${i + 1}`, `Overview page, paragraph ${i + 1}`, '_pages/camelot/index.md', `paragraph ${i + 1}`, [b]));
 
+// B2. About page
+children.push(H2('B2. About page (mitoc.mit.edu/camelot/about)'));
+children.push(note('The full story, under headings: Camelot today, why a new bunkhouse, the plan, a timeline, what the money pays for, and who is leading. Items marked with a check mark in the timeline are done.'));
+block('AB-title', 'About page title (page heading and browser tab title)', '_pages/camelot/about.md', 'front matter title', txt('About'));
+let ap = 0, ah = 0, ai = 0;
+blocks(body('_pages/camelot/about.md')).forEach(b => {
+  if (b.type === 'h') { ah++; block(`AB-h-${ah}`, `About page, section heading ${ah}`, '_pages/camelot/about.md', `## heading #${ah}`, [b]); }
+  else if (b.type === 'img') { ai++; block(`AB-img-${ai}`, `About page, image ${ai}`, '_pages/camelot/about.md', `<img> #${ai}`, [b]); }
+  else if (b.type === 'caption') block(`AB-cap-${ai}`, `About page, caption for image ${ai}`, '_pages/camelot/about.md', `<figcaption> #${ai}`, [b]);
+  else { ap++; block(`AB-${ap}`, `About page, ${b.type === 'li' ? 'list item' : 'paragraph'} ${ap}`, '_pages/camelot/about.md', `${b.type === 'li' ? 'list item' : 'paragraph'} ${ap}`, [b]); }
+});
+
 // C. Project details
 children.push(H2('C. Project details page (mitoc.mit.edu/camelot/project)'));
 children.push(note('Appears below the header. Each section has a heading, then text and an architectural drawing with a caption. The alt text after each image is read aloud by screen readers.'));
