@@ -5,6 +5,7 @@
 //   npm run build      # or: node make_content_doc.js
 //
 // Writes ../bunkhouse-content-review.docx and ../bunkhouse-content-map.json, overwriting both.
+// Set OUT_DIR to write them somewhere else (e.g. a scratch folder, for testing).
 // Requires Node and Ruby (Ruby is only used to parse the Jekyll YAML data files).
 //
 // When the site's bunkhouse pages change structure (new pages, new includes), update the
@@ -20,7 +21,7 @@ const {
 } = require('docx');
 
 const REPO = path.resolve(__dirname, '../../..');
-const OUTDIR = path.resolve(__dirname, '..');
+const OUTDIR = path.resolve(process.env.OUT_DIR || path.resolve(__dirname, '..'));
 const yaml = file => JSON.parse(execFileSync('ruby', ['-ryaml', '-rjson', '-e', 'puts JSON.dump(YAML.load_file(ARGV[0]))', path.join(REPO, file)], {encoding: 'utf8'}));
 const data = {faqs: yaml('_data/bunkhouse_faqs.yml'), settings: yaml('_data/bunkhouse_settings.yml')};
 const S = data.settings;
@@ -32,6 +33,20 @@ const NOW = new Date();
 const ISO_DATE = NOW.toISOString().slice(0, 10);
 const LONG_DATE = NOW.toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'});
 const read = p => fs.readFileSync(path.join(REPO, p), 'utf8');
+
+// ---------- key facts ----------
+// Facts live under `facts:` in bunkhouse_settings.yml. The site inserts them with
+// %key% (in bunkhouse_faqs.yml) or {{ site.data.bunkhouse_settings.facts.key }} (pages, includes).
+// The doc shows the values; the content map records which facts each label uses,
+// so an edit to one of them is applied to bunkhouse_settings.yml, not the page.
+const FACTS_SET = S.facts || {};
+const FACT_RE = /%(\w+)%|\{\{\s*site\.data\.bunkhouse_settings\.facts\.(\w+)\s*\}\}/g;
+const expand = t => t.replace(FACT_RE, (m, a, b) => (a || b) in FACTS_SET ? FACTS_SET[a || b] : m);
+const factsIn = t => [...new Set([...t.matchAll(FACT_RE)].map(m => m[1] || m[2]).filter(k => k in FACTS_SET))];
+const withFacts = (entry, raw) => {
+  const keys = factsIn(raw);
+  return keys.length ? {...entry, snapshot: expand(raw), facts: keys.map(k => `bunkhouse_settings.yml facts.${k}`)} : entry;
+};
 
 const FONT = 'Arial';
 const GREY = '7F7F7F';
@@ -49,7 +64,7 @@ function addComment(labelId, text) {
 
 // ---------- inline markdown → runs ----------
 function inline(text, base = {}) {
-  text = text.replace(/%donate_link%/g, S.donate_link).replace(/---/g, '—').replace(/\s*\n\s*/g, ' ');
+  text = expand(text.replace(/%donate_link%/g, S.donate_link)).replace(/<br\s*\/?>/g, '').replace(/---/g, '—').replace(/\s*\n\s*/g, ' ');
   const out = [];
   const re = /\*\*(.+?)\*\*|\[([^\]]+)\]\(([^)]+)\)/g;
   let last = 0, m;
@@ -73,7 +88,9 @@ function blocks(md) {
     const t = line.trim();
     if (!t) { flush(); continue; }
     if (t.startsWith('{%') || t.startsWith('{:')) { flush(); continue; }
+    if (/^<\/?figure\b/.test(t) || /^(-{3,}|\*{3,})$/.test(t)) { flush(); continue; } // figure wrappers, horizontal rules
     let m;
+    if ((m = t.match(/^<figcaption>(.*)<\/figcaption>$/))) { flush(); paras.push({type: 'caption', text: m[1]}); continue; }
     if ((m = t.match(/^<img\s+src="([^"]+)"\s+alt="([^"]*)"/))) { flush(); paras.push({type: 'img', src: m[1], alt: m[2]}); continue; }
     if ((m = t.match(/^\*\s+(.*)/))) { flush(); paras.push({type: 'li', text: m[1]}); continue; }
     if ((m = t.match(/^>\s*(.*)/))) { flush(); paras.push({type: 'quote', text: m[1]}); continue; }
@@ -93,7 +110,7 @@ const H2 = t => new Paragraph({heading: HeadingLevel.HEADING_2, children: [new T
 const note = t => P([new TextRun({text: t, italics: true, color: GREY, size: 20})], {spacing: {after: 160}});
 
 function label(id, where, file, locator, snapshot) {
-  manifest.push({id, where, file, locator, snapshot});
+  manifest.push(withFacts({id, where, file, locator, snapshot}, snapshot));
   return new Paragraph({keepNext: true, spacing: {before: 200, after: 40},
     children: [new TextRun({text: `[${id}]`, bold: true, color: GREY, size: 16}),
       new TextRun({text: `  ${where}`, color: GREY, size: 16})]});
@@ -106,6 +123,7 @@ function contentParas(labelId, items, opts = {}) {
     if (it.type === 'img') {
       runs = [new TextRun({text: `[Image: ${path.basename(it.src)}]  Alt text: `, italics: true, color: GREY}), new TextRun(it.alt)];
     } else if (it.type === 'li') { runs = inline(it.text, opts.base); popts = {numbering: {reference: 'bullets', level: 0}}; }
+    else if (it.type === 'caption') runs = [new TextRun({text: 'Caption: ', italics: true, color: GREY}), ...inline(it.text)];
     else if (it.type === 'quote') { runs = inline(it.text, opts.base); popts = {indent: {left: 720}, spacing: {after: 0}}; }
     else runs = inline(it.text, opts.base);
     if (i === 0 && commentFor[labelId] !== undefined) {
@@ -214,16 +232,14 @@ children.push(H1('Part 3. Website text'));
 // A. Header on every bunkhouse page
 children.push(H2('A. Header shown at the top of every bunkhouse page'));
 children.push(note('The big title area over the bunkhouse drawing, with the fundraising thermometer. The site displays the title in capital letters automatically.'));
-const L = read('_layouts/bunkhouse.html');
-const tag = (t) => L.match(new RegExp(`<${t}>([^<]*)</${t}>`))[1].trim();
-block('HERO-1', 'Header: main title', '_layouts/bunkhouse.html', '<h1> in .bunkhouse-banner', txt(tag('h1')));
-block('HERO-2', 'Header: subtitle', '_layouts/bunkhouse.html', '<h2> in .bunkhouse-banner', txt(tag('h2')));
-block('HERO-3', 'Header: second subtitle', '_layouts/bunkhouse.html', '<h3> in .bunkhouse-banner', txt(tag('h3')));
+block('HERO-1', 'Header: main title', '_data/bunkhouse_settings.yml', 'hero_title', txt(S.hero_title));
+block('HERO-2', 'Header: subtitle', '_data/bunkhouse_settings.yml', 'hero_subtitle', txt(S.hero_subtitle));
+block('HERO-3', 'Header: second subtitle (overview page only)', '_data/bunkhouse_settings.yml', 'hero_tagline', txt(S.hero_tagline));
 const money = n => '$' + Number(n).toLocaleString('en-US');
 block('SET-raised', 'Thermometer: amount raised (updated by hand)', '_data/bunkhouse_settings.yml', 'donations_amount', txt(money(S.donations_amount)));
 block('SET-donors', 'Thermometer: number of donors, shown as "RAISED BY ___ PEOPLE"', '_data/bunkhouse_settings.yml', 'number_donors', txt(String(S.number_donors)));
 block('SET-goal', 'Thermometer: goal, shown as "Goal: ___"', '_data/bunkhouse_settings.yml', 'donations_goal', txt(money(S.donations_goal)));
-block('HERO-donate', 'Header: button label (links to the MIT giving form)', '_layouts/bunkhouse.html', '.bunkouse-donate-button text', txt('Donate'));
+block('HERO-donate', 'Header: button label (links to the MIT giving form)', '_layouts/bunkhouse.html', '.bunkhouse-donate-button text', txt('Donate'));
 const amt = (S.donate_link.match(/amount=(\d+)/) || [])[1];
 block('SET-amount', 'Amount pre-filled on the MIT giving form when someone clicks Donate', '_data/bunkhouse_settings.yml', 'donate_link amount= parameter', txt(amt ? money(amt) : '(none)'));
 children.push(label('NAV', 'Menu items at the top of every bunkhouse page, in order', '_data/bunkhouse_settings.yml', 'menu[].title',
@@ -238,10 +254,13 @@ blocks(body('_pages/camelot/index.md')).forEach((b, i) =>
 
 // C. Project details
 children.push(H2('C. Project details page (mitoc.mit.edu/camelot/project)'));
-children.push(note('Appears below the header. Paragraphs alternate with architectural drawings. The alt text after each image is read aloud by screen readers.'));
-let pn = 0, im = 0;
+children.push(note('Appears below the header. Each section has a heading, then text and an architectural drawing with a caption. The alt text after each image is read aloud by screen readers.'));
+// Prose paragraphs keep the numbering PR-1, PR-2, … that earlier versions of this doc used.
+let pn = 0, im = 0, hn = 0;
 blocks(body('_pages/camelot/project.md')).forEach(b => {
-  if (b.type === 'img') { im++; block(`PR-img-${im}`, `Project page, image ${im}`, '_pages/camelot/project.md', `<img> #${im}`, [b]); }
+  if (b.type === 'h') { hn++; block(`PR-h-${hn}`, `Project page, section heading ${hn}`, '_pages/camelot/project.md', `## heading #${hn}`, [b]); }
+  else if (b.type === 'img') { im++; block(`PR-img-${im}`, `Project page, image ${im}`, '_pages/camelot/project.md', `<img> #${im}`, [b]); }
+  else if (b.type === 'caption') block(`PR-cap-${im}`, `Project page, caption for image ${im}`, '_pages/camelot/project.md', `<figcaption> #${im}`, [b]);
   else { pn++; block(`PR-${pn}`, `Project page, paragraph ${pn}`, '_pages/camelot/project.md', `paragraph ${pn}`, [b]); }
 });
 
@@ -254,7 +273,8 @@ data.faqs.forEach(g => {
   g.questions.forEach((q, i) => {
     const id = `FAQ-${g.id}-${i + 1}`;
     const ans = blocks(q.answer);
-    manifest.push({id, where: `FAQ, ${g.title}, question ${i + 1}`, file: '_data/bunkhouse_faqs.yml', locator: `group id=${g.id}, questions[${i}]`, snapshot: q.question + '\n' + q.answer.trim()});
+    const raw = q.question + '\n' + q.answer.trim();
+    manifest.push(withFacts({id, where: `FAQ, ${g.title}, question ${i + 1}`, file: '_data/bunkhouse_faqs.yml', locator: `group id=${g.id}, questions[${i}]`, snapshot: raw}, raw));
     children.push(new Paragraph({keepNext: true, spacing: {before: 200, after: 40}, children: [
       new TextRun({text: `[${id}]`, bold: true, color: GREY, size: 16}), new TextRun({text: `  ${g.title}, question ${i + 1}`, color: GREY, size: 16})]}));
     children.push(new Paragraph({keepNext: true, children: inline(q.question, {bold: true})}));
@@ -270,7 +290,7 @@ const clean = s => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 block('BAN-title', 'Banner: title', '_includes/camelot_banner.html', '<h3>', txt(clean(B.match(/<h3>([\s\S]*?)<\/h3>/)[1])));
 [...B.matchAll(/<p>([\s\S]*?)<\/p>/g)].forEach((m, i) =>
   block(`BAN-${i + 1}`, `Banner: paragraph ${i + 1}`, '_includes/camelot_banner.html', `<p> #${i + 1}`, txt(clean(m[1]))));
-block('BAN-links', 'Banner: button and link labels (the "Read more" link is only visible after expanding the banner)', '_includes/camelot_banner.html', 'links-box anchors', txt('Donate  |  Read more'));
+block('BAN-links', 'Banner: button and link labels (shown both collapsed and expanded)', '_includes/camelot_banner.html', 'links-box and camelot-banner-actions anchors', txt('Donate  |  Learn more'));
 
 // F. Rentals page
 children.push(H2('F. Related text on the Camelot rentals page (mitoc.mit.edu/rentals/camelot)'));
@@ -281,7 +301,7 @@ block('RENT-about', 'Rentals page: opening paragraph', '_pages/rentals/camelot.m
 block('RENT-parking', 'Rentals page: parking paragraph', '_pages/rentals/camelot.md', 'paragraph starting "The parking lot is"', [find('The parking lot is')]);
 block('RENT-fee', 'Rentals page: payment paragraph', '_pages/rentals/camelot.md', 'paragraph starting "To pay for a cabin rental"', [find('To pay for a cabin rental')]);
 block('RENT-bunkhouse-heading', 'Rentals page: section heading', '_pages/rentals/camelot.md', '### Bunkhouse project', txt('Bunkhouse project'));
-block('RENT-bunkhouse', 'Rentals page: bunkhouse section (written around 2018)', '_pages/rentals/camelot.md', 'paragraph starting "As part of our long-term plan"', [find('As part of our long-term plan')]);
+block('RENT-bunkhouse', 'Rentals page: bunkhouse section', '_pages/rentals/camelot.md', 'paragraph starting "MITOC is building a new bunkhouse"', [find('MITOC is building a new bunkhouse')]);
 
 // ---------- assemble ----------
 const doc = new Document({

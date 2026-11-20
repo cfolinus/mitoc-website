@@ -14,7 +14,7 @@ The new bunkhouse will be located behind the existing cabin, about 100 meters up
 
 ## Layout
 
-The bunkhouse will have five sleeping rooms which accommodate 10 people each. A large central hallway contains ample space for gear storage for 50 people. The floor plan also includes a covered deck area.
+The bunkhouse will have five sleeping rooms which accommodate 10 people each. A large central hallway contains ample space for gear storage for {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people. The floor plan also includes a covered deck area.
 
 <figure class="bunkhouse-figure">
   <img src="/images/bunkhouse/bunkhouse-floor-plan.png" alt="Bunkhouse floor plan" width="400"/>

@@ -6,7 +6,10 @@ layout: bunkhouse
   Questions and answers live in _data/bunkhouse_faqs.yml.
   Question headings are plain Markdown so kramdown generates the same
   anchor IDs as before (existing deep links keep working).
+  %donate_link% and %key% placeholders (one per key under `facts:` in
+  bunkhouse_settings.yml) are replaced in both questions and answers.
 {% endcomment %}
+{% assign settings = site.data.bunkhouse_settings %}
 
 ## Frequently asked questions
 {: #faq-top}
@@ -21,10 +24,17 @@ layout: bunkhouse
 {: #{{ group.id }} .faq-group-heading}
 
 {% for q in group.questions %}
-### {{ q.question }}
+{%- assign question = q.question -%}
+{%- assign answer = q.answer | replace: "%donate_link%", settings.donate_link -%}
+{%- for fact in settings.facts -%}
+  {%- assign token = "%" | append: fact[0] | append: "%" -%}
+  {%- assign question = question | replace: token, fact[1] -%}
+  {%- assign answer = answer | replace: token, fact[1] -%}
+{%- endfor %}
+### {{ question }}
 {: .faq-question}
 
-{{ q.answer | replace: "%donate_link%", site.data.bunkhouse_settings.donate_link }}
+{{ answer }}
 {% endfor %}
 
 [↑ Back to top](#faq-top){: .faq-back-to-top}

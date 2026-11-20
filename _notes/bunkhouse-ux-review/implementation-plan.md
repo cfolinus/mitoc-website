@@ -11,7 +11,7 @@
 | 1b: banner and rentals links and copy (R12, R4) | Done, except the disputed facts left for 2a | `7f487e6` |
 | 1c: project page headings and captions (R14) | Done | `54d59f8` |
 | 1d: compact hero (R10), plus follow-up tweaks | Done | `2aba590` |
-| 2a-1: key-facts refactor (no wording change) | Ready to start | — |
+| 2a-1: key-facts refactor (no wording change) | Done | see `git log` |
 | 2a-2: agreed facts and copy fixes (R3) | Ready to start | — |
 | 2b: money and thermometer (R7, R9 wording) | Ready, except the R9 gift preset | — |
 | 2c: ways to give, get involved (R8, R13) | **Blocked** on Q4, Q5, Q8 | — |
@@ -129,6 +129,16 @@ Ask about the gift preset (R9) at the same time.
 3. **Pages and includes:** use `{{ site.data.bunkhouse_settings.facts.total_cost }}` in [index.md](../../_pages/camelot/index.md), [project.md](../../_pages/camelot/project.md), [camelot_banner.html](../../_includes/camelot_banner.html), and [rentals/camelot.md](../../_pages/rentals/camelot.md).
 4. **Content-review tool:** update [make_content_doc.js](tools/make_content_doc.js) to substitute the `%key%` placeholders (and `{{ …facts.x }}`) with their values in the doc, and record in the content map which fact key each one came from. Without this, committee members would see raw placeholders.
 5. **Verify it's a no-op:** build `_site` before and after, then run `diff -r`. The only differences allowed are whitespace.
+- *As built:*
+  - `facts:` holds `total_cost`, `bunkhouse_capacity`, and `fund_number`. I left out the room facts because the banner says "ten persons each" and the project page says "10 people each"; unify them in 2a-2.
+  - `donate_link` still contains the fund number literally, because YAML can't concatenate strings. A comment says it must match `facts.fund_number`.
+  - The FAQ replaces placeholders in questions as well as answers. Heading anchors are unchanged.
+  - The before and after builds were byte-for-byte identical.
+  - Fixes to `make_content_doc.js`:
+    - It replaces placeholders with their values, and the content map lists the `facts` keys each label uses.
+    - Setting `OUT_DIR=…` writes the doc and map somewhere else, for testing.
+    - It also fixes four Stage 1 breakages: the hero text (now read from settings), the rentals bunkhouse paragraph (rewritten in 1b, which made the script crash), the project page's headings, figures, and captions (from 1c; prose paragraphs keep the numbers PR-1 to PR-6, and headings and captions get `PR-h-n` and `PR-cap-n`), and the `<br>` tags in the check address.
+  - `bunkhouse-content-review.docx` won't exist again until the doc is regenerated after 2a-2.
 
 ### 2a-2. Agreed facts and copy fixes (R3) (one PR, about half a day)
 First add the newly agreed facts to `facts:` (`capacity_now`, `distance_to_bunkhouse`, `walk_from_parking`, `groundbreaking`, `completion`, `phase2_cost`, `parking_lot`), then edit the copy below. Labels match the content-review doc. Make one wording pass, keeping the current structure; the R5 restructure is Stage 4.

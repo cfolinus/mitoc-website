@@ -54,4 +54,4 @@ The Camelot calendar is embedded below. Reservations are not mutually exclusive 
 
 ### Bunkhouse project
 
-MITOC is building a new bunkhouse at Camelot, with safe, modern sleeping space for 50 people. To read about the project, see how fundraising is going, or donate, visit the [Camelot bunkhouse pages](/camelot). If you'd like to help with work at Camelot, add yourself to [cabin-helpers@mit.edu](http://mailman.mit.edu/mailman/listinfo/cabin-helpers).
+MITOC is building a new bunkhouse at Camelot, with safe, modern sleeping space for {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people. To read about the project, see how fundraising is going, or donate, visit the [Camelot bunkhouse pages](/camelot). If you'd like to help with work at Camelot, add yourself to [cabin-helpers@mit.edu](http://mailman.mit.edu/mailman/listinfo/cabin-helpers).
