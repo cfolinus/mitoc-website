@@ -72,6 +72,12 @@ p img {
   font-size: 1.4rem;
 }
 
+.bunkhouse-footer a,
+.bunkhouse-footer a:hover,
+.bunkhouse-footer a:focus {
+  color: inherit;
+}
+
 .bunkhouse-wrapper {
   display: flex;
   justify-content: center;
