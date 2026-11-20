@@ -62,6 +62,7 @@ Ask about the gift preset (R9) at the same time.
 - **Typo:** Rename the class `bunkouse-donate-button` to `bunkhouse-donate-button` everywhere it appears: [bunkhouse.html](../../_layouts/bunkhouse.html), [camelot_banner.html](../../_includes/camelot_banner.html), and [css/mitoc.css](../../css/mitoc.css).
 - **R2:** Add a "← MITOC home" item to the menu in [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml), or drop `hide_root=true`. Rename the "Camelot Bunkhouse" menu item to "Overview". Leave the commented-out History entry for now; Stage 3 removes it.
   - *As built:* I dropped `hide_root=true`. The "MIT Outing Club" brand link now shows at every width, including phones with the menu closed.
+  - *Changed later (2026-11-20, maintainer's request):* the bunkhouse navbar brand now says "MITOC Bunkhouse" and links to `/camelot`. `navbar.html` takes optional `brand_title` and `brand_href` parameters; the main site still uses its defaults. The way back to the main site is now a footer on every bunkhouse page, "© {year} MITOC", where MITOC links to `/`.
 - **R4 (redirect only):** Add `/bunkhouse /camelot 301` and `/bunkhouse/* /camelot 301` to [_redirects](../../_redirects).
 - **Display bug:** Keep the line breaks in the check-mailing address in [bunkhouse_faqs.yml:70-72](../../_data/bunkhouse_faqs.yml#L70-L72) by ending each line with two spaces or `<br>`.
 

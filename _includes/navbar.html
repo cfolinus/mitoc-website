@@ -7,7 +7,7 @@
                 <span class="icon-bar"></span>
             </button>
             {% unless include.hide_root %}
-                <a class="navbar-brand" href="/">{{ site.title }}</a>
+                <a class="navbar-brand" href="{{ include.brand_href | default: '/' }}">{{ include.brand_title | default: site.title }}</a>
             {% endunless %}
         </div>
         <div class="collapse navbar-collapse">

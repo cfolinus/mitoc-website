@@ -15,10 +15,15 @@
     </head>
 
     <body class="bunkhouse-body">
-        {% include navbar.html menu=site.data.bunkhouse_settings.menu class='bunkhouse-navbar' %}
+        {% include navbar.html menu=site.data.bunkhouse_settings.menu class='bunkhouse-navbar' brand_title='MITOC Bunkhouse' brand_href='/camelot' %}
         <div>
             {{ content }}
         </div>
+        <footer class="bunkhouse-footer">
+            <div class="container">
+                &copy; {{ site.time | date: '%Y' }} <a href="/">MITOC</a>
+            </div>
+        </footer>
     </body>
 
 </html>

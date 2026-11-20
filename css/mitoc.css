@@ -63,6 +63,15 @@ p img {
   font-size: large;
 }
 
+/* Footer on bunkhouse pages: copyright on the left, linking back to the main site */
+.bunkhouse-footer {
+  margin-top: 30px;
+  padding: 20px 0;
+  border-top: 1px solid #e5e5e5;
+  color: #777;
+  font-size: 1.4rem;
+}
+
 .bunkhouse-wrapper {
   display: flex;
   justify-content: center;
