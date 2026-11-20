@@ -1,6 +1,6 @@
 {
   "generated": "2026-11-20",
-  "source_commit": "3ef5429",
+  "source_commit": "e96cb16",
   "branch": "bunkhouse-edits",
   "note": "Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits. settings lists values in bunkhouse_settings.yml that appear in the text; edit those there, not in the page.",
   "labels": [
@@ -69,7 +69,7 @@
     },
     {
       "id": "HERO-donate",
-      "where": "Header: button label (links to the MIT giving form)",
+      "where": "Header: button label (opens the Donate page; on the Donate page itself it reads \"Give online\" and opens the MIT giving form)",
       "file": "_layouts/bunkhouse.html",
       "locator": ".bunkhouse-donate-button text",
       "snapshot": "Donate"
@@ -352,7 +352,117 @@
       "where": "Project page, paragraph 7",
       "file": "_pages/camelot/project.md",
       "locator": "paragraph 7",
-      "snapshot": "Have more questions? See the [FAQs](/camelot/faqs). Ready to help build the bunkhouse? [Donate](https://giving.mit.edu/form/?fundId=3892696&amount=1000).",
+      "snapshot": "Have more questions? See the [FAQs](/camelot/faqs). Ready to help build the bunkhouse? [Donate](/camelot/donate).",
+      "settings": [
+        "bunkhouse_settings.yml donate_page"
+      ]
+    },
+    {
+      "id": "DON-title",
+      "where": "Donate page title (page heading and browser tab title)",
+      "file": "_pages/camelot/donate.md",
+      "locator": "front matter title",
+      "snapshot": "Ways to give"
+    },
+    {
+      "id": "DON-1",
+      "where": "Donate page, button label",
+      "file": "_pages/camelot/donate.md",
+      "locator": "paragraph 1",
+      "snapshot": "[Give online](https://giving.mit.edu/form/?fundId=3892696&amount=1000){: .bunkhouse-give-button}",
+      "settings": [
+        "bunkhouse_settings.yml donate_link"
+      ]
+    },
+    {
+      "id": "DON-2",
+      "where": "Donate page, paragraph 2",
+      "file": "_pages/camelot/donate.md",
+      "locator": "paragraph 2",
+      "snapshot": "Gifts of every size count."
+    },
+    {
+      "id": "DON-h-1",
+      "where": "Donate page, section heading 1",
+      "file": "_pages/camelot/donate.md",
+      "locator": "## heading #1",
+      "snapshot": "Double your gift with employer matching"
+    },
+    {
+      "id": "DON-3",
+      "where": "Donate page, paragraph 3",
+      "file": "_pages/camelot/donate.md",
+      "locator": "paragraph 3",
+      "snapshot": "Many employers match charitable gifts. Gifts to the bunkhouse go to MIT's \"MIT Outing Club Camelot Cabin Fund\" (fund 3892696), so in your employer's matching portal, search for Massachusetts Institute of Technology as the recipient.",
+      "settings": [
+        "bunkhouse_settings.yml facts.fund_number"
+      ]
+    },
+    {
+      "id": "DON-h-2",
+      "where": "Donate page, section heading 2",
+      "file": "_pages/camelot/donate.md",
+      "locator": "## heading #2",
+      "snapshot": "By check"
+    },
+    {
+      "id": "DON-4",
+      "where": "Donate page, paragraph 4",
+      "file": "_pages/camelot/donate.md",
+      "locator": "paragraph 4",
+      "snapshot": "Please make your check payable to MIT Fund 3892696, enclose the MIT [contribution form](https://giving.mit.edu/check), and mail your check to:",
+      "settings": [
+        "bunkhouse_settings.yml facts.fund_number"
+      ]
+    },
+    {
+      "id": "DON-5",
+      "where": "Donate page, paragraph 5",
+      "file": "_pages/camelot/donate.md",
+      "locator": "paragraph 5",
+      "snapshot": "Massachusetts Institute of Technology<br>"
+    },
+    {
+      "id": "DON-6",
+      "where": "Donate page, paragraph 6",
+      "file": "_pages/camelot/donate.md",
+      "locator": "paragraph 6",
+      "snapshot": "P. O. Box 412926<br>"
+    },
+    {
+      "id": "DON-7",
+      "where": "Donate page, paragraph 7",
+      "file": "_pages/camelot/donate.md",
+      "locator": "paragraph 7",
+      "snapshot": "Boston, MA 02241-2926"
+    },
+    {
+      "id": "DON-h-3",
+      "where": "Donate page, section heading 3",
+      "file": "_pages/camelot/donate.md",
+      "locator": "## heading #3",
+      "snapshot": "Stock, donor-advised funds, IRA gifts, pledges, and larger gifts"
+    },
+    {
+      "id": "DON-8",
+      "where": "Donate page, paragraph 8",
+      "file": "_pages/camelot/donate.md",
+      "locator": "paragraph 8",
+      "snapshot": "To give stock, give from a donor-advised fund, make an IRA gift, make a pledge, or talk about a larger gift, email [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu) and a member of the committee will reply."
+    },
+    {
+      "id": "DON-h-4",
+      "where": "Donate page, section heading 4",
+      "file": "_pages/camelot/donate.md",
+      "locator": "## heading #4",
+      "snapshot": "Is my gift tax deductible?"
+    },
+    {
+      "id": "DON-9",
+      "where": "Donate page, paragraph 9",
+      "file": "_pages/camelot/donate.md",
+      "locator": "paragraph 9",
+      "snapshot": "Yes. If you [give online](https://giving.mit.edu/form/?fundId=3892696&amount=1000) to contribute to the MIT Outing Club Camelot Cabin Fund, you will receive a statement from MIT at the end of the year documenting your tax deductible charitable contribution.",
       "settings": [
         "bunkhouse_settings.yml donate_link"
       ]
@@ -479,17 +589,7 @@
       "where": "FAQ, How to donate, question 1",
       "file": "_data/bunkhouse_faqs.yml",
       "locator": "group id=donating, questions[0]",
-      "snapshot": "Is my donation to the Camelot Bunkhouse tax deductible?\nYes, if you **[donate](%donate_link%)** to contribute to the MIT Outing Club Camelot Cabin Fund, you will receive a statement from MIT at the end of the year documenting your tax deductible charitable contribution."
-    },
-    {
-      "id": "FAQ-donating-2",
-      "where": "FAQ, How to donate, question 2",
-      "file": "_data/bunkhouse_faqs.yml",
-      "locator": "group id=donating, questions[1]",
-      "snapshot": "Can I donate to the bunkhouse project by check?\nYes, it is possible to donate by check!  Please make your check payable to MIT Fund 3892696, enclose the MIT [contribution form](https://giving.mit.edu/check), and mail your check to:\n>Massachusetts Institute of Technology<br>\n>P. O. Box 412926<br>\n>Boston, MA 02241-2926",
-      "settings": [
-        "bunkhouse_settings.yml facts.fund_number"
-      ]
+      "snapshot": "How can I donate?\nSee our **[Donate page](%donate_page%)** for every way to give: online, by check, with employer matching, or with stock, an IRA, or a donor-advised fund. It also answers whether your gift is tax deductible."
     },
     {
       "id": "FAQ-timeline",
@@ -660,7 +760,7 @@
     },
     {
       "id": "BAN-links",
-      "where": "Banner: button and link labels (shown both collapsed and expanded)",
+      "where": "Banner: button and link labels (shown both collapsed and expanded). Donate opens the Donate page; Learn more opens the bunkhouse overview",
       "file": "_includes/camelot_banner.html",
       "locator": "links-box and camelot-banner-actions anchors",
       "snapshot": "Donate  |  Learn more"
