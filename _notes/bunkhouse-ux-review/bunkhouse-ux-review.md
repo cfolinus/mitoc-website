@@ -4,11 +4,13 @@
 
 This folder starts with an underscore, so Jekyll does not publish it. Screenshots are in [screenshots/](screenshots/).
 
-> **Implementation status (updated 2026-11-20).** Work is tracked in [implementation-plan.md](implementation-plan.md), which has the status table, the order of work, and handoff notes.
-> - **Done** (Stage 1, commits `8e67d88`…`2aba590` on `bunkhouse-edits`, not pushed yet): R1, R2, R4, R10, R14, and R12 except its disputed facts. Section 6 marks each one.
-> - **Not started:** everything else, mostly waiting on the committee's answers to section 8.
+> **Implementation status (updated 2026-11-20).** Work is tracked in [implementation-plan.md](implementation-plan.md), which has the status table, next steps, and handoff notes.
+> - **Done** (Stages 1 and 2 through batch 2b, on `bunkhouse-edits`, not pushed yet): R1, R2, R3, R4, R10, R12, R14, and R7. Section 6 marks each one.
+> - **Partly done:** R9 (small-gift wording added; the $1,000 preset still waits for a decision), R6 (only the "as of" date on the thermometer), and R15 (the time-sensitive answers are updated; the new questions aren't added yet).
+> - **Not started:** R5, R6's Updates page, R8, R11, R13, and R16.
+> - **Committee:** the first round of questions came back on 2026-11-20 (saved as `bunkhouse-content-review-2026-11-20-committee.docx`) and settled every row of section 7 except the nightly fee. The questions still open are in the regenerated [bunkhouse-content-review.docx](bunkhouse-content-review.docx), which is ready to send.
 > - **Line numbers in this review are from commit `cd2bad8`.** Many have shifted in `_layouts/bunkhouse.html`, `_layouts/bunkhouse_base.html`, `_includes/camelot_banner.html`, `_pages/camelot/project.md`, and `css/mitoc.css`. Search for the quoted text instead of trusting the line numbers.
-> - **The findings and screenshots below describe the site before Stage 1.** For example, the dead phone Donate button, the missing home link, and the full-screen phone hero are now fixed.
+> - **The findings and screenshots below describe the site before Stage 1.** For example, the dead phone Donate button, the missing home link, the full-screen phone hero, and the contradictory facts are now fixed.
 
 **Content review document:** [bunkhouse-content-review.docx](bunkhouse-content-review.docx) contains all the bunkhouse wording, the key facts table, and the open questions, for committee members to edit in Google Docs or Word. [bunkhouse-content-map.json](bunkhouse-content-map.json) maps each `[label]` in the document to its source file, so edits can be applied back to the site. To regenerate both after the site changes, run `npm install` (first time only) and then `npm run build` in [tools/](tools/). This needs Node and Ruby.
 
@@ -351,15 +353,15 @@ In [_layouts/bunkhouse.html:35-37](../../_layouts/bunkhouse.html#L35-L37), repla
 
 **R2. Add a way back to the main site from bunkhouse pages.** *Effort S. Persona P6.*
 Either drop `hide_root=true` in [bunkhouse_base.html:18](../../_layouts/bunkhouse_base.html#L18) so the "MIT Outing Club" brand link appears, or add a "← MITOC home" item to the menu in [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml). While editing the menu, rename "Camelot Bunkhouse" to "Overview".
-✅ *Done in `8e67d88`. I dropped `hide_root=true` and renamed the menu item. In `2aba590`, the navbar font sizes were also changed to match the main site.*
+✅ *Done in `8e67d88`. I dropped `hide_root=true` and renamed the menu item. In `2aba590`, the navbar font sizes were also changed to match the main site. Changed later at the maintainer's request (`64657fd`): the navbar brand now reads "MITOC Bunkhouse" and links to `/camelot`, and the link back to the main site is in a new footer ("© 2026 MITOC").*
 
 **R4. Connect `/rentals/camelot` to the bunkhouse pages, and add a `/bunkhouse` redirect.** *Effort S. Personas P3, P5, P6.*
 Replace the stale "Bunkhouse project" section in [_pages/rentals/camelot.md:55-57](../../_pages/rentals/camelot.md#L55-L57) with two current sentences and a link to `/camelot`. Add `/bunkhouse  /camelot  301` (and `/bunkhouse/*`) to [_redirects](../../_redirects).
-✅ *Done: the redirect in `8e67d88`, the rentals section in `7f487e6`. The "40 or more" capacity claim on the rentals page still waits for R3.*
+✅ *Done: the redirect in `8e67d88`, the rentals section in `7f487e6`. The rentals page's capacity, walking distance, and parking were corrected in `dbcaf5f` (R3).*
 
 **R12. Make the homepage banner work for newcomers.** *Effort S. Persona P6, and everyone else.*
 In [_includes/camelot_banner.html](../../_includes/camelot_banner.html), show a "Learn more" link next to the small Donate button in the collapsed footer (lines 51-55), so it's visible without expanding. Rewrite the opening (lines 13-19) to say what Camelot is before what it needs, for example: *"Camelot is MITOC's cabin in the White Mountains foothills, where many members take their first trip. We're building it a new bunkhouse."* Remove "As you may know." Make the copy match the overview's facts (see R3).
-🟡 *Partly done in `7f487e6`. The "Learn more" link is added and the opening is rewritten. The second and third paragraphs still contain disputed facts ("100m", "$1.3 million", "design now complete", "complete … in 2027"), which wait for R3.*
+✅ *Done. The "Learn more" link and the new opening are in `7f487e6`. The remaining facts (distance, cost, schedule, "design now complete") were corrected in `dbcaf5f` (R3).*
 
 **R14. Add headings and captions to the project page.** *Effort S. Personas P3, P4.*
 In [_pages/camelot/project.md](../../_pages/camelot/project.md), add `##` headings (Location on the property · Layout · Toilets and water · Heating and insulation · Structure · Fire safety), give each drawing a short caption, and end with a link to the FAQs and a Donate link.
@@ -369,6 +371,7 @@ In [_pages/camelot/project.md](../../_pages/camelot/project.md), add `##` headin
 
 **R3. Fix stale and contradictory facts.** *Effort S–M. Decision: confirm the correct values. All personas.*
 Go through section 7 and settle one value for each item. Update the hero subtitle ("Site construction has started!" → for example "Phase 1 complete · Raising funds for Phase 2") and the "Coming 2027" headline, so the hero agrees with the FAQ timeline. Update the past-tense FAQ answers ("When will construction start?" and the trail work). Use one definition of "Phase 1" everywhere.
+✅ *Done in `9a4e737` and `dbcaf5f`, using the committee's values. Key facts now live once, in `facts:` in `bunkhouse_settings.yml`, and every page reads them from there. A new FAQ question, "What are the phases of the project?", defines Phase 0, 1, and 2. The hero tagline is now "Phase 1 complete · Raising funds to build in 2027". The nightly fee is still undecided, so no number is shown.*
 
 **R7. State the money picture plainly.** *Effort S to write. Decision: the figures and what the thermometer counts. Personas P1, P3, P4.*
 Add a short "What Phase 2 will fund" section to the overview, plus matching FAQ answers:
@@ -378,9 +381,11 @@ Add a short "What Phase 2 will fund" section to the overview, plus matching FAQ 
 - What happens if bids come in high, and what funding level lets construction start.
 
 Then make the thermometer match. If it should show Phase 2 only, adjust `donations_amount`/`donations_goal` in [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml). Consider showing "$832,000 to go" next to the goal (computed in Liquid from the two values).
+✅ *Done in `7eeecd4` and `7987b1c`. The overview has a new section, "What the $1.3 million pays for". The FAQ cost answers are rewritten. The thermometer counts the whole campaign, including pledges (the committee's choice), and shows "$832,000 to go" and "As of November 2026". Still open, and in the round-2 questions: what happens if bids come in high or the goal is missed, and whether Phase 0 is inside the $1.3M.*
 
 **R9. Change the online gift's default amount and add small-gift wording.** *Effort S. Decision: preset or not. Personas P2, P5.*
 Remove `&amount=1000` from `donate_link` in [bunkhouse_settings.yml:1](../../_data/bunkhouse_settings.yml#L1), or set it to a lower value. Add a line near the thermometer such as *"314 people have given. Gifts of every size count."*
+🟡 *The wording is done in `7eeecd4`: "Gifts of every size count" under the overview's thermometer, and in the funding section. The $1,000 preset is unchanged until the maintainer or committee decides (round-2 Q10).*
 
 ### Structural changes
 
@@ -431,6 +436,8 @@ The first new post is then the Phase 2 kickoff. These posts replace the history 
 - a "Latest update" teaser on the overview (date, title, one line, link)
 - an "as of {date}" line under the thermometer, using the latest post's date or an `updated:` field in [bunkhouse_settings.yml](../../_data/bunkhouse_settings.yml)
 
+🟡 *Only the "as of" line is done (`7eeecd4`), from `donations_as_of` in the settings. The Updates page waits for an owner (round-2 Q9).*
+
 *Implementation:*
 - Use a Jekyll collection, for example `_camelot_updates/` with `output: true` in `_config.yml`, so each post gets its own URL that emails can link to.
 - Each post is one Markdown file named like `2025-05-15-phase-1-complete.md`, with front matter for `title`, `date`, and an optional `image` and `summary`.
@@ -470,6 +477,7 @@ Update or retire time-sensitive answers ("When will construction start?", "What 
 - How much is Camelot used?
 
 Consider moving "Who is managing this project?" higher, or onto the overview (R5).
+🟡 *Partly done in `dbcaf5f`: "When will construction start?", "How long will construction take?", the parking answer, and the cost answers are current. The new questions aren't added yet; they wait for round-2 answers and Stage 4.*
 
 **R16. Add impact and usage numbers.** *Effort S once the data exists. Decision: what data the cabin managers can provide. Personas P1, P3, P4.*
 For example: visitor-nights per year, number of MITOC trips and events based at Camelot, share of first-year students, and capacity before and after the loft closure. Even three numbers would make the case far stronger for the analytical personas.
@@ -479,7 +487,7 @@ For example: visitor-nights per year, number of MITOC trips and events based at 
 *This order has been superseded by the more detailed [implementation-plan.md](implementation-plan.md).*
 
 1. **This week (no decisions):** R1, R2, R4, R12, R14. ✅ *Done, plus R10.*
-2. **After a short committee check-in to settle facts and policies:** R3, R7, R9, then R8 and R13. At the same check-in, name an owner for updates (open question 9).
+2. **After a short committee check-in to settle facts and policies:** R3, R7, R9, then R8 and R13. At the same check-in, name an owner for updates (open question 9). ✅ *R3 and R7 done; R9 partly. R8 and R13 wait for round-2 answers.*
 3. **Updates page:** R6, once there's an owner. The past-milestone posts can be written as soon as Phase 1 photos are collected, without waiting for the restructure.
 4. **Larger restructure:** R5 with R10, R11, R15, R16. Do this once the content from steps 2 and 3 exists, since the new overview mainly reorganizes that content and shows the latest update.
 
@@ -488,6 +496,8 @@ For example: visitor-nights per year, number of MITOC trips and events based at 
 ## 7. Content accuracy and upkeep
 
 These need one agreed value. Check with the committee before changing them.
+
+✅ *All settled by the committee on 2026-11-20 and corrected in `dbcaf5f`, except the nightly fee, which is still open (round-2 Q1). The FAQ now gives no fee amount. The "Out of date" items below are fixed too.*
 
 | Topic | Says | Says elsewhere |
 |---|---|---|
@@ -520,6 +530,8 @@ These need one agreed value. Check with the committee before changing them.
 ---
 
 ## 8. Open questions for MITOC
+
+*Round 1 answered Q2, Q3, and most of Q1 and Q6 (2026-11-20). The questions still open, plus new ones raised by the answers, are in Part 2 of the regenerated [bunkhouse-content-review.docx](bunkhouse-content-review.docx), numbered differently. See the "Next steps" table in [implementation-plan.md](implementation-plan.md).*
 
 1. **Money:** does the $468K raised include funds spent on Phase 1? What's the current Phase 2 budget, and has the $1.3M estimate been updated since 2022?
 2. **Schedule:** what funding level, and by what date, lets construction start? Is "Coming 2027" the completion target or the start?
