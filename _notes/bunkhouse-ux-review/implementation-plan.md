@@ -13,7 +13,7 @@
 | 1d: compact hero (R10), plus follow-up tweaks | Done | `2aba590` |
 | 2a-1: key-facts refactor (no wording change) | Done | see `git log` |
 | 2a-2: agreed facts and copy fixes (R3) | Done | see `git log` |
-| 2b: money and thermometer (R7, R9 wording) | Ready, except the R9 gift preset | — |
+| 2b: money and thermometer (R7, R9 wording) | Done, except the R9 gift preset (Q10 in the new review doc) | see `git log` |
 | 2c: ways to give, get involved (R8, R13) | **Blocked** on Q4, Q5, Q8 | — |
 | Stage 3 onward | Not started | — |
 
@@ -193,6 +193,19 @@ First add the newly agreed facts to `facts:` (`capacity_now`, `distance_to_bunkh
   - A link to the FAQ cost section.
   - All the numbers come from `facts:` or the thermometer values, not literals.
 - **R9 wording:** add "{{number_donors}} people have given so far. Gifts of every size count." near the thermometer on the overview. **Don't change `&amount=1000` until the preset is decided.** The maintainer can make that call directly, or add it to the follow-up questions.
+
+*As built (2b):*
+- `donations_as_of` is in the settings. The layout shows "$X to go", worked out from the goal and the amount raised, and hides it once the goal is met. The "As of" line adds "Gifts of every size count" in the full hero only.
+- The overview's new section is "## What the $1.3 million pays for", between OV-4 and the closing line. I put the donor-count sentence there rather than in the hero, because the hero already shows the count.
+- CSS fixes:
+  - `.bunkhouse-body p { font-size: large }` was overriding the new note's size, so the note uses a more specific selector.
+  - Bullet lists on bunkhouse pages were smaller than body text. They now match it, except for the FAQ jump-list pills.
+- Content-review tool:
+  - It works out page Liquid that reads settings (including `minus:` and `thousands_separated`). The content map lists those settings under `settings`, which replaces `facts`.
+  - Part 1 now shows the current values for the committee to confirm.
+  - Part 2 now lists the 11 questions still open: the fee, Phase 0, missing the goal, Phase 1 donors, Q4, Q5, Q7, Q8, Q9, the gift preset, and the rentals parking instructions.
+  - New labels: SET-asof and HERO-note.
+- I regenerated `bunkhouse-content-review.docx` and `bunkhouse-content-map.json`, so they're ready to send for the next round.
 
 ### 2c. Ways to give and getting involved (R8, R13): blocked
 Waits on Q4 (non-cash, pledges, contact, recognition), Q5 (matching details), and Q8 (volunteering). The scope is the same as before:

@@ -33,19 +33,40 @@ const NOW = new Date();
 const ISO_DATE = NOW.toISOString().slice(0, 10);
 const LONG_DATE = NOW.toLocaleDateString('en-GB', {day: 'numeric', month: 'long', year: 'numeric'});
 const read = p => fs.readFileSync(path.join(REPO, p), 'utf8');
+const money = n => '$' + Number(n).toLocaleString('en-US');
 
-// ---------- key facts ----------
+// ---------- key facts and other settings ----------
 // Facts live under `facts:` in bunkhouse_settings.yml. The site inserts them with
 // %key% (in bunkhouse_faqs.yml) or {{ site.data.bunkhouse_settings.facts.key }} (pages, includes).
-// The doc shows the values; the content map records which facts each label uses,
+// Pages can also print other settings, e.g. {{ site.data.bunkhouse_settings.donations_goal |
+// minus: site.data.bunkhouse_settings.donations_amount | thousands_separated }}.
+// The doc shows the values; the content map records which settings each label uses,
 // so an edit to one of them is applied to bunkhouse_settings.yml, not the page.
 const FACTS_SET = S.facts || {};
-const FACT_RE = /%(\w+)%|\{\{\s*site\.data\.bunkhouse_settings\.facts\.(\w+)\s*\}\}/g;
-const expand = t => t.replace(FACT_RE, (m, a, b) => (a || b) in FACTS_SET ? FACTS_SET[a || b] : m);
-const factsIn = t => [...new Set([...t.matchAll(FACT_RE)].map(m => m[1] || m[2]).filter(k => k in FACTS_SET))];
+const PREFIX = 'site.data.bunkhouse_settings.';
+const SETTING_RE = /\{\{\s*site\.data\.bunkhouse_settings\.([\w.]+)\s*((?:\|[^}]*)?)\}\}/g;
+const getPath = p => p.split('.').reduce((o, k) => (o == null ? undefined : o[k]), S);
+function evalSetting(p, filters) {
+  let v = getPath(p);
+  if (v === undefined) return null;
+  for (const f of filters.split('|').map(x => x.trim()).filter(Boolean)) {
+    let m;
+    if ((m = f.match(/^minus:\s*(\S+)$/))) v = Number(v) - Number(m[1].startsWith(PREFIX) ? getPath(m[1].slice(PREFIX.length)) : m[1]);
+    else if (f === 'thousands_separated') v = Number(v).toLocaleString('en-US');
+    else return null; // unknown filter: leave the Liquid visible so it gets noticed
+  }
+  return String(v);
+}
+const expand = t => t
+  .replace(/%(\w+)%/g, (m, k) => (k in FACTS_SET ? FACTS_SET[k] : m))
+  .replace(SETTING_RE, (m, p, f) => evalSetting(p, f) ?? m);
+const settingsIn = t => [...new Set([
+  ...[...t.matchAll(/%(\w+)%/g)].map(m => m[1]).filter(k => k in FACTS_SET).map(k => `facts.${k}`),
+  ...[...t.matchAll(SETTING_RE)].flatMap(m => [m[1], ...[...m[2].matchAll(/site\.data\.bunkhouse_settings\.([\w.]+)/g)].map(x => x[1])]),
+])];
 const withFacts = (entry, raw) => {
-  const keys = factsIn(raw);
-  return keys.length ? {...entry, snapshot: expand(raw), facts: keys.map(k => `bunkhouse_settings.yml facts.${k}`)} : entry;
+  const keys = settingsIn(raw);
+  return keys.length ? {...entry, snapshot: expand(raw), settings: keys.map(k => `bunkhouse_settings.yml ${k}`)} : entry;
 };
 
 const FONT = 'Arial';
@@ -142,15 +163,17 @@ const txt = t => [{type: 'p', text: t}];
 
 // ---------- comments for open questions (anchored to relevant blocks) ----------
 const QUESTIONS = [
-  ['Money', 'Does the $468K raised include funds already spent on Phase 1? What is the current Phase 2 budget, and has the $1.3M estimate been updated since 2022?', 'SET-raised'],
-  ['Schedule', 'What funding level, and by what date, lets construction start? Is "Coming 2027" the completion target or the start?', 'HERO-2'],
-  ['Thermometer', 'Should the thermometer show Phase 2 only or the whole campaign? Received money only, or pledges too?', 'SET-goal'],
-  ['Giving options', 'Which non-cash and pledge options (stock, donor-advised funds, IRA distributions, multi-year pledges) does MIT support for fund 3892696? Who is the named contact for larger gifts? Is there any donor recognition or naming policy?', 'FAQ-donating'],
+  ['Nightly fee', 'What nightly fee will the bunkhouse charge? The FAQ now says "modest user fees" with no number. (The current cabin fee on the rentals page is $10 per person per night.)', 'FAQ-cost-3'],
+  ['Phase 0 and the $1.3M', `Does the ${FACTS_SET.total_cost} include the initial design work with Maclay Architects (Phase 0, 2019–21)? The site now says it covers Phases 1 and 2. Phase 1 (${FACTS_SET.phase1_raised}) plus Phase 2 (${FACTS_SET.phase2_cost}) adds up to the total, which suggests Phase 0 was paid for separately.`, 'FAQ-cost-2'],
+  ['If the goal is not reached', `The site says the full ${FACTS_SET.total_cost} is needed before groundbreaking in ${FACTS_SET.groundbreaking}. What happens if it isn't raised by then: does construction move to 2028? What happens if bids come in above the estimate?`, 'FAQ-timeline-2'],
+  ['Phase 1 donors', `The site says donors gave ${FACTS_SET.phase1_raised} for Phase 1. Was that the amount raised, or Phase 1's final cost? The overview thanks Phase 1 donors as a group. Should they be thanked by name anywhere?`, 'SET-raised'],
+  ['Giving options', `Which non-cash and pledge options (stock, donor-advised funds, IRA distributions, multi-year pledges) does MIT support for fund ${FACTS_SET.fund_number}? Who is the named contact for larger gifts? Is there any donor recognition or naming policy?`, 'FAQ-donating'],
   ['Matching', 'What should employer-matching donors enter in their company\'s matching portal (recipient, designation)? Can MIT provide a link for this?', 'FAQ-donating-1'],
-  ['Capacity and fee', 'How many people can sleep at Camelot now, and is the planned bunkhouse fee $10 or $20 per person per night?', 'FAQ-cost-3'],
   ['Photos and data', 'Are there photos of the finished Phase 1 work (bridge, parking lot, trail)? Can the cabin managers provide usage figures (visitor-nights per year, trips, capacity before and after the loft closure)?', 'OV-3'],
-  ['Volunteering', 'What in-person or skills-based help is the project actually looking for?', 'FAQ-timeline-4'],
-  ['Ownership', 'Who will write posts for a new bunkhouse Updates page and keep the thermometer current? What\'s the minimum schedule (for example, quarterly plus each milestone)? Who sends the matching email announcement?', 'SET-raised'],
+  ['Volunteering', 'What in-person or skills-based help is the project actually looking for?', 'FAQ-timeline-5'],
+  ['Ownership', 'Who will write posts for a new bunkhouse Updates page and keep the thermometer current? What\'s the minimum schedule (for example, quarterly plus each milestone)? Who sends the matching email announcement?', 'SET-asof'],
+  ['Gift amount', 'The online form opens with $1,000 already filled in. Keep that, lower it, or leave the amount blank?', 'SET-amount'],
+  ['Rentals parking (for the cabin managers)', 'The rentals page now describes the new gravel lot. Are the rest of its parking instructions ("entirely off the pavement", "park as close as possible to other cars") still right?', 'RENT-parking'],
 ];
 QUESTIONS.forEach(([t, q, anchor], i) => {
   const existing = commentFor[anchor];
@@ -166,7 +189,7 @@ children.push(note(`Snapshot of the website text as of ${LONG_DATE} (branch ${BR
 children.push(H1('How to use this document'));
 const steps = [
   'Turn on suggestion mode before editing. In Google Docs, click the pencil icon at the top right and choose Suggesting. In Word, go to Review → Track Changes.',
-  'Start with Part 1, Key facts. Fill in the "Agreed value" column. Many pages state these facts differently today, and the website maintainer will make every page match the agreed values.',
+  'Start with Part 1, Key facts. These are the values you agreed in the last review, as the website now states them. If any is wrong, write the correction in the right-hand column.',
   'Answer the open questions in Part 2. Each one also appears as a comment next to the text it affects in Part 3.',
   'Edit the website text in Part 3 freely. You can rewrite, delete, reorder, or add new paragraphs and FAQ questions.',
   'Leave the small grey labels like [OV-1] in place. They tell the maintainer where each piece of text lives on the website. To remove a block, delete its text and keep the label, or add a comment saying "delete".',
@@ -176,33 +199,29 @@ const steps = [
   'When the review is finished, download the file as Word (in Google Docs: File → Download → Microsoft Word) and send it to the website maintainer.',
 ];
 steps.forEach(s => children.push(new Paragraph({numbering: {reference: 'steps', level: 0}, children: inline(s)})));
-children.push(P([new TextRun({text: 'What\'s in this document: ', bold: true}), new TextRun('Part 1 lists the key facts to agree on. Part 2 lists open questions for the committee. Part 3 has all the bunkhouse wording on the website, grouped by where it appears: the header on every bunkhouse page, the three bunkhouse pages, the fundraising banner shown on every main-site page, and related text on the Camelot rentals page.')], {spacing: {before: 160}}));
+children.push(P([new TextRun({text: 'What\'s in this document: ', bold: true}), new TextRun('Part 1 lists the key facts as the website now states them. Part 2 lists the questions that are still open for the committee. Part 3 has all the bunkhouse wording on the website, grouped by where it appears: the header on every bunkhouse page, the three bunkhouse pages, the fundraising banner shown on every main-site page, and related text on the Camelot rentals page.')], {spacing: {before: 160}}));
 
 // ---------- Part 1: key facts ----------
 children.push(new Paragraph({children: [new PageBreak()]}));
 children.push(H1('Part 1. Key facts'));
-children.push(P('Each row is a fact that appears on the website. The middle column shows what the site says now and where (labels refer to Part 3). Please fill in the right-hand column with the correct value, or write "remove" if the fact shouldn\'t appear on the site.'));
+children.push(P('Each row is a fact as the website states it now. Every page that mentions a fact uses the same value, so a correction here fixes it everywhere. Write "OK" or a correction in the right-hand column.'));
+const fx = k => FACTS_SET[k] || '(not set)';
 const FACTS = [
-  ['Total cost of the bunkhouse', '"$1.3 million total costs" (OV-4); "$1.3 million" (FAQ-cost-1, BAN-2)'],
-  ['What the $1.3M covers', 'OV-4 calls it the total. FAQ-cost-2 says it excludes design work, the parking lot, and the trail.'],
-  ['Is the $1.3M estimate still current?', 'FAQ-cost-1: based on Dartmouth bunkhouses; decision made despite COVID-era cost uncertainty (wording from 2022).'],
-  ['Meaning of "Phase 1"', 'OV-3: bridge, parking lot, and access trail. FAQ-cost-2: design work with Maclay Architects.'],
-  ['Meaning of "Phase 2"', 'OV-4: bunkhouse construction.'],
-  ['Amount raised, number of donors, and "as of" date', '$468,000 from 314 people (SET-raised, SET-donors). No date shown.'],
-  ['What the thermometer counts', 'Not stated: Phase 2 only or the whole campaign? Received money only, or pledges too?'],
-  ['Fundraising goal', '$1,300,000 (SET-goal)'],
-  ['Groundbreaking for the bunkhouse', '"breaking ground in 2027" (OV-4); "erected in summer 2027" (FAQ-timeline-1)'],
-  ['Completion date', '"Coming 2027" (HERO-2); "could be finished in 2027" (FAQ-timeline-2); "complete … in 2027" (BAN-3)'],
-  ['Funding needed before construction can start', 'Not stated anywhere.'],
-  ['Nightly fee', '"about $20 per person per night in accordance with MITOC\'s current practices" (FAQ-cost-3); "$10.00 per person per night" (RENT-fee)'],
-  ['How many people the existing cabin can sleep now', 'Loft closed; cabin can\'t safely sleep a large group (FAQ-why-2, FAQ-why-5). "can accommodate groups of 40 or more" (RENT-about)'],
-  ['Bunkhouse capacity', '50 people in five rooms of 10 (OV-1, PR-2, BAN-2). Consistent.'],
-  ['Distance from cabin to bunkhouse', '"a few hundred yards" (OV-1); "about 100 meters" (PR-1, BAN-2)'],
-  ['Walk from parking to the cabin', '"about 200 meters" (FAQ-building-4); "about 1000 feet" (RENT-about)'],
-  ['Parking', 'New off-street lot built (FAQ-building-3, OV-3). "a dirt pull-off at the side of the road" (RENT-parking)'],
-  ['When the project began', '"in discussion for almost a decade", "kick-started in 2018" (OV-2); "Since 2013" (BAN-1)'],
-  ['Condition of the existing cabin', '"nearing the end of its useful life" (BAN-1); "serviceable … for another 10-20 years" (FAQ-why-4)'],
-  ['Contacts', 'mitoc-bunkhouse@mit.edu (FAQ-people-3). No named contact for larger gifts.'],
+  ['Total cost and fundraising goal', `${fx('total_cost')}, estimated in 2026 from contractors' quotes on the finished construction drawings`],
+  ['What the total covers', 'Phases 1 and 2: parking lot, access trail and bridge, site prep, the bunkhouse, and design and project support (FAQ-cost-2)'],
+  ['Phases', 'Phase 0: initial design (2019–21). Phase 1: parking lot, bridge, trail, and construction drawings (2022–25). Phase 2: the bunkhouse (2026–27). (FAQ-timeline-1)'],
+  ['Phase 1 and Phase 2 amounts', `Phase 1: donors gave ${fx('phase1_raised')}. Phase 2: ${fx('phase2_cost')}.`],
+  ['Thermometer', `${money(S.donations_amount)} raised and pledged by ${S.number_donors} people, as of ${S.donations_as_of}, toward ${money(S.donations_goal)}. Counts the whole campaign, including pledges. Shows ${money(S.donations_goal - S.donations_amount)} to go.`],
+  ['Funding needed before construction', `The full ${fx('total_cost')}`],
+  ['Groundbreaking and completion', `Break ground in ${fx('groundbreaking')}; complete in ${fx('completion')}; one season, about May to November`],
+  ['Existing cabin sleeps now', `${fx('capacity_now')} people (loft, living room, kitchen). Loft reopened after repair; not safe to sleep in within a few years.`],
+  ['Bunkhouse', `${fx('bunkhouse_capacity')} people in ${fx('room_count')} rooms of ${fx('room_size')}`],
+  ['Cabin to bunkhouse', fx('distance_to_bunkhouse')],
+  ['Parking to cabin', fx('walk_from_parking')],
+  ['Parking', `Gravel off-street lot with room for ${fx('parking_spaces')} cars`],
+  ['Project history', 'Discussed since 2011; MITOC board approval 2013; founding gift 2018; Maclay design 2019–21; fundraising from 2022; Groton approval June 2023; Phase 1 built 2024–25'],
+  ['Nightly fee for the bunkhouse', 'Not stated (open question 1)'],
+  ['Contact', 'mitoc-bunkhouse@mit.edu'],
 ];
 const W = [2300, 4460, 2600];
 const border = {style: BorderStyle.SINGLE, size: 4, color: 'BFBFBF'};
@@ -212,13 +231,13 @@ const cell = (t, w, head) => new TableCell({width: {size: w, type: WidthType.DXA
   shading: head ? {type: ShadingType.CLEAR, fill: 'E7E6E6', color: 'auto'} : undefined,
   children: [new Paragraph({children: [new TextRun({text: t, bold: !!head, size: 19})]})]});
 children.push(new Table({width: {size: 9360, type: WidthType.DXA}, columnWidths: W, rows: [
-  new TableRow({tableHeader: true, children: [cell('Fact', W[0], true), cell('What the site says now (and where)', W[1], true), cell('Agreed value', W[2], true)]}),
+  new TableRow({tableHeader: true, children: [cell('Fact', W[0], true), cell('What the website says now', W[1], true), cell('OK, or correction', W[2], true)]}),
   ...FACTS.map(([f, s]) => new TableRow({children: [cell(f, W[0]), cell(s, W[1]), cell('', W[2])]})),
 ]}));
 
 // ---------- Part 2: open questions ----------
 children.push(H1('Part 2. Open questions'));
-children.push(P('These came up in the website review and need an answer from the bunkhouse or fundraising committee. Please write the answer under each question.'));
+children.push(P('These are still open after the last review. Please write the answer under each question.'));
 QUESTIONS.forEach(([t, q], i) => {
   children.push(new Paragraph({keepNext: true, spacing: {before: 200, after: 60}, children: [new TextRun({text: `Q${i + 1}. ${t}`, bold: true})]}));
   children.push(new Paragraph({keepNext: true, children: [new TextRun(q)]}));
@@ -235,10 +254,11 @@ children.push(note('The big title area over the bunkhouse drawing, with the fund
 block('HERO-1', 'Header: main title', '_data/bunkhouse_settings.yml', 'hero_title', txt(S.hero_title));
 block('HERO-2', 'Header: subtitle', '_data/bunkhouse_settings.yml', 'hero_subtitle', txt(S.hero_subtitle));
 block('HERO-3', 'Header: second subtitle (overview page only)', '_data/bunkhouse_settings.yml', 'hero_tagline', txt(S.hero_tagline));
-const money = n => '$' + Number(n).toLocaleString('en-US');
 block('SET-raised', 'Thermometer: amount raised (updated by hand)', '_data/bunkhouse_settings.yml', 'donations_amount', txt(money(S.donations_amount)));
-block('SET-donors', 'Thermometer: number of donors, shown as "RAISED BY ___ PEOPLE"', '_data/bunkhouse_settings.yml', 'number_donors', txt(String(S.number_donors)));
-block('SET-goal', 'Thermometer: goal, shown as "Goal: ___"', '_data/bunkhouse_settings.yml', 'donations_goal', txt(money(S.donations_goal)));
+block('SET-donors', 'Thermometer: number of donors, shown as "RAISED AND PLEDGED BY ___ PEOPLE"', '_data/bunkhouse_settings.yml', 'number_donors', txt(String(S.number_donors)));
+block('SET-goal', 'Thermometer: goal, shown as "Goal: ___". The "$___ to go" next to it is worked out automatically.', '_data/bunkhouse_settings.yml', 'donations_goal', txt(money(S.donations_goal)));
+block('SET-asof', 'Thermometer: date shown as "As of ___" (update whenever the amounts change)', '_data/bunkhouse_settings.yml', 'donations_as_of', txt(String(S.donations_as_of)));
+block('HERO-note', 'Header: line under the thermometer on the overview page (other pages show only the date)', '_layouts/bunkhouse.html', '.donations-note', txt(`As of ${S.donations_as_of} · Gifts of every size count`));
 block('HERO-donate', 'Header: button label (links to the MIT giving form)', '_layouts/bunkhouse.html', '.bunkhouse-donate-button text', txt('Donate'));
 const amt = (S.donate_link.match(/amount=(\d+)/) || [])[1];
 block('SET-amount', 'Amount pre-filled on the MIT giving form when someone clicks Donate', '_data/bunkhouse_settings.yml', 'donate_link amount= parameter', txt(amt ? money(amt) : '(none)'));
@@ -248,7 +268,7 @@ S.menu.forEach(m => children.push(new Paragraph({numbering: {reference: 'bullets
 
 // B. Overview
 children.push(H2('B. Overview page (mitoc.mit.edu/camelot)'));
-children.push(note('Appears below the header. There are currently no section headings on this page.'));
+children.push(note('Appears below the header. Unheaded paragraphs first, then a headed section on funding, then a closing line.'));
 blocks(body('_pages/camelot/index.md')).forEach((b, i) =>
   block(`OV-${i + 1}`, `Overview page, paragraph ${i + 1}`, '_pages/camelot/index.md', `paragraph ${i + 1}`, [b]));
 
@@ -344,7 +364,7 @@ Packer.toBuffer(doc).then(fixUp).then(buf => {
   fs.writeFileSync(path.join(OUTDIR, 'bunkhouse-content-review.docx'), buf);
   fs.writeFileSync(path.join(OUTDIR, 'bunkhouse-content-map.json'), JSON.stringify({
     generated: ISO_DATE, source_commit: COMMIT + (DIRTY ? '+uncommitted' : ''), branch: BRANCH,
-    note: 'Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits.',
+    note: 'Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits. settings lists values in bunkhouse_settings.yml that appear in the text; edit those there, not in the page.',
     labels: manifest}, null, 2));
   console.log('labels:', manifest.length, 'comments:', comments.length);
 });

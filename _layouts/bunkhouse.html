@@ -18,7 +18,7 @@ layout: bunkhouse_base
       <strong class="donations-amount"
         >${{ settings.donations_amount | thousands_separated }}</strong
       >
-      <p>RAISED BY <strong>{{ settings.number_donors }}</strong> PEOPLE</p>
+      <p>RAISED AND PLEDGED BY <strong>{{ settings.number_donors }}</strong> PEOPLE</p>
       <div class="thermometer">
         {% assign goal_float = settings.donations_goal | times: 1.0 %}
         {% assign total_donations_float = settings.donations_amount | times: 1.0 %}
@@ -28,7 +28,14 @@ layout: bunkhouse_base
           style="width: {{progress_total | round: 2}}%"
         ></div>
       </div>
-      <p class="text-right">Goal: <strong>${{ settings.donations_goal | thousands_separated }}</strong></p>
+      {% assign to_go = settings.donations_goal | minus: settings.donations_amount %}
+      <p class="donations-goal-row">
+        {% if to_go > 0 %}<span><strong>${{ to_go | thousands_separated }}</strong> to go</span>{% endif %}
+        <span class="donations-goal">Goal: <strong>${{ settings.donations_goal | thousands_separated }}</strong></span>
+      </p>
+      <p class="donations-note">
+        As of {{ settings.donations_as_of }}{% if page.hero == 'full' %} · Gifts of every size count{% endif %}
+      </p>
     </div>
     <a href="{{ settings.donate_link }}" class="bunkhouse-donate-button">Donate</a>
   </div>

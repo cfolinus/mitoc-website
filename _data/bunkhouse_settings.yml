@@ -1,6 +1,9 @@
 # The fundId in donate_link must match facts.fund_number below.
 donate_link: &donate_link https://giving.mit.edu/form/?fundId=3892696&amount=1000
+# Thermometer: the whole campaign (Phases 1 and 2), including pledges.
+# Update donations_as_of whenever the amounts change.
 donations_amount: 468000
+donations_as_of: November 2026
 # Must match facts.total_cost below.
 donations_goal: 1300000
 # Key project facts, written once and inserted everywhere they appear:
