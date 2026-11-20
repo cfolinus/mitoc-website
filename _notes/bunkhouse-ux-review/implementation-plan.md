@@ -196,6 +196,7 @@ First add the newly agreed facts to `facts:` (`capacity_now`, `distance_to_bunkh
 
 *As built (2b):*
 - `donations_as_of` is in the settings. The layout shows "$X to go", worked out from the goal and the amount raised, and hides it once the goal is met. The "As of" line adds "Gifts of every size count" in the full hero only.
+- *Follow-up the maintainer asked for:* the label stays "RAISED BY ___ PEOPLE", not "raised and pledged", even though the total includes pledges. The overview section still says "given or pledged". "$X to go" and "Goal" are on separate lines.
 - The overview's new section is "## What the $1.3 million pays for", between OV-4 and the closing line. I put the donor-count sentence there rather than in the hero, because the hero already shows the count.
 - CSS fixes:
   - `.bunkhouse-body p { font-size: large }` was overriding the new note's size, so the note uses a more specific selector.

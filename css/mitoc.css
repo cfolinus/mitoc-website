@@ -249,7 +249,8 @@ p img {
 }
 
 .bunkhouse-banner-compact .donations-stats > .thermometer,
-.bunkhouse-banner-compact .donations-stats > .donations-goal-row,
+.bunkhouse-banner-compact .donations-stats > .donations-to-go,
+.bunkhouse-banner-compact .donations-stats > .donations-goal,
 .bunkhouse-banner-compact .donations-stats > .donations-note {
   flex-basis: 100%;
 }
@@ -293,16 +294,13 @@ p img {
   background: #d22630;
 }
 
-/* "$X to go" on the left, goal on the right, under the thermometer */
-.donations-goal-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
+/* "$X to go" and the goal, each on its own line under the thermometer */
+.donations-stats .donations-to-go {
   margin: 4px 0 0;
 }
 
-.donations-goal {
-  margin-left: auto;
+.donations-stats .donations-goal {
+  margin: 0;
 }
 
 .donations-stats .donations-note {

@@ -211,7 +211,7 @@ const FACTS = [
   ['What the total covers', 'Phases 1 and 2: parking lot, access trail and bridge, site prep, the bunkhouse, and design and project support (FAQ-cost-2)'],
   ['Phases', 'Phase 0: initial design (2019–21). Phase 1: parking lot, bridge, trail, and construction drawings (2022–25). Phase 2: the bunkhouse (2026–27). (FAQ-timeline-1)'],
   ['Phase 1 and Phase 2 amounts', `Phase 1: donors gave ${fx('phase1_raised')}. Phase 2: ${fx('phase2_cost')}.`],
-  ['Thermometer', `${money(S.donations_amount)} raised and pledged by ${S.number_donors} people, as of ${S.donations_as_of}, toward ${money(S.donations_goal)}. Counts the whole campaign, including pledges. Shows ${money(S.donations_goal - S.donations_amount)} to go.`],
+  ['Thermometer', `${money(S.donations_amount)} raised by ${S.number_donors} people, as of ${S.donations_as_of}, toward ${money(S.donations_goal)}. Counts the whole campaign, including pledges. Shows ${money(S.donations_goal - S.donations_amount)} to go.`],
   ['Funding needed before construction', `The full ${fx('total_cost')}`],
   ['Groundbreaking and completion', `Break ground in ${fx('groundbreaking')}; complete in ${fx('completion')}; one season, about May to November`],
   ['Existing cabin sleeps now', `${fx('capacity_now')} people (loft, living room, kitchen). Loft reopened after repair; not safe to sleep in within a few years.`],
@@ -255,7 +255,7 @@ block('HERO-1', 'Header: main title', '_data/bunkhouse_settings.yml', 'hero_titl
 block('HERO-2', 'Header: subtitle', '_data/bunkhouse_settings.yml', 'hero_subtitle', txt(S.hero_subtitle));
 block('HERO-3', 'Header: second subtitle (overview page only)', '_data/bunkhouse_settings.yml', 'hero_tagline', txt(S.hero_tagline));
 block('SET-raised', 'Thermometer: amount raised (updated by hand)', '_data/bunkhouse_settings.yml', 'donations_amount', txt(money(S.donations_amount)));
-block('SET-donors', 'Thermometer: number of donors, shown as "RAISED AND PLEDGED BY ___ PEOPLE"', '_data/bunkhouse_settings.yml', 'number_donors', txt(String(S.number_donors)));
+block('SET-donors', 'Thermometer: number of donors, shown as "RAISED BY ___ PEOPLE"', '_data/bunkhouse_settings.yml', 'number_donors', txt(String(S.number_donors)));
 block('SET-goal', 'Thermometer: goal, shown as "Goal: ___". The "$___ to go" next to it is worked out automatically.', '_data/bunkhouse_settings.yml', 'donations_goal', txt(money(S.donations_goal)));
 block('SET-asof', 'Thermometer: date shown as "As of ___" (update whenever the amounts change)', '_data/bunkhouse_settings.yml', 'donations_as_of', txt(String(S.donations_as_of)));
 block('HERO-note', 'Header: line under the thermometer on the overview page (other pages show only the date)', '_layouts/bunkhouse.html', '.donations-note', txt(`As of ${S.donations_as_of} · Gifts of every size count`));
