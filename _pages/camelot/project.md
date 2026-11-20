@@ -50,4 +50,4 @@ The bunkhouse will include a fire sprinkler system fed from a small cistern in t
 
 ---
 
-Have more questions? See the [FAQs](/camelot/faqs). Ready to help build the bunkhouse? [Donate]({{ site.data.bunkhouse_settings.donate_link }}).
+Have more questions? See the [FAQs](/camelot/faqs). Ready to help build the bunkhouse? [Donate]({{ site.data.bunkhouse_settings.donate_page }}).

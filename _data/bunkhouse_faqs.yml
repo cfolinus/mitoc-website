@@ -9,7 +9,8 @@
 #
 # Answers are Markdown. Liquid tags like {{ }} don't work inside data files, so use
 # placeholders instead, in questions or answers:
-#   %donate_link%   the donation URL from bunkhouse_settings.yml
+#   %donate_link%   the donation URL from bunkhouse_settings.yml (MIT's giving form)
+#   %donate_page%   the site's Donate page, /camelot/donate
 #   %total_cost%    any key under `facts:` in bunkhouse_settings.yml, written as %key%
 
 - id: why
@@ -67,16 +68,10 @@
 - id: donating
   title: How to donate
   questions:
-    - question: Is my donation to the Camelot Bunkhouse tax deductible?
+    - question: How can I donate?
+      old_ids: [is-my-donation-to-the-camelot-bunkhouse-tax-deductible, can-i-donate-to-the-bunkhouse-project-by-check]
       answer: |
-        Yes, if you **[donate](%donate_link%)** to contribute to the MIT Outing Club Camelot Cabin Fund, you will receive a statement from MIT at the end of the year documenting your tax deductible charitable contribution.
-
-    - question: Can I donate to the bunkhouse project by check?
-      answer: |
-        Yes, it is possible to donate by check!  Please make your check payable to MIT Fund %fund_number%, enclose the MIT [contribution form](https://giving.mit.edu/check), and mail your check to:
-        >Massachusetts Institute of Technology<br>
-        >P. O. Box 412926<br>
-        >Boston, MA 02241-2926
+        See our **[Donate page](%donate_page%)** for every way to give: online, by check, with employer matching, or with stock, an IRA, or a donor-advised fund. It also answers whether your gift is tax deductible.
 
 - id: timeline
   title: Timeline and construction

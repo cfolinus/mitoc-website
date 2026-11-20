@@ -1,5 +1,8 @@
 # The fundId in donate_link must match facts.fund_number below.
-donate_link: &donate_link https://giving.mit.edu/form/?fundId=3892696&amount=1000
+donate_link: https://giving.mit.edu/form/?fundId=3892696&amount=1000
+# Where every Donate button and the menu item go. That page's "Give online" button
+# opens donate_link (MIT's form).
+donate_page: &donate_page /camelot/donate
 # Thermometer: the whole campaign (Phases 1 and 2), including pledges.
 # Update donations_as_of whenever the amounts change.
 donations_amount: 468000
@@ -42,4 +45,4 @@ menu:
   - title: FAQs
     href: /camelot/faqs
   - title: Donate
-    href: *donate_link
+    href: *donate_page

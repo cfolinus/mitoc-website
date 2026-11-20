@@ -7,7 +7,7 @@ title: Frequently asked questions
   Questions and answers live in _data/bunkhouse_faqs.yml.
   Question headings are plain Markdown so kramdown generates the same
   anchor IDs as before (existing deep links keep working).
-  %donate_link% and %key% placeholders (one per key under `facts:` in
+  %donate_link%, %donate_page% and %key% placeholders (one per key under `facts:` in
   bunkhouse_settings.yml) are replaced in both questions and answers.
 {% endcomment %}
 {% assign settings = site.data.bunkhouse_settings %}
@@ -25,7 +25,7 @@ title: Frequently asked questions
 
 {% for q in group.questions %}
 {%- assign question = q.question -%}
-{%- assign answer = q.answer | replace: "%donate_link%", settings.donate_link -%}
+{%- assign answer = q.answer | replace: "%donate_link%", settings.donate_link | replace: "%donate_page%", settings.donate_page -%}
 {%- for fact in settings.facts -%}
   {%- assign token = "%" | append: fact[0] | append: "%" -%}
   {%- assign question = question | replace: token, fact[1] -%}

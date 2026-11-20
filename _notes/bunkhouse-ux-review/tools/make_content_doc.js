@@ -85,7 +85,7 @@ function addComment(labelId, text) {
 
 // ---------- inline markdown → runs ----------
 function inline(text, base = {}) {
-  text = expand(text.replace(/%donate_link%/g, S.donate_link)).replace(/<br\s*\/?>/g, '').replace(/---/g, '—').replace(/\s*\n\s*/g, ' ');
+  text = expand(text.replace(/%donate_link%/g, S.donate_link).replace(/%donate_page%/g, S.donate_page).replace(/\{:[^}]*\}/g, '')).replace(/<br\s*\/?>/g, '').replace(/---/g, '—').replace(/\s*\n\s*/g, ' ');
   const out = [];
   const re = /\*\*(.+?)\*\*|\[([^\]]+)\]\(([^)]+)\)/g;
   let last = 0, m;
@@ -167,8 +167,8 @@ const QUESTIONS = [
   ['Phase 0 and the $1.3M', `Does the ${FACTS_SET.total_cost} include the initial design work with Maclay Architects (Phase 0, 2019–21)? The site now says it covers Phases 1 and 2. Phase 1 (${FACTS_SET.phase1_raised}) plus Phase 2 (${FACTS_SET.phase2_cost}) adds up to the total, which suggests Phase 0 was paid for separately.`, 'FAQ-cost-2'],
   ['If the goal is not reached', `The site says the full ${FACTS_SET.total_cost} is needed before groundbreaking in ${FACTS_SET.groundbreaking}. What happens if it isn't raised by then: does construction move to 2028? What happens if bids come in above the estimate?`, 'FAQ-timeline-2'],
   ['Phase 1 donors', `The site says donors gave ${FACTS_SET.phase1_raised} for Phase 1. Was that the amount raised, or Phase 1's final cost? The overview thanks Phase 1 donors as a group. Should they be thanked by name anywhere?`, 'SET-raised'],
-  ['Giving options', `Which non-cash and pledge options (stock, donor-advised funds, IRA distributions, multi-year pledges) does MIT support for fund ${FACTS_SET.fund_number}? Who is the named contact for larger gifts? Is there any donor recognition or naming policy?`, 'FAQ-donating'],
-  ['Matching', 'What should employer-matching donors enter in their company\'s matching portal (recipient, designation)? Can MIT provide a link for this?', 'FAQ-donating-1'],
+  ['Giving options', `Which non-cash and pledge options (stock, donor-advised funds, IRA distributions, multi-year pledges) does MIT support for fund ${FACTS_SET.fund_number}? Who is the named contact for larger gifts? Is there any donor recognition or naming policy?`, 'DON-h-3'],
+  ['Matching', 'What should employer-matching donors enter in their company\'s matching portal (recipient, designation)? Can MIT provide a link for this?', 'DON-h-1'],
   ['Photos and data', 'Are there photos of the finished Phase 1 work (bridge, parking lot, trail)? Can the cabin managers provide usage figures (visitor-nights per year, trips, capacity before and after the loft closure)?', 'OV-3'],
   ['Volunteering', 'What in-person or skills-based help is the project actually looking for?', 'FAQ-timeline-5'],
   ['Gift amount', 'The online form opens with $1,000 already filled in. Keep that, lower it, or leave the amount blank?', 'SET-amount'],
@@ -259,7 +259,7 @@ block('SET-goal', 'Thermometer: goal, shown as "Goal: ___". The "$___ to go" nex
 block('SET-asof', 'Thermometer: date shown as "As of ___" (update whenever the amounts change)', '_data/bunkhouse_settings.yml', 'donations_as_of', txt(String(S.donations_as_of)));
 block('HERO-note', 'Header: line under the thermometer on the overview page (other pages show only the date)', '_layouts/bunkhouse.html', '.donations-note', txt(`As of ${S.donations_as_of} · Gifts of every size count`));
 block('SET-share', 'Link preview text: shown when a bunkhouse page is shared in Slack, email, or social posts, and often under the page in search results', '_data/bunkhouse_settings.yml', 'share_description', txt(S.share_description));
-block('HERO-donate', 'Header: button label (links to the MIT giving form)', '_layouts/bunkhouse.html', '.bunkhouse-donate-button text', txt('Donate'));
+block('HERO-donate', 'Header: button label (opens the Donate page; on the Donate page itself it reads "Give online" and opens the MIT giving form)', '_layouts/bunkhouse.html', '.bunkhouse-donate-button text', txt('Donate'));
 const amt = (S.donate_link.match(/amount=(\d+)/) || [])[1];
 block('SET-amount', 'Amount pre-filled on the MIT giving form when someone clicks Donate', '_data/bunkhouse_settings.yml', 'donate_link amount= parameter', txt(amt ? money(amt) : '(none)'));
 children.push(label('NAV', 'Menu items at the top of every bunkhouse page, in order', '_data/bunkhouse_settings.yml', 'menu[].title',
@@ -283,6 +283,16 @@ blocks(body('_pages/camelot/project.md')).forEach(b => {
   else if (b.type === 'img') { im++; block(`PR-img-${im}`, `Project page, image ${im}`, '_pages/camelot/project.md', `<img> #${im}`, [b]); }
   else if (b.type === 'caption') block(`PR-cap-${im}`, `Project page, caption for image ${im}`, '_pages/camelot/project.md', `<figcaption> #${im}`, [b]);
   else { pn++; block(`PR-${pn}`, `Project page, paragraph ${pn}`, '_pages/camelot/project.md', `paragraph ${pn}`, [b]); }
+});
+
+// C2. Donate page
+children.push(H2('C2. Donate page (mitoc.mit.edu/camelot/donate)'));
+children.push(note('Every Donate button on the site opens this page. Its first item is the "Give online" button, which opens MIT\'s giving form. The page title, "Ways to give", is followed by these sections.'));
+block('DON-title', 'Donate page title (page heading and browser tab title)', '_pages/camelot/donate.md', 'front matter title', txt('Ways to give'));
+let dp = 0, dh = 0;
+blocks(body('_pages/camelot/donate.md')).forEach(b => {
+  if (b.type === 'h') { dh++; block(`DON-h-${dh}`, `Donate page, section heading ${dh}`, '_pages/camelot/donate.md', `## heading #${dh}`, [b]); }
+  else { dp++; block(`DON-${dp}`, `Donate page, ${dp === 1 ? 'button label' : 'paragraph ' + dp}`, '_pages/camelot/donate.md', `paragraph ${dp}`, [b]); }
 });
 
 // D. FAQ
@@ -311,7 +321,7 @@ const clean = s => s.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
 block('BAN-title', 'Banner: title', '_includes/camelot_banner.html', '<h3>', txt(clean(B.match(/<h3>([\s\S]*?)<\/h3>/)[1])));
 [...B.matchAll(/<p>([\s\S]*?)<\/p>/g)].forEach((m, i) =>
   block(`BAN-${i + 1}`, `Banner: paragraph ${i + 1}`, '_includes/camelot_banner.html', `<p> #${i + 1}`, txt(clean(m[1]))));
-block('BAN-links', 'Banner: button and link labels (shown both collapsed and expanded)', '_includes/camelot_banner.html', 'links-box and camelot-banner-actions anchors', txt('Donate  |  Learn more'));
+block('BAN-links', 'Banner: button and link labels (shown both collapsed and expanded). Donate opens the Donate page; Learn more opens the bunkhouse overview', '_includes/camelot_banner.html', 'links-box and camelot-banner-actions anchors', txt('Donate  |  Learn more'));
 
 // F. Rentals page
 children.push(H2('F. Related text on the Camelot rentals page (mitoc.mit.edu/rentals/camelot)'));

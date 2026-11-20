@@ -3,6 +3,9 @@ layout: bunkhouse_base
 ---
 
 {% assign settings = site.data.bunkhouse_settings %}
+{% assign on_donate_page = false %}
+{% assign current_url = page.url | remove: '.html' %}
+{% if current_url == settings.donate_page %}{% assign on_donate_page = true %}{% endif %}
 {% comment %}
   Pages with `hero: full` in their front matter (the overview) get the large
   hero. Every other page gets a compact strip with the same facts in one row.
@@ -35,19 +38,26 @@ layout: bunkhouse_base
         As of {{ settings.donations_as_of }}{% if page.hero == 'full' %} · Gifts of every size count{% endif %}
       </p>
     </div>
-    <a href="{{ settings.donate_link }}" class="bunkhouse-donate-button">Donate</a>
+    {% comment %} On the Donate page the hero button goes straight to MIT's form. {% endcomment %}
+    {% if on_donate_page %}
+      <a href="{{ settings.donate_link }}" class="bunkhouse-donate-button">Give online</a>
+    {% else %}
+      <a href="{{ settings.donate_page }}" class="bunkhouse-donate-button">Donate</a>
+    {% endif %}
   </div>
 </div>
 <div class="container bunkhouse-wrapper">
   <div class="bunkhouse-container">
     {% if page.title and page.hero != 'full' %}<h1 class="bunkhouse-page-title">{{ page.title }}</h1>{% endif %}
     {{content}}
+    {% unless on_donate_page %}
     <div class="cbox small-screen-only">
       <a
-        href="{{site.data.bunkhouse_settings.donate_link}}"
+        href="{{ settings.donate_page }}"
         class="bunkhouse-donate-button"
         >Donate</a
       >
     </div>
+    {% endunless %}
   </div>
 </div>
