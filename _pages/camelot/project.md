@@ -4,6 +4,14 @@ layout: bunkhouse
 title: Project details
 ---
 
+* [Location](#location-on-the-property)
+* [Layout](#layout)
+* [Toilets and water](#toilets-and-water)
+* [Heating](#heating-and-insulation)
+* [Structure](#structure)
+* [Fire safety](#fire-safety)
+{: .faq-jump-list}
+
 ## Location on the property
 
 The new bunkhouse will be located behind the existing cabin, {{ site.data.bunkhouse_settings.facts.distance_to_bunkhouse }} up the hill. This is close enough that underground electrical wiring will be cost-effective, but far enough that sound from the cabin and campfire won’t carry. The bunkhouse will be farther from the property line than the existing cabin.
@@ -15,7 +23,7 @@ The new bunkhouse will be located behind the existing cabin, {{ site.data.bunkho
 
 ## Layout
 
-The bunkhouse will have {{ site.data.bunkhouse_settings.facts.room_count }} sleeping rooms which accommodate {{ site.data.bunkhouse_settings.facts.room_size }} people each, so each room can hold a standard Winter School trip. A large central hallway contains ample space for gear storage for {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people. The floor plan also includes a covered deck area.
+The bunkhouse will have {{ site.data.bunkhouse_settings.facts.room_count }} sleeping rooms which accommodate {{ site.data.bunkhouse_settings.facts.room_size }} people each, so each room can hold a standard Winter School trip. A large central hallway contains ample space for gear storage for {{ site.data.bunkhouse_settings.facts.bunkhouse_capacity }} people, including hooks, cubbies, and benches. The floor plan also includes a covered deck area. In MITOC tradition, we plan to decorate the walls in part with antique MITOC rental gear such as beavertail snowshoes and old skis!
 
 <figure class="bunkhouse-figure">
   <img src="/images/bunkhouse/bunkhouse-floor-plan.png" alt="Bunkhouse floor plan" width="400"/>
@@ -24,7 +32,7 @@ The bunkhouse will have {{ site.data.bunkhouse_settings.facts.room_count }} slee
 
 ## Toilets and water
 
-The bunkhouse will not have running water. Three composting toilets will be accessed from the covered porch (so that they are accessible to campers even when the bunkhouse is closed). The composter beneath the toilets will be located in a small insulated basement so that it remains warm enough to compost year round.
+Like the existing Camelot cabin, the bunkhouse will not have running water. Three composting toilets will be accessed from the covered porch (so that they are accessible to campers even when the bunkhouse is closed). The composter beneath the toilets will be located in a small insulated basement so that it remains warm enough to compost year round.
 
 <figure class="bunkhouse-figure">
   <img src="/images/bunkhouse/bunkhouse-section.png" alt="Bunkhouse cross section" width="400"/>
@@ -33,7 +41,9 @@ The bunkhouse will not have running water. Three composting toilets will be acce
 
 ## Heating and insulation
 
-The bunkhouse will be tightly insulated and heating will not be required for most groups. Resistive electric heat will be provided to assist with initial heat-up on the coldest nights. Resistive heat makes sense for this application due to the infrequent demand and its high reliability and low cost.
+The bunkhouse will be tightly insulated and heating will not be required for most groups. Resistive electric heat will be provided to assist with initial heat-up on the coldest nights, but the energy-efficient structure means the bunkhouse won’t require much heat to stay warm once in use. Resistive heat makes sense for this application due to the infrequent demand and its high reliability and low cost.
+
+MITOC’s current cabins (Camelot and Intervale) both require special training, in large part because of their heating (a wood stove and a finicky gas furnace, respectively). The bunkhouse’s electric heating alleviates these training and safety concerns.
 
 ## Structure
 
@@ -50,4 +60,6 @@ The bunkhouse will include a fire sprinkler system fed from a small cistern in t
 
 ---
 
-Have more questions? See the [FAQs](/camelot/faqs). Ready to help build the bunkhouse? [Donate]({{ site.data.bunkhouse_settings.donate_page }}).
+Have more questions? See the [FAQs](/camelot/faqs).
+
+Ready to help build the bunkhouse? [Donate]({{ site.data.bunkhouse_settings.donate_page }}).
