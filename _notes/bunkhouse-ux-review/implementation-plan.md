@@ -1,6 +1,6 @@
 # Camelot bunkhouse pages: implementation plan
 
-*Updated 2026-11-20 (Stage 4 built). This plan turns [bunkhouse-ux-review.md](bunkhouse-ux-review.md) into batches. R1–R16 are from the review's Part 2, section 6; R17–R21 are from Part 1, section G. The web team's decisions (review section H) are folded in. Stages 0–4 are done; their as-built notes are in the **Appendix** at the end.*
+*Updated 2026-11-22 (round-2 answers applied). This plan turns [bunkhouse-ux-review.md](bunkhouse-ux-review.md) into batches. R1–R16 are from the review's Part 2, section 6; R17–R21 are from Part 1, section G. The web team's decisions (review section H) are folded in. Stages 0–4 are done; their as-built notes are in the **Appendix** at the end.*
 
 ## Where things stand
 
@@ -8,7 +8,9 @@
 - **The web team has decided the new structure** (review section H): a short Home page, an "About" page at `/camelot/about`, a Donate page that every Donate button opens, "raised by" wording, and Updates owned by the web team.
 - **Round-2 doc sent to the committee** (10 open questions). The copy as sent is saved as `bunkhouse-content-review-2026-11-20-sent.docx` and `bunkhouse-content-map-2026-11-20-sent.json`; map returned OV-n, FAQ-donating and FAQ-donating-1 labels through that saved map. The working doc has since been regenerated, so Q5 and Q6 are now attached to DON-h-3 and DON-h-1.
 - **Stage 4 is built locally.** Round-2 labels the committee uses map as: OV-1 to OV-4 → HOME-n and AB-n (the old overview text is now About; see `bunkhouse-content-map-2026-11-20-sent.json` for each label's source paragraph); Q7 (photos) is attached to HOME-3.
-- **Next to build:** Stage 5a (Updates setup). It doesn't wait on the committee; 5b waits on Phase 1 photos.
+- **Round-2 answers came back 2026-11-22** (saved as `bunkhouse-content-review-2026-11-22-committee.docx`) and are applied: the committee's text edits (commit `a012eb3`), and 6a and 6e (`b3e541f`). The doc and map are regenerated with no open questions (`3eea03f`). See **Round 2 as built** below.
+- **Look and feel (2026-11-22, maintainer's request, `a3495de`):** forest green replaces the reds, text links are bold and a darker spring green (`#14804a`), and the compact header on subpages is a solid green band with no drawing.
+- **Next to build:** Stage 5a (Updates setup). 5b waits on Phase 1 photos, which the committee will provide later. 6d (usage numbers) is optional: the committee gave one figure (about 1,000 person-nights a year), now in FAQ cost-3.
 
 | Stage | Batches | Status | Waits on |
 |---|---|---|---|
@@ -16,9 +18,23 @@
 | 3 | 3a page identity (R20) · 3b share previews (R21) · 3c minimal Donate page (R19) | ✅ Done (local) | — |
 | 4 | 4a About (R18) · 4b new Home (R17, R11) · 4c FAQ reshuffle | ✅ Done (local) | — |
 | 5 | 5a Updates setup · 5b posts from the last two years · 5c upkeep (R6) | 5a ready; 5b waits on photos | Phase 1 photos (Q7); the web team writes the posts |
-| 6 | 6a full Donate page · 6b Get involved · 6c missed-goal answer · 6d usage numbers · 6e small fill-ins | Waiting | The committee's round-2 answers |
+| 6 | 6a full Donate page · 6b Get involved · 6c missed-goal answer · 6d usage numbers · 6e small fill-ins | ✅ 6a, 6e done (local). 6b and 6c dropped by the committee. 6d partly covered. | — |
 
 Before starting new work, read the **Handoff notes** near the end of this file.
+
+## Round 2 as built (2026-11-22)
+
+**Committee answers and maintainer decisions**
+- Q1 fee: about $10/night (new fact `nightly_fee`). The committee's usage and cost-per-night paragraph is in FAQ cost-3; the maintainer changed the hostel price to "from about $40".
+- Q2: Phase 0 was funded before the campaign and isn't in the $1.3M. This is now said in FAQ cost-2 and the phases answer.
+- Q3: don't address a missed goal. **6c is dropped.**
+- Q4: Phase 1 raised about $400K. The maintainer confirmed Phase 2 is $0.9M (`phase2_cost: "about $900,000"`), so the two add to $1.3M. The $468K thermometer includes the Phase 1 money. Don't thank Phase 1 donors by name.
+- Q5 and Q6: the Donate page links to https://giving.mit.edu/ways and https://giving.mit.edu/matching-gifts, and names Lucas Ehinger and Greg Wallace as contacts. Lucas is *not* named in About's team section (maintainer). No naming policy.
+- Q7: photos later. Q8: avoid volunteering text, so **6b is dropped** and the rentals page's cabin-helpers sentence is removed. Q9: preset $500. Q10: parking text OK.
+
+**Text edits applied:** shared summary (SUM-1 and SUM-2), Home, About (new loft and code paragraph; "The bunkhouse vision" `#vision` with bold lead-ins, the committee's choice; timeline; "Costs" `#funding`; "Bunkhouse team" `#leaders`), Project details (jump buttons reuse `.faq-jump-list`; new detail), FAQ link text. The maintainer approved "mechanical, electrical, and plumbing (MEP) engineers", the PR-4 fixes, and trimming The plan's duplicated sentence. "See the full design" was dropped from The plan, because the vision section now ends with a link to Project details.
+
+**Still unchanged, and could be revisited:** FAQ "Will students be involved in construction?" still says "where possible" (the committee left it alone). FAQ why-2 and why-5 repeat About's loft and code paragraph.
 
 ## Target structure
 
