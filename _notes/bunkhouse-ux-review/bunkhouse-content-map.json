@@ -1,6 +1,6 @@
 {
   "generated": "2026-11-22",
-  "source_commit": "b3e541f",
+  "source_commit": "5846d39",
   "branch": "bunkhouse-edits",
   "note": "Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits. settings lists values in bunkhouse_settings.yml that appear in the text; edit those there, not in the page.",
   "labels": [
@@ -171,7 +171,7 @@
       "where": "Home page, paragraph 6",
       "file": "_pages/camelot/index.md",
       "locator": "paragraph 6",
-      "snapshot": "[Donate](/camelot/donate){: .bunkhouse-give-button}",
+      "snapshot": "[Donate](/camelot/donate){: .bunkhouse-give-button .bunkhouse-give-button-small}",
       "settings": [
         "bunkhouse_settings.yml donate_page"
       ]
@@ -698,7 +698,7 @@
       "where": "Donate page, paragraph 2",
       "file": "_pages/camelot/donate.md",
       "locator": "paragraph 2",
-      "snapshot": "Gifts of every size count."
+      "snapshot": "Gifts of every size count, and construction will be funded entirely by donations."
     },
     {
       "id": "DON-h-1",
