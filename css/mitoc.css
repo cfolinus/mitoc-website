@@ -54,8 +54,31 @@ p img {
   justify-content: center;
 }
 
+/* Bunkhouse colors. The link green is a darker spring green: pure spring green
+   (#00ff7f) is unreadable on white, and this one passes WCAG AA (about 5:1). */
+:root {
+  --bunkhouse-green: #2e6b30;      /* forest green: buttons, bars, headings */
+  --bunkhouse-green-dark: #1f4d22; /* borders and hover */
+  --bunkhouse-link: #14804a;       /* text links */
+}
+
 .bunkhouse-body {
   padding-top: 50px;
+}
+
+/* Text links in bunkhouse page content: green and bold. Links with a class
+   (buttons) style themselves; the FAQ jump pills override this further down. */
+.bunkhouse-container a:not([class]),
+.bunkhouse-container a.faq-back-to-top {
+  color: var(--bunkhouse-link);
+  font-weight: bold;
+}
+
+.bunkhouse-container a:not([class]):hover,
+.bunkhouse-container a:not([class]):focus,
+.bunkhouse-container a.faq-back-to-top:hover,
+.bunkhouse-container a.faq-back-to-top:focus {
+  color: var(--bunkhouse-green-dark);
 }
 
 .bunkhouse-body p,
@@ -218,13 +241,26 @@ p img {
   }
 }
 
-/* Compact strip: every other bunkhouse page */
+/* Compact strip: every other bunkhouse page. A solid forest-green band with
+   white titles and a white card for the thermometer; no drawing. */
 .bunkhouse-banner-compact {
   flex-direction: column;
   justify-content: center;
   gap: 8px;
-  padding: 10px 15px;
-  background-position-y: 45%;
+  padding: 14px 15px;
+  background-image: none;
+  background-color: var(--bunkhouse-green);
+}
+
+.bunkhouse-banner-compact h1,
+.bunkhouse-banner-compact h2 {
+  background: none;
+  color: #fff;
+}
+
+.bunkhouse-banner-compact .donations-block {
+  background: #fff;
+  border-radius: 6px;
 }
 
 .bunkhouse-banner-compact .bunkhouse-banner-titles {
@@ -296,7 +332,7 @@ p img {
   .bunkhouse-banner-compact {
     flex-direction: row;
     gap: 40px;
-    padding: 16px 15px;
+    padding: 20px 15px;
   }
   .bunkhouse-banner-compact h1 {
     font-size: 3.6rem;
@@ -316,7 +352,7 @@ p img {
 }
 
 .donation-progress {
-  background: #d22630;
+  background: var(--bunkhouse-green);
 }
 
 /* "$X to go" and the goal, each on its own line under the thermometer */
@@ -358,8 +394,8 @@ p img {
   font-weight: 600;
   opacity: 0.93;
   padding: 0.5625rem 0.75rem;
-  background: #d22630;
-  border-bottom: 2px solid #a41d35;
+  background: var(--bunkhouse-green);
+  border-bottom: 2px solid var(--bunkhouse-green-dark);
   border-radius: 30px;
   color: white;
   padding: 0.5625rem 0.75rem;
@@ -399,8 +435,8 @@ p img {
   margin: 10px 0 8px;
   padding: 16px 24px;
   border-radius: 40px;
-  background: #d22630;
-  border-bottom: 2px solid #a41d35;
+  background: var(--bunkhouse-green);
+  border-bottom: 2px solid var(--bunkhouse-green-dark);
   color: #fff;
   font-size: 28px;
   font-weight: bold;
@@ -408,7 +444,7 @@ p img {
   text-decoration: none;
 }
 .bunkhouse-container a.bunkhouse-give-button:hover {
-  background: #a41d35;
+  background: var(--bunkhouse-green-dark);
   color: #fff;
 }
 .bunkhouse-body .bunkhouse-container p.bunkhouse-give-note {
@@ -425,19 +461,20 @@ p img {
   margin: 0 0 30px;
 }
 
-.faq-jump-list a {
+.bunkhouse-container .faq-jump-list a {
   display: inline-block;
+  font-weight: normal;
   padding: 10px 16px; /* ~44px tall tap target */
-  border: 1px solid #d22630;
+  border: 1px solid var(--bunkhouse-green);
   border-radius: 30px;
-  color: #a41d35;
+  color: var(--bunkhouse-green-dark);
   font-size: large;
   line-height: 1.3;
 }
 
-.faq-jump-list a:hover,
-.faq-jump-list a:focus {
-  background: #d22630;
+.bunkhouse-container .faq-jump-list a:hover,
+.bunkhouse-container .faq-jump-list a:focus {
+  background: var(--bunkhouse-green);
   color: white;
   text-decoration: none;
 }
@@ -445,7 +482,7 @@ p img {
 .faq-group-heading {
   margin: 56px 0 8px;
   padding: 10px 14px;
-  background: #d22630;
+  background: var(--bunkhouse-green);
   color: white;
   font-size: 3rem;
   font-weight: 700;
@@ -455,7 +492,7 @@ p img {
 .faq-question {
   margin: 28px 0 6px;
   padding-left: 12px;
-  border-left: 4px solid #d22630;
+  border-left: 4px solid var(--bunkhouse-green);
   font-size: 2.1rem;
   font-weight: 600;
   line-height: 1.3;
