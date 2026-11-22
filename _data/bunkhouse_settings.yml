@@ -1,5 +1,5 @@
 # The fundId in donate_link must match facts.fund_number below.
-donate_link: https://giving.mit.edu/form/?fundId=3892696&amount=1000
+donate_link: https://giving.mit.edu/form/?fundId=3892696&amount=500
 # Where every Donate button and the menu item go. That page's "Give online" button
 # opens donate_link (MIT's form).
 donate_page: &donate_page /camelot/donate
@@ -25,10 +25,11 @@ facts:
   parking_spaces: "20"
   groundbreaking: "late spring 2027"
   completion: "fall 2027"
-  phase1_raised: "about $300,000"
-  phase2_cost: "about $1 million"
+  phase1_raised: "about $400,000"
+  phase2_cost: "about $900,000"
   fund_number: "3892696"
   drive_time: "about 2.5 hours"
+  nightly_fee: "about $10"
 number_donors: 314
 # Wording taken from the committee's own text. Shown on Home, About and (what_is_camelot)
 # the homepage banner. Write facts as %key% (see facts: above). Insert with:

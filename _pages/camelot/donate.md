@@ -11,7 +11,7 @@ Gifts of every size count.
 
 ## Double your gift with employer matching
 
-Many employers match charitable gifts. Gifts to the bunkhouse go to MIT's "MIT Outing Club Camelot Cabin Fund" (fund {{ site.data.bunkhouse_settings.facts.fund_number }}), so in your employer's matching portal, search for Massachusetts Institute of Technology as the recipient.
+Roughly 15 percent of MIT alumni work for companies that match charitable gifts. [Look up your company](https://giving.mit.edu/matching-gifts) to see whether it matches gifts to MIT and how to request a match. Gifts to the bunkhouse go to MIT's "MIT Outing Club Camelot Cabin Fund" (fund {{ site.data.bunkhouse_settings.facts.fund_number }}).
 
 ## By check
 
@@ -23,7 +23,7 @@ Please make your check payable to MIT Fund {{ site.data.bunkhouse_settings.facts
 
 ## Stock, donor-advised funds, IRA gifts, pledges, and larger gifts
 
-To give stock, give from a donor-advised fund, make an IRA gift, make a pledge, or talk about a larger gift, email [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu) and a member of the committee will reply.
+For stock, donor-advised funds, IRA gifts, multi-year pledges, and other options, see [MIT's ways to give](https://giving.mit.edu/ways). To talk about a larger gift, or for help directing your gift to the bunkhouse, email Lucas Ehinger and Greg Wallace at [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu).
 
 ## Is my gift tax deductible?
 

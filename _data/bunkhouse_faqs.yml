@@ -61,9 +61,13 @@
         * Construction of the bunkhouse itself.
         * Design and project support from architects, structural and geotechnical engineers, MIT Facilities, and others.
 
+        The initial design work with Maclay Architects (Phase 0, 2019–2021) was funded and completed before the fundraising campaign launched, so it isn't part of the %total_cost%.
+
     - question: How will the bunkhouse be funded?
       answer: |
-        Construction of the bunkhouse will be fully funded by donations. Once completed, ongoing maintenance of the bunkhouse will be funded by modest user fees, in accordance with MITOC’s current practices.
+        Construction of the bunkhouse will be fully funded by donations. Once completed, ongoing maintenance of the bunkhouse will be funded by user fees, in accordance with MITOC’s current practices. We anticipate charging %nightly_fee% per person per night, in line with the current cabin fee.
+
+        Camelot sees roughly 1,000 person-nights of use each year, about half of them from circuses alone. Spread over a 100-year lifespan, a $1 million bunkhouse works out to about $10 per person per night: the same as today’s cabin fee, and well below a bunk at a White Mountains hostel (from about $40) or a Randolph Mountain Club cabin ($30–$50). Unlike those, the bunkhouse will be reserved for the MITOC community.
 
 - id: donating
   title: How to donate
@@ -78,7 +82,7 @@
   questions:
     - question: What are the phases of the project?
       answer: |
-        * **Phase 0: design (2019--2021).** MITOC worked with Maclay Architects on the initial bunkhouse design.
+        * **Phase 0: design (2019--2021).** MITOC worked with Maclay Architects on the initial bunkhouse design. This was funded and completed before the fundraising campaign launched.
         * **Phase 1: site work (2022--2025).** Fundraising from 2022 to 2024 raised %phase1_raised%. In 2024 and 2025 we built the new parking lot, bridge, and access trail, and completed the final construction drawings for the bunkhouse.
         * **Phase 2: the bunkhouse (2026--2027).** We're raising %phase2_cost% to build the bunkhouse itself, breaking ground in %groundbreaking% and finishing in %completion%.
 
