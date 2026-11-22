@@ -707,6 +707,45 @@ details[open] summary::before {
   margin-bottom: 0;
 }
 
+/* Bunkhouse navbar: dark forest green instead of Bootstrap's black. Darker than the
+   compact header strip below it so the two read as separate bars. Main site unchanged. */
+.navbar-inverse.bunkhouse-navbar {
+  background-color: var(--bunkhouse-green-dark);
+  border-color: #163a19;
+}
+
+.navbar-inverse.bunkhouse-navbar .navbar-brand,
+.navbar-inverse.bunkhouse-navbar .navbar-nav > li > a {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navbar-inverse.bunkhouse-navbar .navbar-brand:hover,
+.navbar-inverse.bunkhouse-navbar .navbar-brand:focus,
+.navbar-inverse.bunkhouse-navbar .navbar-nav > li > a:hover,
+.navbar-inverse.bunkhouse-navbar .navbar-nav > li > a:focus {
+  color: #fff;
+}
+
+.navbar-inverse.bunkhouse-navbar .navbar-nav > .active > a,
+.navbar-inverse.bunkhouse-navbar .navbar-nav > .active > a:hover,
+.navbar-inverse.bunkhouse-navbar .navbar-nav > .active > a:focus {
+  color: #fff;
+  background-color: #163a19;
+}
+
+.navbar-inverse.bunkhouse-navbar .navbar-toggle {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+
+.navbar-inverse.bunkhouse-navbar .navbar-toggle:hover,
+.navbar-inverse.bunkhouse-navbar .navbar-toggle:focus {
+  background-color: #163a19;
+}
+
+.navbar-inverse.bunkhouse-navbar .navbar-collapse {
+  border-color: #163a19;
+}
+
 .camelot-banner .links-box {
   text-align: center;
 }
