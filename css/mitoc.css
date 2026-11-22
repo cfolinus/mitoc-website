@@ -125,9 +125,27 @@ p img {
   background-position-y: 34%;
   background-position-x: 50%;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  align-items: stretch;
   position: relative;
   margin-bottom: 1rem;
+}
+
+/* Inner Bootstrap container, so the hero text lines up with the navbar brand.
+   Its clearfix pseudo-elements would become flex items, so turn them off. */
+.bunkhouse-banner-inner {
+  display: flex;
+}
+.bunkhouse-banner-inner::before,
+.bunkhouse-banner-inner::after {
+  display: none;
+}
+/* Below 768px Bootstrap gives .container no width, and its auto margins would
+   shrink it to fit and center it; make it full width instead. */
+@media (max-width: 767px) {
+  .bunkhouse-banner-inner {
+    width: 100%;
+  }
 }
 
 .bunkhouse-banner h1,
@@ -147,7 +165,7 @@ p img {
 .bunkhouse-banner h3 {
   color: #151515;
   padding: 2px 10px;
-  text-align: center;
+  text-align: left;
 }
 
 .bunkhouse-banner h1,
@@ -159,7 +177,7 @@ p img {
 .bunkhouse-banner-titles {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 /* Subtitle sits under the title, lined up with its left edge */
@@ -171,11 +189,23 @@ p img {
   display: block;
 }
 
-/* Full hero: overview page only (front matter `hero: full`) */
+/* Full hero: overview page only (front matter `hero: full`). Everything is
+   left-aligned; the title boxes are pulled left by their padding so the text
+   itself lines up with the navbar brand. */
 .bunkhouse-banner-full {
-  flex-direction: column;
   justify-content: center;
-  padding: 20px 15px;
+  padding: 20px 0;
+}
+
+.bunkhouse-banner-full .bunkhouse-banner-inner {
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.bunkhouse-banner-full h1,
+.bunkhouse-banner-full h2,
+.bunkhouse-banner-full h3 {
+  margin-left: -10px !important;
 }
 
 .bunkhouse-banner-full h1 {
@@ -215,7 +245,7 @@ p img {
 @media (min-width: 768px) {
   .bunkhouse-banner-full {
     min-height: 57vh;
-    padding: 30px 15px;
+    padding: 30px 0;
   }
   .bunkhouse-banner-full h1 {
     font-size: 6rem;
@@ -244,18 +274,22 @@ p img {
 /* Compact strip: every other bunkhouse page. A solid forest-green band with
    white titles and a white card for the thermometer; no drawing. */
 .bunkhouse-banner-compact {
-  flex-direction: column;
   justify-content: center;
-  gap: 8px;
-  padding: 14px 15px;
+  padding: 14px 0;
   background-image: none;
   background-color: var(--bunkhouse-green);
+}
+
+.bunkhouse-banner-compact .bunkhouse-banner-inner {
+  flex-direction: column;
+  gap: 8px;
 }
 
 .bunkhouse-banner-compact h1,
 .bunkhouse-banner-compact h2 {
   background: none;
   color: #fff;
+  padding-left: 0;
 }
 
 .bunkhouse-banner-compact .donations-block {
@@ -330,9 +364,13 @@ p img {
 
 @media (min-width: 768px) {
   .bunkhouse-banner-compact {
+    padding: 20px 0;
+  }
+  .bunkhouse-banner-compact .bunkhouse-banner-inner {
     flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     gap: 40px;
-    padding: 20px 15px;
   }
   .bunkhouse-banner-compact h1 {
     font-size: 3.6rem;
@@ -392,7 +430,6 @@ p img {
 
 .bunkhouse-donate-button {
   font-weight: 600;
-  opacity: 0.93;
   padding: 0.5625rem 0.75rem;
   background: var(--bunkhouse-green);
   border-bottom: 2px solid var(--bunkhouse-green-dark);
@@ -402,8 +439,11 @@ p img {
   margin-bottom: 20px;
 }
 
-.bunkhouse-donate-button:hover {
-  text-decoration: underline;
+.bunkhouse-donate-button:hover,
+.bunkhouse-donate-button:focus {
+  background: var(--bunkhouse-green-dark);
+  color: #fff;
+  text-decoration: none;
 }
 
 @media (min-width: 800px) {
@@ -422,28 +462,52 @@ p img {
   scroll-margin-top: 70px;
 }
 
-/* Page title under the compact strip: between the strip and the h2 headings */
+/* Page title under the compact strip: clearly bigger than the section headings */
 .bunkhouse-container .bunkhouse-page-title {
-  font-size: 32px;
-  margin: 20px 0 10px;
+  font-size: 36px;
+  font-weight: 700;
+  margin: 24px 0 12px;
+}
+
+/* Section headings: same weight and size as the FAQ group headings */
+.bunkhouse-container h2:not(.faq-group-heading) {
+  font-size: 2.6rem;
+  font-weight: 700;
+  margin: 32px 0 10px;
+}
+
+@media (min-width: 768px) {
+  .bunkhouse-container .bunkhouse-page-title {
+    font-size: 46px;
+  }
+  .bunkhouse-container h2:not(.faq-group-heading) {
+    font-size: 3rem;
+  }
 }
 
 /* Donate page: the Give online button comes first and fills the width on phones */
 .bunkhouse-container a.bunkhouse-give-button {
-  display: block;
-  max-width: 420px;
+  display: inline-block;
   margin: 10px 0 8px;
-  padding: 16px 24px;
+  padding: 8px 32px;
   border-radius: 40px;
   background: var(--bunkhouse-green);
   border-bottom: 2px solid var(--bunkhouse-green-dark);
   color: #fff;
-  font-size: 28px;
+  font-size: 22px;
   font-weight: bold;
   text-align: center;
   text-decoration: none;
 }
-.bunkhouse-container a.bunkhouse-give-button:hover {
+/* Home's Donate button: about the height of a line of text */
+.bunkhouse-container a.bunkhouse-give-button.bunkhouse-give-button-small {
+  margin: 0;
+  padding: 2px 20px;
+  font-size: inherit;
+  line-height: 1.5;
+}
+.bunkhouse-container a.bunkhouse-give-button:hover,
+.bunkhouse-container a.bunkhouse-give-button:focus {
   background: var(--bunkhouse-green-dark);
   color: #fff;
 }
@@ -474,7 +538,8 @@ p img {
 
 .bunkhouse-container .faq-jump-list a:hover,
 .bunkhouse-container .faq-jump-list a:focus {
-  background: var(--bunkhouse-green);
+  background: var(--bunkhouse-green-dark);
+  border-color: var(--bunkhouse-green-dark);
   color: white;
   text-decoration: none;
 }

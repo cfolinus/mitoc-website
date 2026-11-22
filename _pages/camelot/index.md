@@ -22,6 +22,6 @@ We are now raising funds for Phase 2, construction of the bunkhouse itself. We p
 
 We need your help to get there. If you are able, please consider donating to ensure MITOC can fulfill its mission for the next generation of MITOC members.
 
-[Donate]({{ site.data.bunkhouse_settings.donate_page }}){: .bunkhouse-give-button}
+[Donate]({{ site.data.bunkhouse_settings.donate_page }}){: .bunkhouse-give-button .bunkhouse-give-button-small}
 
 Questions? See the [FAQs](/camelot/faqs).

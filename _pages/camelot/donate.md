@@ -6,7 +6,7 @@ title: Ways to give
 
 [Give online]({{ site.data.bunkhouse_settings.donate_link }}){: .bunkhouse-give-button}
 
-Gifts of every size count.
+Gifts of every size count, and construction will be funded entirely by donations.
 {: .bunkhouse-give-note}
 
 ## Double your gift with employer matching

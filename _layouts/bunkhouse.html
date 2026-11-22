@@ -9,8 +9,10 @@ layout: bunkhouse_base
 {% comment %}
   Pages with `hero: full` in their front matter (the overview) get the large
   hero. Every other page gets a compact strip with the same facts in one row.
+  The inner .container lines the titles up with the navbar brand above.
 {% endcomment %}
 <div class="bunkhouse-banner {% if page.hero == 'full' %}bunkhouse-banner-full{% else %}bunkhouse-banner-compact{% endif %}">
+  <div class="container bunkhouse-banner-inner">
   <div class="bunkhouse-banner-titles">
     <h1>{{ settings.hero_title }}</h1>
     <h2>{{ settings.hero_subtitle }}</h2>
@@ -44,6 +46,7 @@ layout: bunkhouse_base
     {% else %}
       <a href="{{ settings.donate_page }}" class="bunkhouse-donate-button">Donate</a>
     {% endif %}
+  </div>
   </div>
 </div>
 <div class="container bunkhouse-wrapper">
