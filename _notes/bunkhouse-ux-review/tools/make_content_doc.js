@@ -166,18 +166,8 @@ function block(id, where, file, locator, items, opts) {
 const txt = t => [{type: 'p', text: t}];
 
 // ---------- comments for open questions (anchored to relevant blocks) ----------
-const QUESTIONS = [
-  ['Nightly fee', 'What nightly fee will the bunkhouse charge? The FAQ now says "modest user fees" with no number. (The current cabin fee on the rentals page is $10 per person per night.)', 'FAQ-cost-3'],
-  ['Phase 0 and the $1.3M', `Does the ${FACTS_SET.total_cost} include the initial design work with Maclay Architects (Phase 0, 2019–21)? The site now says it covers Phases 1 and 2. Phase 1 (${FACTS_SET.phase1_raised}) plus Phase 2 (${FACTS_SET.phase2_cost}) adds up to the total, which suggests Phase 0 was paid for separately.`, 'FAQ-cost-2'],
-  ['If the goal is not reached', `The site says the full ${FACTS_SET.total_cost} is needed before groundbreaking in ${FACTS_SET.groundbreaking}. What happens if it isn't raised by then: does construction move to 2028? What happens if bids come in above the estimate?`, 'FAQ-timeline-2'],
-  ['Phase 1 donors', `The site says donors gave ${FACTS_SET.phase1_raised} for Phase 1. Was that the amount raised, or Phase 1's final cost? The overview thanks Phase 1 donors as a group. Should they be thanked by name anywhere?`, 'SET-raised'],
-  ['Giving options', `Which non-cash and pledge options (stock, donor-advised funds, IRA distributions, multi-year pledges) does MIT support for fund ${FACTS_SET.fund_number}? Who is the named contact for larger gifts? Is there any donor recognition or naming policy?`, 'DON-h-3'],
-  ['Matching', 'What should employer-matching donors enter in their company\'s matching portal (recipient, designation)? Can MIT provide a link for this?', 'DON-h-1'],
-  ['Photos and data', 'Are there photos of the finished Phase 1 work (bridge, parking lot, trail)? Can the cabin managers provide usage figures (visitor-nights per year, trips, capacity before and after the loft closure)?', 'HOME-3'],
-  ['Volunteering', 'What in-person or skills-based help is the project actually looking for?', 'FAQ-timeline-5'],
-  ['Gift amount', 'The online form opens with $1,000 already filled in. Keep that, lower it, or leave the amount blank?', 'SET-amount'],
-  ['Rentals parking (for the cabin managers)', 'The rentals page now describes the new gravel lot. Are the rest of its parking instructions ("entirely off the pavement", "park as close as possible to other cars") still right?', 'RENT-parking'],
-];
+// Round 2 was answered on 2026-11-22; add new open questions here as [title, question, label].
+const QUESTIONS = [];
 QUESTIONS.forEach(([t, q, anchor], i) => {
   const existing = commentFor[anchor];
   const text = `Open question Q${i + 1} (${t}): ${q}`;
@@ -193,7 +183,7 @@ children.push(H1('How to use this document'));
 const steps = [
   'Turn on suggestion mode before editing. In Google Docs, click the pencil icon at the top right and choose Suggesting. In Word, go to Review → Track Changes.',
   'Start with Part 1, Key facts. These are the values you agreed in the last review, as the website now states them. If any is wrong, write the correction in the right-hand column.',
-  'Answer the open questions in Part 2. Each one also appears as a comment next to the text it affects in Part 3.',
+  'Answer any open questions in Part 2. Each one also appears as a comment next to the text it affects in Part 3.',
   'Edit the website text in Part 3 freely. You can rewrite, delete, reorder, or add new paragraphs and FAQ questions.',
   'Leave the small grey labels like [HOME-1] in place. They tell the maintainer where each piece of text lives on the website. To remove a block, delete its text and keep the label, or add a comment saying "delete".',
   'For new text, add a line like "NEW: after HOME-3" or "NEW FAQ in Cost and funding", then the text.',
@@ -202,7 +192,7 @@ const steps = [
   'When the review is finished, download the file as Word (in Google Docs: File → Download → Microsoft Word) and send it to the website maintainer.',
 ];
 steps.forEach(s => children.push(new Paragraph({numbering: {reference: 'steps', level: 0}, children: inline(s)})));
-children.push(P([new TextRun({text: 'What\'s in this document: ', bold: true}), new TextRun('Part 1 lists the key facts as the website now states them. Part 2 lists the questions that are still open for the committee. Part 3 has all the bunkhouse wording on the website, grouped by where it appears: the header on every bunkhouse page, the three bunkhouse pages, the fundraising banner shown on every main-site page, and related text on the Camelot rentals page.')], {spacing: {before: 160}}));
+children.push(P([new TextRun({text: 'What\'s in this document: ', bold: true}), new TextRun('Part 1 lists the key facts as the website now states them. Part 2 lists any questions still open for the committee. Part 3 has all the bunkhouse wording on the website, grouped by where it appears: the header on every bunkhouse page, the three bunkhouse pages, the fundraising banner shown on every main-site page, and related text on the Camelot rentals page.')], {spacing: {before: 160}}));
 
 // ---------- Part 1: key facts ----------
 children.push(new Paragraph({children: [new PageBreak()]}));
@@ -211,7 +201,7 @@ children.push(P('Each row is a fact as the website states it now. Every page tha
 const fx = k => FACTS_SET[k] || '(not set)';
 const FACTS = [
   ['Total cost and fundraising goal', `${fx('total_cost')}, estimated in 2026 from contractors' quotes on the finished construction drawings`],
-  ['What the total covers', 'Phases 1 and 2: parking lot, access trail and bridge, site prep, the bunkhouse, and design and project support (FAQ-cost-2)'],
+  ['What the total covers', 'Phases 1 and 2: parking lot, access trail and bridge, site prep, the bunkhouse, and design and project support. Phase 0 (initial design) was funded before the campaign and is not included. (FAQ-cost-2)'],
   ['Phases', 'Phase 0: initial design (2019–21). Phase 1: parking lot, bridge, trail, and construction drawings (2022–25). Phase 2: the bunkhouse (2026–27). (FAQ-timeline-1)'],
   ['Phase 1 and Phase 2 amounts', `Phase 1: donors gave ${fx('phase1_raised')}. Phase 2: ${fx('phase2_cost')}.`],
   ['Thermometer', `${money(S.donations_amount)} raised by ${S.number_donors} people, as of ${S.donations_as_of}, toward ${money(S.donations_goal)}. Counts the whole campaign, including pledges. Shows ${money(S.donations_goal - S.donations_amount)} to go.`],
@@ -222,8 +212,8 @@ const FACTS = [
   ['Cabin to bunkhouse', fx('distance_to_bunkhouse')],
   ['Parking to cabin', fx('walk_from_parking')],
   ['Parking', `Gravel off-street lot with room for ${fx('parking_spaces')} cars`],
-  ['Project history', 'Discussed since 2011; MITOC board approval 2013; founding gift 2018; Maclay design 2019–21; fundraising from 2022; Groton approval June 2023; Phase 1 built 2024–25'],
-  ['Nightly fee for the bunkhouse', 'Not stated (open question 1)'],
+  ['Project history', 'Discussed since 2011; MITOC Board of Directors approval 2013; founding gift 2018; Maclay design 2019–21; fundraising from 2022; Groton approval 2023; Phase 1 built 2024–25'],
+  ['Nightly fee for the bunkhouse', `${fx('nightly_fee')} per person per night, in line with the current cabin fee (FAQ-cost-3)`],
   ['Contact', 'mitoc-bunkhouse@mit.edu'],
 ];
 const W = [2300, 4460, 2600];
@@ -240,7 +230,7 @@ children.push(new Table({width: {size: 9360, type: WidthType.DXA}, columnWidths:
 
 // ---------- Part 2: open questions ----------
 children.push(H1('Part 2. Open questions'));
-children.push(P('These are still open after the last review. Please write the answer under each question.'));
+children.push(P(QUESTIONS.length ? 'These are still open after the last review. Please write the answer under each question.' : 'None right now. Every question from the last review has been answered.'));
 QUESTIONS.forEach(([t, q], i) => {
   children.push(new Paragraph({keepNext: true, spacing: {before: 200, after: 60}, children: [new TextRun({text: `Q${i + 1}. ${t}`, bold: true})]}));
   children.push(new Paragraph({keepNext: true, children: [new TextRun(q)]}));
@@ -253,7 +243,7 @@ children.push(H1('Part 3. Website text'));
 
 // A. Header on every bunkhouse page
 children.push(H2('A. Header shown at the top of every bunkhouse page'));
-children.push(note('The big title area over the bunkhouse drawing, with the fundraising thermometer. The site displays the title in capital letters automatically.'));
+children.push(note('The title area with the fundraising thermometer: over the bunkhouse drawing on the Home page, and on a solid green band on the other pages. The site displays the title in capital letters automatically.'));
 block('HERO-1', 'Header: main title', '_data/bunkhouse_settings.yml', 'hero_title', txt(S.hero_title));
 block('HERO-2', 'Header: subtitle', '_data/bunkhouse_settings.yml', 'hero_subtitle', txt(S.hero_subtitle));
 block('HERO-3', 'Header: second subtitle (overview page only)', '_data/bunkhouse_settings.yml', 'hero_tagline', txt(S.hero_tagline));
@@ -306,7 +296,13 @@ children.push(note('Appears below the header. Each section has a heading, then t
 // Prose paragraphs keep the numbering PR-1, PR-2, … that earlier versions of this doc used.
 let pn = 0, im = 0, hn = 0;
 block('PR-title', 'Project page title (page heading and browser tab title)', '_pages/camelot/project.md', 'front matter title', txt('Project details'));
-blocks(body('_pages/camelot/project.md')).forEach(b => {
+// The jump buttons at the top (list items linking to #anchors) are one block, so they
+// don't shift the paragraph numbers.
+const prBlocks = blocks(body('_pages/camelot/project.md'));
+const isJump = b => b.type === 'li' && /^\[[^\]]+\]\(#/.test(b.text);
+const prJump = prBlocks.filter(isJump);
+if (prJump.length) block('PR-jump', 'Project page: jump buttons under the title, one per section', '_pages/camelot/project.md', 'jump list', prJump);
+prBlocks.filter(b => !isJump(b)).forEach(b => {
   if (b.type === 'h') { hn++; block(`PR-h-${hn}`, `Project page, section heading ${hn}`, '_pages/camelot/project.md', `## heading #${hn}`, [b]); }
   else if (b.type === 'img') { im++; block(`PR-img-${im}`, `Project page, image ${im}`, '_pages/camelot/project.md', `<img> #${im}`, [b]); }
   else if (b.type === 'caption') block(`PR-cap-${im}`, `Project page, caption for image ${im}`, '_pages/camelot/project.md', `<figcaption> #${im}`, [b]);

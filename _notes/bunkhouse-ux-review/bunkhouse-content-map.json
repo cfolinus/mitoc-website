@@ -1,6 +1,6 @@
 {
-  "generated": "2026-11-20",
-  "source_commit": "09b0ddf",
+  "generated": "2026-11-22",
+  "source_commit": "b3e541f",
   "branch": "bunkhouse-edits",
   "note": "Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits. settings lists values in bunkhouse_settings.yml that appear in the text; edit those there, not in the page.",
   "labels": [
@@ -79,7 +79,7 @@
       "where": "Amount pre-filled on the MIT giving form when someone clicks Donate",
       "file": "_data/bunkhouse_settings.yml",
       "locator": "donate_link amount= parameter",
-      "snapshot": "$1,000"
+      "snapshot": "$500"
     },
     {
       "id": "NAV",
@@ -93,14 +93,14 @@
       "where": "Shared summary: what Camelot is (Home, About \"Camelot today\", banner)",
       "file": "_data/bunkhouse_settings.yml",
       "locator": "summary.what_is_camelot",
-      "snapshot": "The MIT Outing Club's Camelot cabin, set on 20 acres near Rumney, NH, has been a center of the club's activities for nearly 50 years. Countless MITOC members are first introduced to outdoor recreation and camaraderie at events based out of Camelot."
+      "snapshot": "For over 50 years, the MIT Outing Club's Camelot cabin has been a vital resource and center of the club's activities. Set on about 20 acres near Rumney, NH, Camelot hosts official club circuses, open cabins, and social events and is a base camp for individual club members using the cabin for personal adventures. Many MITOC members are first introduced to outdoor recreation and the club community through Camelot-based events."
     },
     {
       "id": "SUM-2",
       "where": "Shared summary: why a new bunkhouse is needed (Home, About \"Why a new bunkhouse\")",
       "file": "_data/bunkhouse_settings.yml",
       "locator": "summary.why",
-      "snapshot": "The existing cabin is nearing the end of its usable life as a place to sleep. Its loft had to be closed because it did not meet modern safety standards, and it reopened only after a major repair effort by the cabin managers, but patches like this can only go so far. Within a few years the cabin will no longer be safe to sleep in, and it can't be brought up to the code required for lodging. The new bunkhouse will give MITOC safe, comfortable sleeping space for 50 people.",
+      "snapshot": "The existing cabin is nearing the end of its usable life. Camelot was built in 1973, largely by MIT undergrads, and will not remain safe to sleep in for much longer. The new bunkhouse will give MITOC safe, comfortable sleeping space for 50 people.",
       "settings": [
         "bunkhouse_settings.yml facts.bunkhouse_capacity"
       ]
@@ -110,7 +110,7 @@
       "where": "Home page, paragraph 1",
       "file": "_pages/camelot/index.md",
       "locator": "paragraph 1",
-      "snapshot": "[shared text: SUM-1] To plan a visit, see the [Camelot rental page](/rentals/camelot)."
+      "snapshot": "[shared text: SUM-1] To visit or stay at Camelot, see the [Camelot rental page](/rentals/camelot)."
     },
     {
       "id": "HOME-h-1",
@@ -124,7 +124,7 @@
       "where": "Home page, paragraph 2",
       "file": "_pages/camelot/index.md",
       "locator": "paragraph 2",
-      "snapshot": "[shared text: SUM-2] [Read the full story.](/camelot/about)"
+      "snapshot": "[shared text: SUM-2] [See more about the new bunkhouse.](/camelot/about)"
     },
     {
       "id": "HOME-h-2",
@@ -138,7 +138,14 @@
       "where": "Home page, paragraph 3",
       "file": "_pages/camelot/index.md",
       "locator": "paragraph 3",
-      "snapshot": "Phase 1, a new bridge, off-street parking lot, and access trail, was finished in spring 2025. We are now raising funds for Phase 2, construction of the bunkhouse itself. We plan to break ground in late spring 2027 and finish in fall 2027, but construction can only start once the full $1.3 million is raised. [See how the money will be spent.](/camelot/about#funding)",
+      "snapshot": "Phase 1, which was finished in spring 2025, included construction of a new bridge, off-street parking lot, and access trail, as well as design and project support from architects, structural engineers, geotechnical engineers, mechanical, electrical, and plumbing (MEP) engineers, and MIT Facilities."
+    },
+    {
+      "id": "HOME-4",
+      "where": "Home page, paragraph 4",
+      "file": "_pages/camelot/index.md",
+      "locator": "paragraph 4",
+      "snapshot": "We are now raising funds for Phase 2, construction of the bunkhouse itself. We plan to break ground in late spring 2027 and finish in fall 2027, but construction can only start once the full $1.3 million is raised. [See how the money will be spent.](/camelot/about#funding)",
       "settings": [
         "bunkhouse_settings.yml facts.groundbreaking",
         "bunkhouse_settings.yml facts.completion",
@@ -153,27 +160,27 @@
       "snapshot": "Donate"
     },
     {
-      "id": "HOME-4",
-      "where": "Home page, paragraph 4",
-      "file": "_pages/camelot/index.md",
-      "locator": "paragraph 4",
-      "snapshot": "We need your help to get there. If you are able, please consider donating to ensure MITOC can fulfill its mission for the next generation of MITOC members."
-    },
-    {
       "id": "HOME-5",
       "where": "Home page, paragraph 5",
       "file": "_pages/camelot/index.md",
       "locator": "paragraph 5",
-      "snapshot": "[Donate](/camelot/donate){: .bunkhouse-give-button}",
-      "settings": [
-        "bunkhouse_settings.yml donate_page"
-      ]
+      "snapshot": "We need your help to get there. If you are able, please consider donating to ensure MITOC can fulfill its mission for the next generation of MITOC members."
     },
     {
       "id": "HOME-6",
       "where": "Home page, paragraph 6",
       "file": "_pages/camelot/index.md",
       "locator": "paragraph 6",
+      "snapshot": "[Donate](/camelot/donate){: .bunkhouse-give-button}",
+      "settings": [
+        "bunkhouse_settings.yml donate_page"
+      ]
+    },
+    {
+      "id": "HOME-7",
+      "where": "Home page, paragraph 7",
+      "file": "_pages/camelot/index.md",
+      "locator": "paragraph 7",
       "snapshot": "Questions? See the [FAQs](/camelot/faqs)."
     },
     {
@@ -195,9 +202,19 @@
       "where": "About page, paragraph 1",
       "file": "_pages/camelot/about.md",
       "locator": "paragraph 1",
-      "snapshot": "[shared text: SUM-1] The cabin is about 2.5 hours from Boston and sleeps about 30 people across the loft, living room, and kitchen. To visit, see the [Camelot rental page](/rentals/camelot).",
+      "snapshot": "[shared text: SUM-1] The cabin is about 2.5 hours from Boston and currently sleeps about 30 people across the loft, living room, and kitchen. To visit, see the [Camelot rental page](/rentals/camelot).",
       "settings": [
         "bunkhouse_settings.yml facts.capacity_now"
+      ]
+    },
+    {
+      "id": "AB-2",
+      "where": "About page, paragraph 2",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 2",
+      "snapshot": "Camelot’s loft had to be closed recently because it did not meet modern safety standards; it reopened only after a major repair effort by the cabin managers, and patches like this can only go so far. Making the existing cabin sleep 50 people would mean bringing it up to current code for lodging (sprinklers, fire-rated sleeping rooms, and emergency exits), and the cabin managers and the Town of Groton found no viable way to do that. Building new is the more cost-effective option.",
+      "settings": [
+        "bunkhouse_settings.yml facts.bunkhouse_capacity"
       ]
     },
     {
@@ -205,21 +222,64 @@
       "where": "About page, section heading 2",
       "file": "_pages/camelot/about.md",
       "locator": "## heading #2",
-      "snapshot": "Why a new bunkhouse"
-    },
-    {
-      "id": "AB-2",
-      "where": "About page, paragraph 2",
-      "file": "_pages/camelot/about.md",
-      "locator": "paragraph 2",
-      "snapshot": "[shared text: SUM-2]"
+      "snapshot": "The bunkhouse vision"
     },
     {
       "id": "AB-3",
       "where": "About page, paragraph 3",
       "file": "_pages/camelot/about.md",
       "locator": "paragraph 3",
-      "snapshot": "The existing cabin should remain a serviceable kitchen and lounge for another 10–20 years, so the bunkhouse is for sleeping only. For more, see the FAQs: [why MITOC needs the bunkhouse](/camelot/faqs#why-does-mitoc-need-the-bunkhouse), [whether the cabin can be brought up to code](/camelot/faqs#can-the-existing-cabin-be-brought-up-to-code), and [why not buy a house instead](/camelot/faqs#why-not-buy-a-house-instead)."
+      "snapshot": "After over a decade of planning, focus groups, discussions with MIT, and design work by Maclay Architects, we believe that building a new bunkhouse on the existing Camelot land is the best path forward. The new bunkhouse will be sited about 200 meters from the existing cabin and will provide heated sleeping space in a modern, safe, tightly insulated building enclosure.",
+      "settings": [
+        "bunkhouse_settings.yml facts.distance_to_bunkhouse"
+      ]
+    },
+    {
+      "id": "AB-4",
+      "where": "About page, paragraph 4",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 4",
+      "snapshot": "**Who it’s for:** The bunkhouse supports MITOC’s goal of making outdoor recreation accessible, especially to new students, with inexpensive, year-round sleeping space that requires no experience or special equipment."
+    },
+    {
+      "id": "AB-5",
+      "where": "About page, paragraph 5",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 5",
+      "snapshot": "**Capacity:** The bunkhouse will sleep 50 people (five rooms of 10), enough for all but the busiest weekends of the year.",
+      "settings": [
+        "bunkhouse_settings.yml facts.bunkhouse_capacity",
+        "bunkhouse_settings.yml facts.room_count",
+        "bunkhouse_settings.yml facts.room_size"
+      ]
+    },
+    {
+      "id": "AB-6",
+      "where": "About page, paragraph 6",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 6",
+      "snapshot": "**Amenities:** The bunkhouse will have electricity, electric heat, and composting toilets."
+    },
+    {
+      "id": "AB-7",
+      "where": "About page, paragraph 7",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 7",
+      "snapshot": "**Fire safety:** A sprinkler system fed by a cistern in the basement, 1-hour fire-rated sleeping rooms, an emergency exit window in every room, and a networked fire alarm."
+    },
+    {
+      "id": "AB-8",
+      "where": "About page, paragraph 8",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 8",
+      "snapshot": "**No kitchen:** The bunkhouse will not have a kitchen. Building code requirements would have made including one prohibitively expensive. Instead, the existing cabin, expected to remain usable as a kitchen and lounge for another 10 to 20 years, will continue to be used for cooking."
+    },
+    {
+      "id": "AB-9",
+      "where": "About page, paragraph 9",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 9",
+      "snapshot": "For more information on the design of the bunkhouse, see [Project Details](/camelot/project)."
     },
     {
       "id": "AB-h-3",
@@ -229,14 +289,11 @@
       "snapshot": "The plan"
     },
     {
-      "id": "AB-4",
-      "where": "About page, paragraph 4",
+      "id": "AB-10",
+      "where": "About page, paragraph 10",
       "file": "_pages/camelot/about.md",
-      "locator": "paragraph 4",
-      "snapshot": "From 2019 through 2021, the Outing Club worked with Maclay Architects to create a bunkhouse design that complies with all modern building codes, is satisfactory to MIT Facilities and the local town board, and yet maintains the wilderness ethos of the Outing Club and its Camelot property. The new bunkhouse will be sited about 200 meters from the existing cabin and will provide heated sleeping space in a modern, safe, tightly insulated building enclosure. [See the full design.](/camelot/project)",
-      "settings": [
-        "bunkhouse_settings.yml facts.distance_to_bunkhouse"
-      ]
+      "locator": "paragraph 10",
+      "snapshot": "From 2019 through 2021, the Outing Club worked with Maclay Architects to create a bunkhouse design that complies with all modern building codes, is satisfactory to MIT Facilities and the local town board, and yet maintains the wilderness ethos of the Outing Club and its Camelot property."
     },
     {
       "id": "AB-h-4",
@@ -246,85 +303,88 @@
       "snapshot": "Timeline"
     },
     {
-      "id": "AB-5",
-      "where": "About page, list item 5",
-      "file": "_pages/camelot/about.md",
-      "locator": "list item 5",
-      "snapshot": "**2011:** Discussions begin."
-    },
-    {
-      "id": "AB-6",
-      "where": "About page, list item 6",
-      "file": "_pages/camelot/about.md",
-      "locator": "list item 6",
-      "snapshot": "**2013:** The MITOC board approves the project."
-    },
-    {
-      "id": "AB-7",
-      "where": "About page, list item 7",
-      "file": "_pages/camelot/about.md",
-      "locator": "list item 7",
-      "snapshot": "**2014–2018:** Focus groups."
-    },
-    {
-      "id": "AB-8",
-      "where": "About page, list item 8",
-      "file": "_pages/camelot/about.md",
-      "locator": "list item 8",
-      "snapshot": "**2018:** A generous initial donation in memory of Joris Naiman kick-starts active development."
-    },
-    {
-      "id": "AB-9",
-      "where": "About page, list item 9",
-      "file": "_pages/camelot/about.md",
-      "locator": "list item 9",
-      "snapshot": "**2019–2021:** Design with Maclay Architects."
-    },
-    {
-      "id": "AB-10",
-      "where": "About page, list item 10",
-      "file": "_pages/camelot/about.md",
-      "locator": "list item 10",
-      "snapshot": "**2022–2024:** Phase 1 fundraising."
-    },
-    {
       "id": "AB-11",
       "where": "About page, list item 11",
       "file": "_pages/camelot/about.md",
       "locator": "list item 11",
-      "snapshot": "**June 2023:** The Groton planning board approves the project."
+      "snapshot": "**2011:** Discussions begin"
     },
     {
       "id": "AB-12",
       "where": "About page, list item 12",
       "file": "_pages/camelot/about.md",
       "locator": "list item 12",
-      "snapshot": "**2024–2025:** Phase 1 is built: a new bridge, off-street parking lot, and access trail, along with the final construction drawings."
+      "snapshot": "**2013:** The MITOC Board of Directors (BOD) approves the project"
     },
     {
       "id": "AB-13",
       "where": "About page, list item 13",
       "file": "_pages/camelot/about.md",
       "locator": "list item 13",
-      "snapshot": "**2026–2027:** Phase 2 fundraising, now under way."
+      "snapshot": "**2014–2018:** Focus groups about club needs and the future of Camelot"
     },
     {
       "id": "AB-14",
       "where": "About page, list item 14",
       "file": "_pages/camelot/about.md",
       "locator": "list item 14",
-      "snapshot": "**Planned for late spring 2027:** Groundbreaking, once the full $1.3 million is raised.",
-      "settings": [
-        "bunkhouse_settings.yml facts.groundbreaking",
-        "bunkhouse_settings.yml facts.total_cost"
-      ]
+      "snapshot": "**2018:** A generous initial donation in memory of Joris Naiman kick-starts active development"
     },
     {
       "id": "AB-15",
       "where": "About page, list item 15",
       "file": "_pages/camelot/about.md",
       "locator": "list item 15",
-      "snapshot": "**Planned for fall 2027:** The bunkhouse is finished.",
+      "snapshot": "**2019–2021:** Design with Maclay Architects"
+    },
+    {
+      "id": "AB-16",
+      "where": "About page, list item 16",
+      "file": "_pages/camelot/about.md",
+      "locator": "list item 16",
+      "snapshot": "**2022–2024:** Phase 1 fundraising (about $400,000)",
+      "settings": [
+        "bunkhouse_settings.yml facts.phase1_raised"
+      ]
+    },
+    {
+      "id": "AB-17",
+      "where": "About page, list item 17",
+      "file": "_pages/camelot/about.md",
+      "locator": "list item 17",
+      "snapshot": "**2023:** The Groton planning board approves the project"
+    },
+    {
+      "id": "AB-18",
+      "where": "About page, list item 18",
+      "file": "_pages/camelot/about.md",
+      "locator": "list item 18",
+      "snapshot": "**2024–2025:** Phase 1 construction: a new bridge, off-street parking lot, and access trail, along with the final construction drawings"
+    },
+    {
+      "id": "AB-19",
+      "where": "About page, list item 19",
+      "file": "_pages/camelot/about.md",
+      "locator": "list item 19",
+      "snapshot": "**2026–2027:** Phase 2 fundraising, now under way"
+    },
+    {
+      "id": "AB-20",
+      "where": "About page, list item 20",
+      "file": "_pages/camelot/about.md",
+      "locator": "list item 20",
+      "snapshot": "**Planned for late spring 2027:** Groundbreaking! This requires raising the full $1.3 million",
+      "settings": [
+        "bunkhouse_settings.yml facts.groundbreaking",
+        "bunkhouse_settings.yml facts.total_cost"
+      ]
+    },
+    {
+      "id": "AB-21",
+      "where": "About page, list item 21",
+      "file": "_pages/camelot/about.md",
+      "locator": "list item 21",
+      "snapshot": "**Planned for fall 2027:** Construction complete!",
       "settings": [
         "bunkhouse_settings.yml facts.completion"
       ]
@@ -334,54 +394,67 @@
       "where": "About page, section heading 5",
       "file": "_pages/camelot/about.md",
       "locator": "## heading #5",
-      "snapshot": "What the $1.3 million pays for",
-      "settings": [
-        "bunkhouse_settings.yml facts.total_cost"
-      ]
+      "snapshot": "Costs"
     },
     {
-      "id": "AB-16",
-      "where": "About page, paragraph 16",
+      "id": "AB-22",
+      "where": "About page, paragraph 22",
       "file": "_pages/camelot/about.md",
-      "locator": "paragraph 16",
+      "locator": "paragraph 22",
       "snapshot": "The bunkhouse project will cost $1.3 million in total, based on 2026 quotes from general contractors for the finished construction drawings.",
       "settings": [
         "bunkhouse_settings.yml facts.total_cost"
       ]
     },
     {
-      "id": "AB-17",
-      "where": "About page, list item 17",
+      "id": "AB-23",
+      "where": "About page, paragraph 23",
       "file": "_pages/camelot/about.md",
-      "locator": "list item 17",
-      "snapshot": "Phase 1 is complete. Donors gave about $300,000 for the new parking lot, bridge, and access trail, all finished in spring 2025, and for the final construction drawings. Thank you to everyone who made it possible!",
+      "locator": "paragraph 23",
+      "snapshot": "This includes construction of the new parking lot, which was necessary for Town of Groton approval; construction of the new access trail and bridge, which are necessary for construction vehicles and fire safety; construction of the bunkhouse itself; as well as design and project support work from architects, structural engineers, geotechnical engineers, mechanical, electrical, and plumbing (MEP) engineers, and MIT Facilities."
+    },
+    {
+      "id": "AB-24",
+      "where": "About page, list item 24",
+      "file": "_pages/camelot/about.md",
+      "locator": "list item 24",
+      "snapshot": "Phase 1 is complete. Donors gave about $400,000 for the new parking lot, bridge, and access trail, all finished in spring 2025, and for the final construction drawings. Thank you to everyone who made it possible!",
       "settings": [
         "bunkhouse_settings.yml facts.phase1_raised"
       ]
     },
     {
-      "id": "AB-18",
-      "where": "About page, list item 18",
+      "id": "AB-25",
+      "where": "About page, list item 25",
       "file": "_pages/camelot/about.md",
-      "locator": "list item 18",
-      "snapshot": "Phase 2 is under way. The bunkhouse itself will cost about $1 million.",
+      "locator": "list item 25",
+      "snapshot": "Phase 2 is under way. The bunkhouse itself will cost about $900,000.",
       "settings": [
         "bunkhouse_settings.yml facts.phase2_cost"
       ]
     },
     {
-      "id": "AB-19",
-      "where": "About page, paragraph 19",
+      "id": "AB-26",
+      "where": "About page, paragraph 26",
       "file": "_pages/camelot/about.md",
-      "locator": "paragraph 19",
-      "snapshot": "As of November 2026, $468,000 has been raised by 314 people toward the full $1.3 million. That leaves **$832,000 to go**, and we need the full amount before we can break ground in late spring 2027. Gifts of every size count. [Donate online](https://giving.mit.edu/form/?fundId=3892696&amount=1000), or read [more about costs and funding](/camelot/faqs#cost).",
+      "locator": "paragraph 26",
+      "snapshot": "As of November 2026, $468,000 has been raised by 314 people toward the full $1.3 million. That leaves **$832,000 to go**, and we need the full amount before we can break ground in late spring 2027.",
       "settings": [
         "bunkhouse_settings.yml donations_as_of",
         "bunkhouse_settings.yml donations_amount",
         "bunkhouse_settings.yml number_donors",
         "bunkhouse_settings.yml facts.total_cost",
         "bunkhouse_settings.yml donations_goal",
-        "bunkhouse_settings.yml facts.groundbreaking",
+        "bunkhouse_settings.yml facts.groundbreaking"
+      ]
+    },
+    {
+      "id": "AB-27",
+      "where": "About page, paragraph 27",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 27",
+      "snapshot": "Gifts of every size count! [Donate online](https://giving.mit.edu/form/?fundId=3892696&amount=500), or read [more about costs and funding](/camelot/faqs#cost).",
+      "settings": [
         "bunkhouse_settings.yml donate_link"
       ]
     },
@@ -390,14 +463,28 @@
       "where": "About page, section heading 6",
       "file": "_pages/camelot/about.md",
       "locator": "## heading #6",
-      "snapshot": "Who's leading the project"
+      "snapshot": "Bunkhouse team"
     },
     {
-      "id": "AB-20",
-      "where": "About page, paragraph 20",
+      "id": "AB-28",
+      "where": "About page, paragraph 28",
       "file": "_pages/camelot/about.md",
-      "locator": "paragraph 20",
-      "snapshot": "David Lawrence ‘14, a former MITOC president and Camelot manager, is the volunteer director of the Camelot bunkhouse project. The fundraising committee also includes graduate student Karina Smolyar and MITOC's alumni liaison Greg Wallace. We have active participation from the MIT Department of Facilities, the MIT Division of Student Life, and many other MITOC board members. Questions? Email [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu)."
+      "locator": "paragraph 28",
+      "snapshot": "Relaunched in Fall 2026, an eager committee of current MITOCers are spearheading fundraising and current project management! The fundraising committee includes graduate students, alumni, and affiliates who are MITOC trip leaders, board members, and lovers-of-Camelot."
+    },
+    {
+      "id": "AB-29",
+      "where": "About page, paragraph 29",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 29",
+      "snapshot": "David Lawrence ‘14 (former MITOC president and Camelot manager) and Greg Wallace (MITOC’s alumni liaison), who helped lead Phase 1, remain involved."
+    },
+    {
+      "id": "AB-30",
+      "where": "About page, paragraph 30",
+      "file": "_pages/camelot/about.md",
+      "locator": "paragraph 30",
+      "snapshot": "We have active participation from the MIT Department of Facilities, the MIT Division of Student Life, and the MITOC Board of Directors. To chat with us directly, reach out over email to [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu)."
     },
     {
       "id": "PR-title",
@@ -405,6 +492,13 @@
       "file": "_pages/camelot/project.md",
       "locator": "front matter title",
       "snapshot": "Project details"
+    },
+    {
+      "id": "PR-jump",
+      "where": "Project page: jump buttons under the title, one per section",
+      "file": "_pages/camelot/project.md",
+      "locator": "jump list",
+      "snapshot": "[Location](#location-on-the-property)\n[Layout](#layout)\n[Toilets and water](#toilets-and-water)\n[Heating](#heating-and-insulation)\n[Structure](#structure)\n[Fire safety](#fire-safety)"
     },
     {
       "id": "PR-h-1",
@@ -449,7 +543,7 @@
       "where": "Project page, paragraph 2",
       "file": "_pages/camelot/project.md",
       "locator": "paragraph 2",
-      "snapshot": "The bunkhouse will have five sleeping rooms which accommodate 10 people each, so each room can hold a standard Winter School trip. A large central hallway contains ample space for gear storage for 50 people. The floor plan also includes a covered deck area.",
+      "snapshot": "The bunkhouse will have five sleeping rooms which accommodate 10 people each, so each room can hold a standard Winter School trip. A large central hallway contains ample space for gear storage for 50 people, including hooks, cubbies, and benches. The floor plan also includes a covered deck area. In MITOC tradition, we plan to decorate the walls in part with antique MITOC rental gear such as beavertail snowshoes and old skis!",
       "settings": [
         "bunkhouse_settings.yml facts.room_count",
         "bunkhouse_settings.yml facts.room_size",
@@ -486,7 +580,7 @@
       "where": "Project page, paragraph 3",
       "file": "_pages/camelot/project.md",
       "locator": "paragraph 3",
-      "snapshot": "The bunkhouse will not have running water. Three composting toilets will be accessed from the covered porch (so that they are accessible to campers even when the bunkhouse is closed). The composter beneath the toilets will be located in a small insulated basement so that it remains warm enough to compost year round."
+      "snapshot": "Like the existing Camelot cabin, the bunkhouse will not have running water. Three composting toilets will be accessed from the covered porch (so that they are accessible to campers even when the bunkhouse is closed). The composter beneath the toilets will be located in a small insulated basement so that it remains warm enough to compost year round."
     },
     {
       "id": "PR-img-3",
@@ -514,7 +608,14 @@
       "where": "Project page, paragraph 4",
       "file": "_pages/camelot/project.md",
       "locator": "paragraph 4",
-      "snapshot": "The bunkhouse will be tightly insulated and heating will not be required for most groups. Resistive electric heat will be provided to assist with initial heat-up on the coldest nights. Resistive heat makes sense for this application due to the infrequent demand and its high reliability and low cost."
+      "snapshot": "The bunkhouse will be tightly insulated and heating will not be required for most groups. Resistive electric heat will be provided to assist with initial heat-up on the coldest nights, but the energy-efficient structure means the bunkhouse won’t require much heat to stay warm once in use. Resistive heat makes sense for this application due to the infrequent demand and its high reliability and low cost."
+    },
+    {
+      "id": "PR-5",
+      "where": "Project page, paragraph 5",
+      "file": "_pages/camelot/project.md",
+      "locator": "paragraph 5",
+      "snapshot": "MITOC’s current cabins (Camelot and Intervale) both require special training, in large part because of their heating (a wood stove and a finicky gas furnace, respectively). The bunkhouse’s electric heating alleviates these training and safety concerns."
     },
     {
       "id": "PR-h-5",
@@ -524,10 +625,10 @@
       "snapshot": "Structure"
     },
     {
-      "id": "PR-5",
-      "where": "Project page, paragraph 5",
+      "id": "PR-6",
+      "where": "Project page, paragraph 6",
       "file": "_pages/camelot/project.md",
-      "locator": "paragraph 5",
+      "locator": "paragraph 6",
       "snapshot": "To minimize site impacts, the bunkhouse will be an above-grade structure built on piers. A small basement and a section of poured concrete wall will provide the necessary shear strength. The remainder of the bunkhouse structure will be wooden."
     },
     {
@@ -552,18 +653,25 @@
       "snapshot": "Fire safety"
     },
     {
-      "id": "PR-6",
-      "where": "Project page, paragraph 6",
-      "file": "_pages/camelot/project.md",
-      "locator": "paragraph 6",
-      "snapshot": "The bunkhouse will include a fire sprinkler system fed from a small cistern in the insulated basement. Sleeping rooms will be built as 1 hour rated fire enclosures, and each room will have its own direct egress window. The bunkhouse will have a networked fire alarm system. These measures ensure that the bunkhouse will comply with all modern fire safety codes."
-    },
-    {
       "id": "PR-7",
       "where": "Project page, paragraph 7",
       "file": "_pages/camelot/project.md",
       "locator": "paragraph 7",
-      "snapshot": "Have more questions? See the [FAQs](/camelot/faqs). Ready to help build the bunkhouse? [Donate](/camelot/donate).",
+      "snapshot": "The bunkhouse will include a fire sprinkler system fed from a small cistern in the insulated basement. Sleeping rooms will be built as 1 hour rated fire enclosures, and each room will have its own direct egress window. The bunkhouse will have a networked fire alarm system. These measures ensure that the bunkhouse will comply with all modern fire safety codes."
+    },
+    {
+      "id": "PR-8",
+      "where": "Project page, paragraph 8",
+      "file": "_pages/camelot/project.md",
+      "locator": "paragraph 8",
+      "snapshot": "Have more questions? See the [FAQs](/camelot/faqs)."
+    },
+    {
+      "id": "PR-9",
+      "where": "Project page, paragraph 9",
+      "file": "_pages/camelot/project.md",
+      "locator": "paragraph 9",
+      "snapshot": "Ready to help build the bunkhouse? [Donate](/camelot/donate).",
       "settings": [
         "bunkhouse_settings.yml donate_page"
       ]
@@ -580,7 +688,7 @@
       "where": "Donate page, button label",
       "file": "_pages/camelot/donate.md",
       "locator": "paragraph 1",
-      "snapshot": "[Give online](https://giving.mit.edu/form/?fundId=3892696&amount=1000){: .bunkhouse-give-button}",
+      "snapshot": "[Give online](https://giving.mit.edu/form/?fundId=3892696&amount=500){: .bunkhouse-give-button}",
       "settings": [
         "bunkhouse_settings.yml donate_link"
       ]
@@ -604,7 +712,7 @@
       "where": "Donate page, paragraph 3",
       "file": "_pages/camelot/donate.md",
       "locator": "paragraph 3",
-      "snapshot": "Many employers match charitable gifts. Gifts to the bunkhouse go to MIT's \"MIT Outing Club Camelot Cabin Fund\" (fund 3892696), so in your employer's matching portal, search for Massachusetts Institute of Technology as the recipient.",
+      "snapshot": "Roughly 15 percent of MIT alumni work for companies that match charitable gifts. [Look up your company](https://giving.mit.edu/matching-gifts) to see whether it matches gifts to MIT and how to request a match. Gifts to the bunkhouse go to MIT's \"MIT Outing Club Camelot Cabin Fund\" (fund 3892696).",
       "settings": [
         "bunkhouse_settings.yml facts.fund_number"
       ]
@@ -659,7 +767,7 @@
       "where": "Donate page, paragraph 8",
       "file": "_pages/camelot/donate.md",
       "locator": "paragraph 8",
-      "snapshot": "To give stock, give from a donor-advised fund, make an IRA gift, make a pledge, or talk about a larger gift, email [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu) and a member of the committee will reply."
+      "snapshot": "For stock, donor-advised funds, IRA gifts, multi-year pledges, and other options, see [MIT's ways to give](https://giving.mit.edu/ways). To talk about a larger gift, or for help directing your gift to the bunkhouse, email Lucas Ehinger and Greg Wallace at [mitoc-bunkhouse@mit.edu](mailto:mitoc-bunkhouse@mit.edu)."
     },
     {
       "id": "DON-h-4",
@@ -673,7 +781,7 @@
       "where": "Donate page, paragraph 9",
       "file": "_pages/camelot/donate.md",
       "locator": "paragraph 9",
-      "snapshot": "Yes. If you [give online](https://giving.mit.edu/form/?fundId=3892696&amount=1000) to contribute to the MIT Outing Club Camelot Cabin Fund, you will receive a statement from MIT at the end of the year documenting your tax deductible charitable contribution.",
+      "snapshot": "Yes. If you [give online](https://giving.mit.edu/form/?fundId=3892696&amount=500) to contribute to the MIT Outing Club Camelot Cabin Fund, you will receive a statement from MIT at the end of the year documenting your tax deductible charitable contribution.",
       "settings": [
         "bunkhouse_settings.yml donate_link"
       ]
@@ -783,7 +891,7 @@
       "where": "FAQ, Cost and funding, question 2",
       "file": "_data/bunkhouse_faqs.yml",
       "locator": "group id=cost, questions[1]",
-      "snapshot": "What does the $1.3 million cover?\nThe $1.3 million covers the whole project:\n* Construction of the new parking lot, which the town of Groton requested as a condition for granting our zoning exemption for the property.\n* Construction of the access trail and bridge to the bunkhouse site.\n* Initial site preparation.\n* Construction of the bunkhouse itself.\n* Design and project support from architects, structural and geotechnical engineers, MIT Facilities, and others.",
+      "snapshot": "What does the $1.3 million cover?\nThe $1.3 million covers the whole project:\n* Construction of the new parking lot, which the town of Groton requested as a condition for granting our zoning exemption for the property.\n* Construction of the access trail and bridge to the bunkhouse site.\n* Initial site preparation.\n* Construction of the bunkhouse itself.\n* Design and project support from architects, structural and geotechnical engineers, MIT Facilities, and others.\n\nThe initial design work with Maclay Architects (Phase 0, 2019–2021) was funded and completed before the fundraising campaign launched, so it isn't part of the $1.3 million.",
       "settings": [
         "bunkhouse_settings.yml facts.total_cost"
       ]
@@ -793,7 +901,10 @@
       "where": "FAQ, Cost and funding, question 3",
       "file": "_data/bunkhouse_faqs.yml",
       "locator": "group id=cost, questions[2]",
-      "snapshot": "How will the bunkhouse be funded?\nConstruction of the bunkhouse will be fully funded by donations. Once completed, ongoing maintenance of the bunkhouse will be funded by modest user fees, in accordance with MITOC’s current practices."
+      "snapshot": "How will the bunkhouse be funded?\nConstruction of the bunkhouse will be fully funded by donations. Once completed, ongoing maintenance of the bunkhouse will be funded by user fees, in accordance with MITOC’s current practices. We anticipate charging about $10 per person per night, in line with the current cabin fee.\n\nCamelot sees roughly 1,000 person-nights of use each year, about half of them from circuses alone. Spread over a 100-year lifespan, a $1 million bunkhouse works out to about $10 per person per night: the same as today’s cabin fee, and well below a bunk at a White Mountains hostel (from about $40) or a Randolph Mountain Club cabin ($30–$50). Unlike those, the bunkhouse will be reserved for the MITOC community.",
+      "settings": [
+        "bunkhouse_settings.yml facts.nightly_fee"
+      ]
     },
     {
       "id": "FAQ-donating",
@@ -821,7 +932,7 @@
       "where": "FAQ, Timeline and construction, question 1",
       "file": "_data/bunkhouse_faqs.yml",
       "locator": "group id=timeline, questions[0]",
-      "snapshot": "What are the phases of the project?\n* **Phase 0: design (2019--2021).** MITOC worked with Maclay Architects on the initial bunkhouse design.\n* **Phase 1: site work (2022--2025).** Fundraising from 2022 to 2024 raised about $300,000. In 2024 and 2025 we built the new parking lot, bridge, and access trail, and completed the final construction drawings for the bunkhouse.\n* **Phase 2: the bunkhouse (2026--2027).** We're raising about $1 million to build the bunkhouse itself, breaking ground in late spring 2027 and finishing in fall 2027.",
+      "snapshot": "What are the phases of the project?\n* **Phase 0: design (2019--2021).** MITOC worked with Maclay Architects on the initial bunkhouse design. This was funded and completed before the fundraising campaign launched.\n* **Phase 1: site work (2022--2025).** Fundraising from 2022 to 2024 raised about $400,000. In 2024 and 2025 we built the new parking lot, bridge, and access trail, and completed the final construction drawings for the bunkhouse.\n* **Phase 2: the bunkhouse (2026--2027).** We're raising about $900,000 to build the bunkhouse itself, breaking ground in late spring 2027 and finishing in fall 2027.",
       "settings": [
         "bunkhouse_settings.yml facts.phase1_raised",
         "bunkhouse_settings.yml facts.phase2_cost",
@@ -918,7 +1029,7 @@
       "where": "FAQ, Who's involved, question 1",
       "file": "_data/bunkhouse_faqs.yml",
       "locator": "group id=people, questions[0]",
-      "snapshot": "Who's running the project?\nThe project is led by volunteers from the MITOC community, with active participation from MIT Facilities and the MIT Division of Student Life. The design is by Maclay Architects. For names and roles, see [Who's leading the project](/camelot/about#leaders) on the About page."
+      "snapshot": "Who's running the project?\nThe project is led by volunteers from the MITOC community, with active participation from MIT Facilities and the MIT Division of Student Life. The design is by Maclay Architects. For names and roles, see [Bunkhouse team](/camelot/about#leaders) on the About page."
     },
     {
       "id": "FAQ-people-2",
@@ -1016,7 +1127,7 @@
       "where": "Rentals page: bunkhouse section",
       "file": "_pages/rentals/camelot.md",
       "locator": "paragraph starting \"MITOC is building a new bunkhouse\"",
-      "snapshot": "MITOC is building a new bunkhouse at Camelot, with safe, modern sleeping space for 50 people. To read about the project, see how fundraising is going, or donate, visit the [Camelot bunkhouse pages](/camelot). If you'd like to help with work at Camelot, add yourself to [cabin-helpers@mit.edu](http://mailman.mit.edu/mailman/listinfo/cabin-helpers).",
+      "snapshot": "MITOC is building a new bunkhouse at Camelot, with safe, modern sleeping space for 50 people. To read about the project, see how fundraising is going, or donate, visit the [Camelot bunkhouse pages](/camelot).",
       "settings": [
         "bunkhouse_settings.yml facts.bunkhouse_capacity"
       ]
