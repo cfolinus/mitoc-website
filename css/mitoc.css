@@ -198,13 +198,19 @@ p img {
 }
 
 .bunkhouse-banner-full .bunkhouse-banner-inner {
+  flex: 1;                         /* fill the hero's height */
   flex-direction: column;
   align-items: flex-start;
+  justify-content: space-between;  /* titles at the top, thermometer card at the bottom */
+  gap: 20px;
 }
 
+/* Pull the title boxes and the card left by the title boxes' padding, so the
+   title text lines up with the navbar brand and every box shares one left edge. */
 .bunkhouse-banner-full h1,
 .bunkhouse-banner-full h2,
-.bunkhouse-banner-full h3 {
+.bunkhouse-banner-full h3,
+.bunkhouse-banner-full .donations-block {
   margin-left: -10px !important;
 }
 
