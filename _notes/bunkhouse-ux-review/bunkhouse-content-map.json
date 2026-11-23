@@ -1,6 +1,6 @@
 {
   "generated": "2026-11-22",
-  "source_commit": "5846d39",
+  "source_commit": "4b6a794",
   "branch": "bunkhouse-edits",
   "note": "Maps each [label] in bunkhouse-content-review.docx to where that text lives in the repo. snapshot is the text at generation time, for diffing reviewer edits. settings lists values in bunkhouse_settings.yml that appear in the text; edit those there, not in the page.",
   "labels": [
@@ -86,7 +86,7 @@
       "where": "Menu items at the top of every bunkhouse page, in order",
       "file": "_data/bunkhouse_settings.yml",
       "locator": "menu[].title",
-      "snapshot": "About | Project details | FAQs | Donate"
+      "snapshot": "About | Updates | Project details | FAQs | Donate"
     },
     {
       "id": "SUM-1",
@@ -522,7 +522,7 @@
       "where": "Project page, image 1",
       "file": "_pages/camelot/project.md",
       "locator": "<img> #1",
-      "snapshot": "[img /images/bunkhouse/bunkhouse-site-plan.png] Bunkhouse site plan"
+      "snapshot": "[img /images/bunkhouse/compressed/architectural/site-rendering.jpg] Bunkhouse site plan"
     },
     {
       "id": "PR-cap-1",
@@ -587,7 +587,7 @@
       "where": "Project page, image 3",
       "file": "_pages/camelot/project.md",
       "locator": "<img> #3",
-      "snapshot": "[img /images/bunkhouse/bunkhouse-section.png] Bunkhouse cross section"
+      "snapshot": "[img /images/bunkhouse/compressed/architectural/section-perspective.jpg] Bunkhouse cross section"
     },
     {
       "id": "PR-cap-3",

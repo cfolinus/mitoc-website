@@ -11,11 +11,19 @@ plugins:
   - jekyll-sitemap
   - jekyll-target-blank
 
+# Camelot bunkhouse progress posts: _camelot_updates/YYYY-MM-DD-short-name.md
+# How to add one: _notes/bunkhouse-ux-review/how-to-add-an-update.md
+collections:
+  camelot_updates:
+    output: true
+    permalink: /camelot/updates/:title/
+
 exclude:
   - README.md
   - .circleci
   - vendor
   - tools
+  - images/bunkhouse/Images and assets
 
 defaults:
   -
@@ -23,6 +31,12 @@ defaults:
       path: "_pages" # all files in the project
     values:
       layout: "default"
+  -
+    scope:
+      path: ""
+      type: "camelot_updates"
+    values:
+      layout: "camelot_update"
 
 webrick:
   headers:

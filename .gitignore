@@ -1,3 +1,7 @@
 *.swp
 _site
 .DS_Store
+
+# Full-size originals of the bunkhouse photos and drawings. Web copies are in
+# images/bunkhouse/compressed/ (see _notes/bunkhouse-ux-review/how-to-add-an-update.md).
+images/bunkhouse/Images and assets/

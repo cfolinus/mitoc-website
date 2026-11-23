@@ -49,6 +49,8 @@ share_description: "MITOC is building a new bunkhouse at Camelot, its cabin near
 menu:
   - title: About
     href: /camelot/about
+  - title: Updates
+    href: /camelot/updates
   - title: Project details
     href: /camelot/project
   - title: FAQs
