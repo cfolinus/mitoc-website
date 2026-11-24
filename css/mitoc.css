@@ -54,31 +54,77 @@ p img {
   justify-content: center;
 }
 
-/* Bunkhouse colors. The link green is a darker spring green: pure spring green
-   (#00ff7f) is unreadable on white, and this one passes WCAG AA (about 5:1). */
+/* Bunkhouse palette */
 :root {
-  --bunkhouse-green: #2e6b30;      /* forest green: buttons, bars, headings */
-  --bunkhouse-green-dark: #1f4d22; /* borders and hover */
-  --bunkhouse-link: #14804a;       /* text links */
+  --bunkhouse-primary: #004d1a;        /* forest, canopy: nav, headers, footer, hero, body text */
+  --bunkhouse-secondary: #1966ff;      /* lakes, sky: buttons, icons, active states, charts */
+  --bunkhouse-secondary-dark: #0d4fd6; /* darker secondary */
+  --bunkhouse-navy: #002896;           /* donate buttons and text links */
+  --bunkhouse-navy-dark: #001a66;      /* donate button bottom edge and hover */
+  --bunkhouse-navbar: #00330f;         /* navbar: deeper forest green than primary */
+  --bunkhouse-accent: #aaff33;         /* new growth, sunlight: highlights, text and focus rings on dark green */
+  --bunkhouse-neutral: #f2f4f8;        /* cloud, trail dust */
+  --bunkhouse-page: #f7f3ed;           /* cream page background */
+  --bunkhouse-link: var(--bunkhouse-navy); /* navy text links */
+  --bunkhouse-link-visited: #750062;   /* plum visited links */
+  --bunkhouse-link-hover-bg: #99ebff;  /* aqua behind hovered links */
 }
 
 .bunkhouse-body {
   padding-top: 50px;
+  background-color: var(--bunkhouse-page);
+  color: #000;
 }
 
-/* Text links in bunkhouse page content: green and bold. Links with a class
+/* Headings in page content are primary green (headings on green bands stay white) */
+.bunkhouse-container h1,
+.bunkhouse-container h2:not(.faq-group-heading),
+.bunkhouse-container h3,
+.bunkhouse-container h4 {
+  color: var(--bunkhouse-primary);
+}
+
+/* Accent focus rings on dark-green bars */
+.bunkhouse-navbar a:focus-visible,
+.bunkhouse-banner-full a:focus-visible,
+.bunkhouse-banner-compact a:focus-visible {
+  outline: 2px solid var(--bunkhouse-accent);
+  outline-offset: 2px;
+}
+
+/* Text links in bunkhouse page content: navy, bold, and always underlined (navy and
+   forest green are too close to tell apart by color alone). Links with a class
    (buttons) style themselves; the FAQ jump pills override this further down. */
 .bunkhouse-container a:not([class]),
 .bunkhouse-container a.faq-back-to-top {
   color: var(--bunkhouse-link);
   font-weight: bold;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+}
+
+.bunkhouse-container a:not([class]):visited,
+.bunkhouse-container a.faq-back-to-top:visited {
+  color: var(--bunkhouse-link-visited);
 }
 
 .bunkhouse-container a:not([class]):hover,
+.bunkhouse-container a.faq-back-to-top:hover {
+  color: var(--bunkhouse-link);
+  background-color: var(--bunkhouse-link-hover-bg);
+  text-decoration-thickness: 3px;
+}
+
 .bunkhouse-container a:not([class]):focus,
-.bunkhouse-container a.faq-back-to-top:hover,
 .bunkhouse-container a.faq-back-to-top:focus {
-  color: var(--bunkhouse-green-dark);
+  color: var(--bunkhouse-link);
+}
+
+.bunkhouse-container a:not([class]):focus-visible,
+.bunkhouse-container a.faq-back-to-top:focus-visible {
+  outline: 3px solid var(--bunkhouse-secondary);
+  outline-offset: 2px;
 }
 
 .bunkhouse-body p,
@@ -90,8 +136,9 @@ p img {
 .bunkhouse-footer {
   margin-top: 30px;
   padding: 20px 0;
-  border-top: 1px solid #e5e5e5;
-  color: #777;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  background: var(--bunkhouse-page);
+  color: #555;
   font-size: 1.4rem;
 }
 
@@ -99,6 +146,11 @@ p img {
 .bunkhouse-footer a:hover,
 .bunkhouse-footer a:focus {
   color: inherit;
+}
+
+.bunkhouse-footer a:focus-visible {
+  outline: 3px solid var(--bunkhouse-secondary);
+  outline-offset: 2px;
 }
 
 .bunkhouse-wrapper {
@@ -143,7 +195,8 @@ p img {
 /* Below 768px Bootstrap gives .container no width, and its auto margins would
    shrink it to fit and center it; make it full width instead. */
 @media (max-width: 767px) {
-  .bunkhouse-banner-inner {
+  .bunkhouse-banner-inner,
+  .bunkhouse-hero-title {
     width: 100%;
   }
 }
@@ -163,7 +216,7 @@ p img {
 .bunkhouse-banner h1,
 .bunkhouse-banner h2,
 .bunkhouse-banner h3 {
-  color: #151515;
+  color: var(--bunkhouse-primary);
   padding: 2px 10px;
   text-align: left;
 }
@@ -189,51 +242,67 @@ p img {
   display: block;
 }
 
-/* Full hero: overview page only (front matter `hero: full`). Everything is
-   left-aligned; the title boxes are pulled left by their padding so the text
-   itself lines up with the navbar brand. */
+/* Full hero: overview page only (front matter `hero: full`). The title sits on
+   a full-width forest-green band; below it the hero splits in half, with the
+   subtitle, tagline, and thermometer card on green at the left and the drawing
+   filling the right half of the screen. All the text starts at the container's
+   left edge, so it lines up with the navbar brand and the page text below. */
 .bunkhouse-banner-full {
-  justify-content: center;
-  padding: 20px 0;
+  background-image: none;
+  background-color: var(--bunkhouse-primary);
+  padding: 0;
+}
+
+.bunkhouse-banner-full h1,
+.bunkhouse-banner-full h2,
+.bunkhouse-banner-full h3 {
+  background: none;
+  color: #fff;
+  padding: 0;
+}
+
+.bunkhouse-hero-title h1 {
+  font-size: 3.2rem;
+  margin: 0;
+  padding: 20px 0 10px;
+}
+
+.bunkhouse-hero-split {
+  position: relative;
 }
 
 .bunkhouse-banner-full .bunkhouse-banner-inner {
-  flex: 1;                         /* fill the hero's height */
   flex-direction: column;
   align-items: flex-start;
-  justify-content: space-between;  /* titles at the top, thermometer card at the bottom */
+  justify-content: space-between;  /* subtitle at the top, thermometer card at the bottom */
   gap: 20px;
-}
-
-/* Pull the title boxes and the card left by the title boxes' padding, so the
-   title text lines up with the navbar brand and every box shares one left edge. */
-.bunkhouse-banner-full h1,
-.bunkhouse-banner-full h2,
-.bunkhouse-banner-full h3,
-.bunkhouse-banner-full .donations-block {
-  margin-left: -10px !important;
-}
-
-.bunkhouse-banner-full h1 {
-  font-size: 3.2rem;
-  margin: 0 0 10px;
+  padding-bottom: 20px;
 }
 
 .bunkhouse-banner-full h2 {
-  font-size: 2.4rem;
-  margin: 0 0 10px;
+  font-size: 2rem;
+  margin: 0 0 8px;
 }
 
 .bunkhouse-banner-full h3 {
-  font-size: 1.8rem;
-  margin: 0 0 12px;
+  font-size: 1.6rem;
+  line-height: 1.3;
+  margin: 0;
+}
+
+/* Tagline: each phrase on its own line, so the separator dot is hidden */
+.hero-tagline-part {
+  display: block;
+}
+.hero-tagline-sep {
+  display: none;
 }
 
 .bunkhouse-banner-full .donations-block {
-  /* More opaque than the compact strip so the small "As of" line stays readable */
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--bunkhouse-page);
+  border-radius: 6px;
   padding: 12px 20px;
-  min-width: min(300px, 90%);
+  min-width: min(300px, 100%);
 }
 
 .bunkhouse-banner-full .donations-amount {
@@ -243,27 +312,55 @@ p img {
 .bunkhouse-banner-full .bunkhouse-donate-button {
   display: block;
   width: fit-content;
-  margin: 4px auto 0;
+  margin: 4px 0 0;  /* left-aligned with the text above */
   padding: 6px 36px;
   font-size: 1.8rem;
 }
 
+/* Phones: the drawing sits below the green text block at full width */
+.bunkhouse-hero-image {
+  background-image: url(/images/bunkhouse/bunkhouse-exterior-rendering.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50% 34%;
+  height: 240px;
+}
+
 @media (min-width: 768px) {
-  .bunkhouse-banner-full {
-    min-height: 57vh;
-    padding: 30px 0;
-  }
-  .bunkhouse-banner-full h1 {
+  .bunkhouse-hero-title h1 {
     font-size: 6rem;
-    margin-bottom: 15px;
+    padding: 30px 0 15px;
+  }
+  /* Tablets: the drawing fills the right half of the screen, edge to edge.
+     Wider screens move the split to a third (below). */
+  .bunkhouse-hero-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 50%;
+    height: auto;
+  }
+  /* The text keeps to the left half, with a gutter before the drawing */
+  .bunkhouse-banner-full .bunkhouse-banner-titles,
+  .bunkhouse-banner-full .donations-block {
+    max-width: calc(50% - 30px);
+  }
+  .bunkhouse-banner-full .donations-block {
+    min-width: 0;
+    width: calc(50% - 30px);
+  }
+  .bunkhouse-banner-full .bunkhouse-banner-inner {
+    min-height: 45vh;
+    padding-top: 10px;
+    padding-bottom: 30px;
   }
   .bunkhouse-banner-full h2 {
-    font-size: 4rem;
-    margin-bottom: 15px;
+    font-size: 3rem;
+    margin-bottom: 12px;
   }
   .bunkhouse-banner-full h3 {
-    font-size: 2.4rem;
-    margin-bottom: 15px;
+    font-size: 2rem;
   }
   .bunkhouse-banner-full .donations-block {
     padding: 20px;
@@ -277,13 +374,43 @@ p img {
   }
 }
 
+/* Desktop: the text column takes the left third of the container and the
+   drawing runs from there to the right edge of the screen. The image's left
+   edge is the container's left content edge (50% - half the content width)
+   plus a third of the content width (970px container → 940px of content,
+   1170px → 1140px). */
+@media (min-width: 992px) {
+  .bunkhouse-hero-image {
+    width: auto;
+    left: calc(50% - 470px + 940px / 3);
+  }
+  .bunkhouse-banner-full .bunkhouse-banner-titles,
+  .bunkhouse-banner-full .donations-block {
+    max-width: calc(100% / 3 - 30px);
+  }
+  .bunkhouse-banner-full .donations-block {
+    width: calc(100% / 3 - 30px);
+  }
+}
+@media (min-width: 1200px) {
+  .bunkhouse-hero-image {
+    left: calc(50% - 570px + 1140px / 3);
+  }
+}
+
+/* Home: page text starts at the container's left edge (not centered), so it
+   lines up with the navbar brand and the hero text. */
+.bunkhouse-wrapper-left {
+  justify-content: flex-start;
+}
+
 /* Compact strip: every other bunkhouse page. A solid forest-green band with
    white titles and a white card for the thermometer; no drawing. */
 .bunkhouse-banner-compact {
   justify-content: center;
   padding: 14px 0;
   background-image: none;
-  background-color: var(--bunkhouse-green);
+  background-color: var(--bunkhouse-primary);
 }
 
 .bunkhouse-banner-compact .bunkhouse-banner-inner {
@@ -299,7 +426,7 @@ p img {
 }
 
 .bunkhouse-banner-compact .donations-block {
-  background: #fff;
+  background: var(--bunkhouse-page);
   border-radius: 6px;
 }
 
@@ -350,6 +477,7 @@ p img {
 }
 
 .bunkhouse-banner-compact .donations-stats > .thermometer,
+.bunkhouse-banner-compact .donations-stats > .thermometer-phases,
 .bunkhouse-banner-compact .donations-stats > .donations-to-go,
 .bunkhouse-banner-compact .donations-stats > .donations-goal,
 .bunkhouse-banner-compact .donations-stats > .donations-note {
@@ -390,13 +518,39 @@ p img {
 }
 
 .thermometer {
-  height: 10px;
+  position: relative;
+  height: 12px;
   border-radius: 40px;
   background-color: #dae5eb;
+  overflow: hidden;
 }
 
 .donation-progress {
-  background: var(--bunkhouse-green);
+  height: 100%;
+  background: var(--bunkhouse-secondary);
+}
+
+/* White notch where Phase 1 ends and Phase 2 begins */
+.thermometer-phase-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  margin-left: -1.5px;
+  background: white;
+}
+
+/* "Phase 1 · $400k" and "Phase 2 · $900k" under their parts of the bar */
+.thermometer-phases {
+  display: flex;
+  margin-top: 2px;
+  font-size: 1.2rem;
+  color: inherit;
+  white-space: nowrap;
+}
+
+.thermometer-phases span + span {
+  padding-left: 6px;
 }
 
 /* "$X to go" and the goal, each on its own line under the thermometer */
@@ -411,7 +565,7 @@ p img {
 .donations-stats .donations-note {
   margin: 2px 0 0;
   font-size: 1.4rem;
-  color: #333;
+  color: inherit;
 }
 
 .bunkhouse-donate-button {
@@ -437,8 +591,8 @@ p img {
 .bunkhouse-donate-button {
   font-weight: 600;
   padding: 0.5625rem 0.75rem;
-  background: var(--bunkhouse-green);
-  border-bottom: 2px solid var(--bunkhouse-green-dark);
+  background: var(--bunkhouse-navy);
+  border-bottom: 2px solid var(--bunkhouse-navy-dark);
   border-radius: 30px;
   color: white;
   padding: 0.5625rem 0.75rem;
@@ -447,7 +601,7 @@ p img {
 
 .bunkhouse-donate-button:hover,
 .bunkhouse-donate-button:focus {
-  background: var(--bunkhouse-green-dark);
+  background: var(--bunkhouse-navy-dark);
   color: #fff;
   text-decoration: none;
 }
@@ -497,8 +651,8 @@ p img {
   margin: 10px 0 8px;
   padding: 8px 32px;
   border-radius: 40px;
-  background: var(--bunkhouse-green);
-  border-bottom: 2px solid var(--bunkhouse-green-dark);
+  background: var(--bunkhouse-navy);
+  border-bottom: 2px solid var(--bunkhouse-navy-dark);
   color: #fff;
   font-size: 22px;
   font-weight: bold;
@@ -514,7 +668,7 @@ p img {
 }
 .bunkhouse-container a.bunkhouse-give-button:hover,
 .bunkhouse-container a.bunkhouse-give-button:focus {
-  background: var(--bunkhouse-green-dark);
+  background: var(--bunkhouse-navy-dark);
   color: #fff;
 }
 .bunkhouse-body .bunkhouse-container p.bunkhouse-give-note {
@@ -535,17 +689,17 @@ p img {
   display: inline-block;
   font-weight: normal;
   padding: 10px 16px; /* ~44px tall tap target */
-  border: 1px solid var(--bunkhouse-green);
+  border: 1px solid var(--bunkhouse-secondary);
   border-radius: 30px;
-  color: var(--bunkhouse-green-dark);
+  color: var(--bunkhouse-secondary);
   font-size: large;
   line-height: 1.3;
 }
 
 .bunkhouse-container .faq-jump-list a:hover,
 .bunkhouse-container .faq-jump-list a:focus {
-  background: var(--bunkhouse-green-dark);
-  border-color: var(--bunkhouse-green-dark);
+  background: var(--bunkhouse-secondary);
+  border-color: var(--bunkhouse-secondary);
   color: white;
   text-decoration: none;
 }
@@ -553,7 +707,7 @@ p img {
 .faq-group-heading {
   margin: 56px 0 8px;
   padding: 10px 14px;
-  background: var(--bunkhouse-green);
+  background: var(--bunkhouse-primary);
   color: white;
   font-size: 3rem;
   font-weight: 700;
@@ -563,11 +717,11 @@ p img {
 .faq-question {
   margin: 28px 0 6px;
   padding-left: 12px;
-  border-left: 4px solid var(--bunkhouse-green);
+  border-left: 4px solid var(--bunkhouse-primary);
   font-size: 2.1rem;
   font-weight: 600;
   line-height: 1.3;
-  color: #151515;
+  color: var(--bunkhouse-primary);
 }
 
 /* Answers: lighter weight and softer color than the questions above them */
@@ -575,7 +729,7 @@ p img {
 .faq-question ~ ul,
 .faq-question ~ blockquote {
   margin-left: 16px;
-  color: #444;
+  color: inherit;
 }
 
 .faq-question ~ p,
@@ -778,30 +932,30 @@ details[open] summary::before {
   margin-bottom: 0;
 }
 
-/* Bunkhouse navbar: dark forest green instead of Bootstrap's black. Darker than the
-   compact header strip below it so the two read as separate bars. Main site unchanged. */
+/* Bunkhouse navbar: deep forest green instead of Bootstrap's black, darker than the
+   green header strip below it so the two read as separate bars. Main site unchanged. */
 .navbar-inverse.bunkhouse-navbar {
-  background-color: var(--bunkhouse-green-dark);
-  border-color: #163a19;
+  background-color: var(--bunkhouse-navbar);
+  border-color: var(--bunkhouse-navbar);
 }
 
 .navbar-inverse.bunkhouse-navbar .navbar-brand,
 .navbar-inverse.bunkhouse-navbar .navbar-nav > li > a {
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .navbar-inverse.bunkhouse-navbar .navbar-brand:hover,
 .navbar-inverse.bunkhouse-navbar .navbar-brand:focus,
 .navbar-inverse.bunkhouse-navbar .navbar-nav > li > a:hover,
 .navbar-inverse.bunkhouse-navbar .navbar-nav > li > a:focus {
-  color: #fff;
+  color: var(--bunkhouse-accent);
 }
 
 .navbar-inverse.bunkhouse-navbar .navbar-nav > .active > a,
 .navbar-inverse.bunkhouse-navbar .navbar-nav > .active > a:hover,
 .navbar-inverse.bunkhouse-navbar .navbar-nav > .active > a:focus {
-  color: #fff;
-  background-color: #163a19;
+  color: var(--bunkhouse-accent);
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .navbar-inverse.bunkhouse-navbar .navbar-toggle {
@@ -810,11 +964,11 @@ details[open] summary::before {
 
 .navbar-inverse.bunkhouse-navbar .navbar-toggle:hover,
 .navbar-inverse.bunkhouse-navbar .navbar-toggle:focus {
-  background-color: #163a19;
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .navbar-inverse.bunkhouse-navbar .navbar-collapse {
-  border-color: #163a19;
+  border-color: rgba(255, 255, 255, 0.15);
 }
 
 .camelot-banner .links-box {

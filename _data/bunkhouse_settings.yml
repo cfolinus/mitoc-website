@@ -9,6 +9,9 @@ donations_amount: 468000
 donations_as_of: November 2026
 # Must match facts.total_cost below.
 donations_goal: 1300000
+# Where the thermometer splits into Phase 1 and Phase 2 (Phase 2 is the rest of
+# donations_goal). Must match facts.phase1_raised and facts.phase2_cost below.
+phase1_goal: 400000
 # Key project facts, written once and inserted everywhere they appear:
 #   pages and includes:  {{ site.data.bunkhouse_settings.facts.total_cost }}
 #   bunkhouse_faqs.yml:  %total_cost%  (Liquid doesn't run inside data files)
@@ -42,7 +45,7 @@ summary:
 # only in the full hero on the overview page.
 hero_title: Camelot bunkhouse
 hero_subtitle: Coming 2027
-hero_tagline: Phase 1 complete · Phase 2 fundraising now
+hero_tagline: Phase 1 built · Phase 2 fundraising now
 # Shown in link previews (Slack, email, social posts) and often under the page
 # in search results. A page can override it with `description:` in its front matter.
 share_description: "MITOC is building a new bunkhouse at Camelot, its cabin near Rumney, NH. Phase 1 is complete; help us raise the rest to build in 2027."

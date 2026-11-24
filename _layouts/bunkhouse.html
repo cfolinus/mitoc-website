@@ -10,34 +10,61 @@ layout: bunkhouse_base
   Pages with `hero: full` in their front matter (the overview) get the large
   hero. Every other page gets a compact strip with the same facts in one row.
   The inner .container lines the titles up with the navbar brand above.
+  The full hero puts the title on a full-width green band, then splits below
+  it: the subtitle, tagline, and thermometer on green at the left, and the
+  drawing filling the right half of the screen.
 {% endcomment %}
 <div class="bunkhouse-banner {% if page.hero == 'full' %}bunkhouse-banner-full{% else %}bunkhouse-banner-compact{% endif %}">
+  {% if page.hero == 'full' %}
+  <div class="container bunkhouse-hero-title">
+    <h1>{{ settings.hero_title }}</h1>
+  </div>
+  <div class="bunkhouse-hero-split">
+  {% endif %}
   <div class="container bunkhouse-banner-inner">
   <div class="bunkhouse-banner-titles">
-    <h1>{{ settings.hero_title }}</h1>
+    {% unless page.hero == 'full' %}<h1>{{ settings.hero_title }}</h1>{% endunless %}
     <h2>{{ settings.hero_subtitle }}</h2>
-    {% if page.hero == 'full' %}<h3>{{ settings.hero_tagline }}</h3>{% endif %}
+    {% comment %} Each " · "-separated phrase of the tagline goes on its own line. {% endcomment %}
+    {% if page.hero == 'full' %}{% assign tagline_parts = settings.hero_tagline | split: ' · ' %}<h3>{% for part in tagline_parts %}<span class="hero-tagline-part">{{ part }}</span>{% unless forloop.last %}<span class="hero-tagline-sep"> · </span>{% endunless %}{% endfor %}</h3>{% endif %}
   </div>
   <div class="donations-block">
     <div class="donations-stats">
       <strong class="donations-amount"
         >${{ settings.donations_amount | thousands_separated }}</strong
       >
-      <p>RAISED BY <strong>{{ settings.number_donors }}</strong> PEOPLE</p>
-      <div class="thermometer">
-        {% assign goal_float = settings.donations_goal | times: 1.0 %}
-        {% assign total_donations_float = settings.donations_amount | times: 1.0 %}
-        {% assign progress_total = total_donations_float | divided_by: goal_float | times: 100 %}
-        <div
-          class="thermometer donation-progress"
-          style="width: {{progress_total | round: 2}}%"
-        ></div>
+      <p>RAISED BY <strong>{{ settings.number_donors }}</strong> DONORS</p>
+      {% comment %}
+        One bar split into Phase 1 and Phase 2 at their share of the total goal;
+        the fill shows progress across both phases.
+      {% endcomment %}
+      {% assign goal_float = settings.donations_goal | times: 1.0 %}
+      {% assign total_donations_float = settings.donations_amount | times: 1.0 %}
+      {% assign progress_total = total_donations_float | divided_by: goal_float | times: 100 %}
+      {% if progress_total > 100 %}{% assign progress_total = 100 %}{% endif %}
+      {% assign phase1_pct = settings.phase1_goal | times: 1.0 | divided_by: goal_float | times: 100 | round: 2 %}
+      {% assign phase2_pct = 100 | minus: phase1_pct %}
+      {% assign phase2_goal = settings.donations_goal | minus: settings.phase1_goal %}
+      <div
+        class="thermometer"
+        role="progressbar"
+        aria-label="Raised toward the ${{ settings.donations_goal | thousands_separated }} goal"
+        aria-valuemin="0"
+        aria-valuemax="{{ settings.donations_goal }}"
+        aria-valuenow="{{ settings.donations_amount }}"
+      >
+        <div class="donation-progress" style="width: {{ progress_total | round: 2 }}%"></div>
+        <div class="thermometer-phase-divider" style="left: {{ phase1_pct }}%"></div>
+      </div>
+      <div class="thermometer-phases" aria-hidden="true">
+        <span style="width: {{ phase1_pct }}%">Phase 1 · ${{ settings.phase1_goal | divided_by: 1000 }}k</span>
+        <span style="width: {{ phase2_pct }}%">Phase 2 · ${{ phase2_goal | divided_by: 1000 }}k</span>
       </div>
       {% assign to_go = settings.donations_goal | minus: settings.donations_amount %}
       {% if to_go > 0 %}<p class="donations-to-go"><strong>${{ to_go | thousands_separated }}</strong> to go</p>{% endif %}
       <p class="donations-goal">Goal: <strong>${{ settings.donations_goal | thousands_separated }}</strong></p>
       <p class="donations-note">
-        As of {{ settings.donations_as_of }}{% if page.hero == 'full' %} · Gifts of every size count{% endif %}
+        As of {{ settings.donations_as_of }}
       </p>
     </div>
     {% comment %} On the Donate page the hero button goes straight to MIT's form. {% endcomment %}
@@ -48,8 +75,12 @@ layout: bunkhouse_base
     {% endif %}
   </div>
   </div>
+  {% if page.hero == 'full' %}
+  <div class="bunkhouse-hero-image" role="img" aria-label="Drawing of the new Camelot bunkhouse"></div>
+  </div>
+  {% endif %}
 </div>
-<div class="container bunkhouse-wrapper">
+<div class="container bunkhouse-wrapper{% if page.hero == 'full' %} bunkhouse-wrapper-left{% endif %}">
   <div class="bunkhouse-container">
     {% if page.title and page.hero != 'full' %}<h1 class="bunkhouse-page-title">{{ page.title }}</h1>{% endif %}
     {{content}}
