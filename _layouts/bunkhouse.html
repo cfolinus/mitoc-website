@@ -26,7 +26,7 @@ layout: bunkhouse_base
     Phase 2), a column for each phase, the Donate button, and the running total.
     Phase 1 fills first; anything raised beyond it fills Phase 2. Home stacks
     it all in a tall card; every other page gets a compact version with the
-    button at the right.
+    button at the right (below the bar on small phones).
   {% endcomment %}
   {% assign phase2_goal = settings.donations_goal | minus: settings.phase1_goal %}
   {% assign phase1_raised = settings.donations_amount | at_most: settings.phase1_goal %}

@@ -62,14 +62,13 @@ p img {
   --bunkhouse-muted: #6b6b6b;          /* secondary text on cream (4.8:1) */
   --bunkhouse-secondary: #1966ff;      /* lakes, sky: buttons, icons, active states, charts */
   --bunkhouse-secondary-dark: #0d4fd6; /* darker secondary */
-  --bunkhouse-navy: #002896;           /* text links */
   --bunkhouse-navbar: #00330f;         /* navbar: deeper forest green than primary */
   --bunkhouse-accent: #aaff33;         /* new growth, sunlight: highlights, text and focus rings on dark green */
   --bunkhouse-neutral: #f2f4f8;        /* cloud, trail dust */
   --bunkhouse-page: #f7f3ed;           /* cream page background */
-  --bunkhouse-link: var(--bunkhouse-navy); /* navy text links */
-  --bunkhouse-link-visited: #750062;   /* plum visited links */
-  --bunkhouse-link-hover-bg: #99ebff;  /* aqua behind hovered links */
+  --bunkhouse-link: var(--bunkhouse-primary);          /* forest green text links */
+  --bunkhouse-link-visited: var(--bunkhouse-navbar);   /* deeper forest green visited links */
+  --bunkhouse-link-hover-bg: var(--bunkhouse-accent);  /* bright green behind hovered links */
 }
 
 .bunkhouse-body {
@@ -94,8 +93,8 @@ p img {
   outline-offset: 2px;
 }
 
-/* Text links in bunkhouse page content: navy, bold, and always underlined (navy and
-   forest green are too close to tell apart by color alone). Links with a class
+/* Text links in bunkhouse page content: forest green, bold, and always underlined
+   (links share the body text's color, so the underline marks them). Links with a class
    (buttons) style themselves; the FAQ jump pills override this further down. */
 .bunkhouse-container a:not([class]),
 .bunkhouse-container a.faq-back-to-top {
@@ -527,9 +526,9 @@ p img {
 }
 
 /* Compact card: the goal, bar, and phases on the left, the Donate button
-   beside them, and the running total along the bottom. The goal and total
-   are left-aligned; each phase's name and amount share a line, wrapping onto
-   two if its part of the bar is too narrow. */
+   beside them (below them on phones), and the running total along the bottom.
+   The goal and total are left-aligned; each phase stacks its name, amount,
+   and status on three lines at every screen size. */
 .bunkhouse-banner .donations-card-compact {
   --phase-gap: 3px;
   display: grid;
@@ -566,14 +565,6 @@ p img {
   margin-bottom: 0;
 }
 
-.donations-card-compact .phase-heading {
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: baseline;
-  column-gap: 6px;
-}
-
 .donations-card-compact .phase-name {
   font-size: 1.4rem;
 }
@@ -602,6 +593,21 @@ p img {
   font-size: 1.8rem;
   padding: 6px 24px;
   margin-bottom: 0;
+}
+
+/* Small phones: the Donate button drops below the bar and phases, full width */
+@media (max-width: 479px) {
+  .bunkhouse-banner .donations-card-compact {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "body"
+      "button"
+      "note";
+  }
+  .bunkhouse-banner-compact .bunkhouse-donate-button {
+    width: 100%;
+    margin-top: 10px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -635,7 +641,7 @@ p img {
 
 .bunkhouse-donate-button:hover,
 .bunkhouse-donate-button:visited {
-  color: white;
+  color: var(--bunkhouse-page);
 }
 
 @media (min-width: 768px) {
@@ -651,7 +657,7 @@ p img {
   background: var(--bunkhouse-primary);
   border-bottom: 2px solid var(--bunkhouse-primary-dark);
   border-radius: 30px;
-  color: white;
+  color: var(--bunkhouse-page);
   padding: 0.5625rem 0.75rem;
   margin-bottom: 20px;
 }
@@ -659,7 +665,7 @@ p img {
 .bunkhouse-donate-button:hover,
 .bunkhouse-donate-button:focus {
   background: var(--bunkhouse-primary-dark);
-  color: #fff;
+  color: var(--bunkhouse-accent);
   text-decoration: none;
 }
 
@@ -710,7 +716,7 @@ p img {
   border-radius: 40px;
   background: var(--bunkhouse-primary);
   border-bottom: 2px solid var(--bunkhouse-primary-dark);
-  color: #fff;
+  color: var(--bunkhouse-page);
   font-size: 22px;
   font-weight: bold;
   text-align: center;
@@ -726,7 +732,7 @@ p img {
 .bunkhouse-container a.bunkhouse-give-button:hover,
 .bunkhouse-container a.bunkhouse-give-button:focus {
   background: var(--bunkhouse-primary-dark);
-  color: #fff;
+  color: var(--bunkhouse-accent);
 }
 .bunkhouse-body .bunkhouse-container p.bunkhouse-give-note {
   margin-bottom: 30px;
@@ -746,17 +752,24 @@ p img {
   display: inline-block;
   font-weight: normal;
   padding: 10px 16px; /* ~44px tall tap target */
-  border: 1px solid var(--bunkhouse-secondary);
+  border: 1px solid var(--bunkhouse-primary);
   border-radius: 30px;
-  color: var(--bunkhouse-secondary);
+  background: white;
+  color: var(--bunkhouse-primary);
   font-size: large;
   line-height: 1.3;
+  text-decoration: none;
+}
+
+.bunkhouse-container .faq-jump-list a:visited {
+  color: var(--bunkhouse-primary);
 }
 
 .bunkhouse-container .faq-jump-list a:hover,
-.bunkhouse-container .faq-jump-list a:focus {
-  background: var(--bunkhouse-secondary);
-  border-color: var(--bunkhouse-secondary);
+.bunkhouse-container .faq-jump-list a:focus,
+.bunkhouse-container .faq-jump-list a:active {
+  background: var(--bunkhouse-primary);
+  border-color: var(--bunkhouse-primary);
   color: white;
   text-decoration: none;
 }
@@ -899,6 +912,20 @@ p img {
 
 .camelot-banner-actions .bunkhouse-donate-button {
   margin-bottom: 0;
+}
+
+/* Donate buttons in the main-site banner: dark blue with white text */
+.camelot-banner-wrapper .bunkhouse-donate-button,
+.camelot-banner-wrapper .bunkhouse-donate-button:visited {
+  background: #002896;
+  border-bottom-color: #001a66;
+  color: white;
+}
+
+.camelot-banner-wrapper .bunkhouse-donate-button:hover,
+.camelot-banner-wrapper .bunkhouse-donate-button:focus {
+  background: #001a66;
+  color: white;
 }
 
 .camelot-banner-learn-more {
