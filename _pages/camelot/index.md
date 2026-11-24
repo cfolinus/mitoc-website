@@ -12,9 +12,9 @@ hero: full
 
 ## Where things stand
 
-Phase 1, which was finished in spring 2025, included construction of a new bridge, off-street parking lot, and access trail, as well as design and project support from architects, structural engineers, geotechnical engineers, mechanical, electrical, and plumbing (MEP) engineers, and MIT Facilities.
+In Phase 1, which finished in Spring 2025, we progressed to a completed design and full construction documents for the bunkhouse as well as construction of a new bridge, off-street parking lot, and access trail. Design and documentation included work from structural, MEP, and architectural disciplines and completed a geotechnical site survey. We also made significant progress with MIT administrators and facilities to approve the construction project and plans.
 
-We are now raising funds for Phase 2, construction of the bunkhouse itself. We plan to break ground in {{ site.data.bunkhouse_settings.facts.groundbreaking }} and finish in {{ site.data.bunkhouse_settings.facts.completion }}, but construction can only start once the full {{ site.data.bunkhouse_settings.facts.total_cost }} is raised. [See how the money will be spent.](/camelot/about#funding)
+We are now raising funds for Phase 2, construction of the bunkhouse itself. We plan to break ground in {{ site.data.bunkhouse_settings.facts.groundbreaking }} and finish in {{ site.data.bunkhouse_settings.facts.completion }}, but construction can only start once we reach our overall {{ site.data.bunkhouse_settings.facts.total_cost }} fundraising goal. [See how the money will be spent.](/camelot/about#funding)
 
 {% include camelot_latest_update.html %}
 

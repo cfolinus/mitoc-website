@@ -40,6 +40,18 @@
       answer: |
         The safety requirements for a structure that can legally sleep %bunkhouse_capacity% people are quite different from the safety requirements for a single-family residence. The cost of the necessary modifications to a typical house would be a large fraction of the cost of building a new bunkhouse. We also want to preserve the special outdoor space and rustic atmosphere of MITOC cabins.
 
+    - question: Why not use prefab structures, tiny houses, or yurts?
+      answer: |
+        Yurts and prefab buildings cost much less up front, but they don't meet our long-term club needs. Our main concerns are durability, codes/safety, and heating, as well as our experience at Intervale, which has a (non-heated) yurt.
+
+        While yurts and prefab buildings are significantly cheaper, they don’t last nearly as long, especially under heavy use through harsh New England winters. Based on our experience with yurts at Intervale, we expect a yurt to last a decade or two at most. Building and maintaining a yurt village at Camelot would require a new construction project every several years. Instead, we want to make a generational investment through a permanent structure that better meets club needs and lasts a century or more.
+
+        Building new sleeping space for %bunkhouse_capacity% club members requires meeting modern building codes and MIT's standards for facilities which house students. These have come a long way since 1973!
+
+        Additionally, yurts are hard to keep warm (inefficient and poorly insulated) and usually rely on wood stoves if heated. This means keyholders need fire safety training, which is a current pain point with the current Camelot cabin, as well as an ongoing risk of fire. Because the bunkhouse will be well-insulated and energy efficient, it won't require much electric heat to stay warm when in use, and use won't require fire safety training.
+
+        We have also found that the Intervale yurt sees relatively little use. Given the choice, most people would rather sleep in the cabin, even in the summer when heating is not a priority.
+
     - question: Why not buy new land for a bunkhouse somewhere else?
       answer: |
         The current Camelot property meets the needs of the club. Although it is about an hour away from the higher peaks of the White Mountains, this distance does not pose difficulty for running hiking trips out of Camelot. We do not wish to give up on the existing improvements to Camelot nor our working relationship with the local authorities. And, we like the neighborhood, including the Rumney cliffs, Sculptured Rocks, and the wonderful new Green Woodlands preserve.
@@ -88,7 +100,7 @@
 
     - question: When will construction start?
       answer: |
-        It already has! In spring of 2025, we completed Phase 1: the new parking lot, access trail, and bridge.
+        It already has! In Spring 2025, we completed Phase 1: the new parking lot, access trail, and bridge.
 
         For Phase 2, construction of the bunkhouse itself, more fundraising is needed. We plan to break ground in %groundbreaking%, once the full %total_cost% has been raised.
 

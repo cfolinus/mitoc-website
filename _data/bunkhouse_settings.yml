@@ -26,8 +26,8 @@ facts:
   distance_to_bunkhouse: "about 200 meters"
   walk_from_parking: "about 200 meters"
   parking_spaces: "20"
-  groundbreaking: "late spring 2027"
-  completion: "fall 2027"
+  groundbreaking: "late Spring 2027"
+  completion: "Fall 2027"
   phase1_raised: "about $400,000"
   phase2_cost: "about $900,000"
   fund_number: "3892696"
@@ -39,7 +39,7 @@ number_donors: 314
 #   {% include bunkhouse_summary.html part='what_is_camelot' %}
 #   {% include bunkhouse_summary.html part='why' %}
 summary:
-  what_is_camelot: "For over 50 years, the MIT Outing Club's Camelot cabin has been a vital resource and center of the club's activities. Set on about 20 acres near Rumney, NH, Camelot hosts official club circuses, open cabins, and social events and is a base camp for individual club members using the cabin for personal adventures. Many MITOC members are first introduced to outdoor recreation and the club community through Camelot-based events."
+  what_is_camelot: "For over 50 years, the MIT Outing Club's Camelot cabin has been a vital resource and center of the club's activities. Set on about 20 acres near Rumney, NH, Camelot hosts official club circuses, open cabins, and social events and is a base camp for individual club members using the cabin for personal adventures. Camelot sees over 1000 person-nights each year, and many MITOC members are first introduced to outdoor recreation and the club community through Camelot-based events."
   why: "The existing cabin is nearing the end of its usable life. Camelot was built in 1973, largely by MIT undergrads, and will not remain safe to sleep in for much longer. The new bunkhouse will give MITOC safe, comfortable sleeping space for %bunkhouse_capacity% people."
 # Hero text shown at the top of every /camelot page.
 hero_title: Camelot bunkhouse

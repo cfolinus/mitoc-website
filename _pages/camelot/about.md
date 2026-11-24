@@ -52,8 +52,8 @@ The bunkhouse project will cost {{ site.data.bunkhouse_settings.facts.total_cost
 
 This includes construction of the new parking lot, which was necessary for Town of Groton approval; construction of the new access trail and bridge, which are necessary for construction vehicles and fire safety; construction of the bunkhouse itself; as well as design and project support work from architects, structural engineers, geotechnical engineers, mechanical, electrical, and plumbing (MEP) engineers, and MIT Facilities.
 
-* Phase 1 is complete. Donors gave {{ site.data.bunkhouse_settings.facts.phase1_raised }} for the new parking lot, bridge, and access trail, all finished in spring 2025, and for the final construction drawings. Thank you to everyone who made it possible!
-* Phase 2 is under way. The bunkhouse itself will cost {{ site.data.bunkhouse_settings.facts.phase2_cost }}.
+* **Phase 1** is complete. Donors gave {{ site.data.bunkhouse_settings.facts.phase1_raised }} for a completed design and full construction documents for the bunkhouse as well as construction of a new bridge, off-street parking lot, and access trail. Design and documentation included work from structural, MEP, and architectural disciplines and completed a geotechnical site survey. We also made significant progress with MIT administrators and facilities to approve the construction project and plans.
+* **Phase 2** is under way. The bunkhouse itself will cost {{ site.data.bunkhouse_settings.facts.phase2_cost }}.
 
 As of {{ site.data.bunkhouse_settings.donations_as_of }}, ${{ site.data.bunkhouse_settings.donations_amount | thousands_separated }} has been raised by {{ site.data.bunkhouse_settings.number_donors }} people toward the full {{ site.data.bunkhouse_settings.facts.total_cost }}. That leaves **${{ site.data.bunkhouse_settings.donations_goal | minus: site.data.bunkhouse_settings.donations_amount | thousands_separated }} to go**, and we need the full amount before we can break ground in {{ site.data.bunkhouse_settings.facts.groundbreaking }}.
 
