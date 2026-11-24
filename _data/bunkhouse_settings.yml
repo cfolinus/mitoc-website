@@ -41,11 +41,12 @@ number_donors: 314
 summary:
   what_is_camelot: "For over 50 years, the MIT Outing Club's Camelot cabin has been a vital resource and center of the club's activities. Set on about 20 acres near Rumney, NH, Camelot hosts official club circuses, open cabins, and social events and is a base camp for individual club members using the cabin for personal adventures. Many MITOC members are first introduced to outdoor recreation and the club community through Camelot-based events."
   why: "The existing cabin is nearing the end of its usable life. Camelot was built in 1973, largely by MIT undergrads, and will not remain safe to sleep in for much longer. The new bunkhouse will give MITOC safe, comfortable sleeping space for %bunkhouse_capacity% people."
-# Hero text shown at the top of every /camelot page. The tagline appears
-# only in the full hero on the overview page.
+# Hero text shown at the top of every /camelot page.
 hero_title: Camelot bunkhouse
 hero_subtitle: Coming 2027
-hero_tagline: Phase 1 built · Phase 2 fundraising now
+# The line under each phase in Home's fundraising card.
+phase1_status: Built 2025
+phase2_status: Fundraising now
 # Shown in link previews (Slack, email, social posts) and often under the page
 # in search results. A page can override it with `description:` in its front matter.
 share_description: "MITOC is building a new bunkhouse at Camelot, its cabin near Rumney, NH. Phase 1 is complete; help us raise the rest to build in 2027."
