@@ -3,7 +3,7 @@ _site
 .DS_Store
 
 # Full-size originals of the bunkhouse photos and drawings. Web copies are in
-# images/bunkhouse/compressed/ (see _notes/bunkhouse-ux-review/how-to-add-an-update.md).
+# images/bunkhouse/compressed/ (see _camelot_updates/how-to-add-a-bunkhouse-update.md).
 images/bunkhouse/Images and assets/
 
 # Local working files for the bunkhouse project (Word drafts, agendas)

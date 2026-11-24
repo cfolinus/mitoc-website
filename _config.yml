@@ -12,7 +12,7 @@ plugins:
   - jekyll-target-blank
 
 # Camelot bunkhouse progress posts: _camelot_updates/YYYY-MM-DD-short-name.md
-# How to add one: _notes/bunkhouse-ux-review/how-to-add-an-update.md
+# How to add one: _camelot_updates/how-to-add-a-bunkhouse-update.md
 collections:
   camelot_updates:
     output: true
@@ -24,6 +24,7 @@ exclude:
   - vendor
   - tools
   - images/bunkhouse/Images and assets
+  - _camelot_updates/how-to-add-a-bunkhouse-update.md
 
 defaults:
   -
